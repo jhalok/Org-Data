@@ -1,0 +1,14 @@
+.THIS .left-align {
+    text-align: left;
+}
+.THIS .right-align {
+     float:right;
+    text-align: right;
+}
+.THIS [lightning-input_input-host] {
+    display: -webkit-inline-box;
+}
+.THIS .boxSize{
+    margin-left: 58%;
+    margin-top: -112px;
+}

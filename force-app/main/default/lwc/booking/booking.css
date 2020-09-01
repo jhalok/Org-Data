@@ -1,0 +1,34 @@
+.slds-modal__header.header_BackGround {
+    position: relative;
+    border-top-right-radius: 0.25rem;
+    border-top-left-radius: 0.25rem;
+    border-bottom: 2px solid rgb(221, 219, 218);
+    padding: 1rem;
+    text-align: center;
+    background-color: black !important;
+    color: white !important;
+}
+.button-Style{
+    background-color: black;
+    border-color: black;
+}
+    
+/*.remove_Border{
+    line-height: var(--lwc-lineHeightReset,1);
+    vertical-align: middle;
+    color: var(--lwc-colorTextIconDefault,rgb(112, 110, 107));
+     border: var(--lwc-borderWidthThin,1px) solid var(--lwc-colorBorderPrimary,rgb(221, 219, 218));
+    transition: border .15s linear;
+     border-color: var(--lwc-buttonColorBorderPrimary,rgb(221, 219, 218));
+}
+.remove_Border .slds-button_icon-border-filled, .slds-button--icon-border-filled, .slds-button_icon-border, .slds-button--icon-border {
+    line-height: var(--lwc-lineHeightReset,1);
+    /* vertical-align: middle; */
+    /* color: var(--lwc-colorTextIconDefault,rgb(112, 110, 107)); */
+    /* border: var(--lwc-borderWidthThin,1px) solid var(--lwc-colorBorderPrimary,rgb(221, 219, 218)); */
+    /* transition: border .15s linear; 
+    border-color: none !important;
+}*/
+.slds-button--icon-border.remove_Border{
+    border-color: none !important;
+}

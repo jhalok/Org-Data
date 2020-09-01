@@ -1,0 +1,12 @@
+<apex:component controller="AccCompController">
+    <apex:attribute name="FinalCompo" description="This is the value for the component." type="String" required="true" />
+         
+        <div style="text-align:center;font-size:30px;color:red;" >
+            <b><p>You'r records are Saved.</p></b>
+               <p>Thank You!</p>
+        </div> 
+     
+        <div style="text-align:center;font-size:15px;margin:70px" > 
+      
+        </div>       
+</apex:component>

@@ -1,0 +1,35 @@
+<aura:component controller="AccountList" >
+    <aura:attribute name="accdetails" type="Account"/>
+    <aura:attribute name="newAccDetails" type="Account[]"/>
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}" />
+    
+	<table class="slds-table slds-table_cell-buffer slds-table_bordered slds-p-left_xx-large slds-p-right_xx-large slds-p-top_xx-large">
+  <thead>
+    <tr class="slds-line-height_reset">
+      <th class="slds-text-title_caps slds-cell-wrap" scope="col">
+        <div class="slds-truncate" title="Id">Id</div>
+      </th>
+      <th class="slds-text-title_caps slds-cell-wrap" scope="col">
+        <div class="slds-truncate" title="Name">Name</div>
+      </th>
+      <th class="slds-text-title_caps slds-cell-wrap" scope="col">
+        <div class="slds-truncate" title="AccountNumber">AccountNumber</div>
+      </th>
+      <th class="slds-text-title_caps slds-cell-wrap" scope="col">
+        <div class="slds-truncate" title="BillingAddress">BillingAddress</div>
+      </th>
+    </tr>
+  </thead>
+ 		<tbody>
+            <aura:iteration items="{!v.newAccDetails}" var="acc">		
+                <tr>
+                    <td><ui:outputText value="{!acc.Name}"/></td>
+                    <td>{!acc.Id}</td>
+                   	<td>{!acc.AccountNumber}</td>
+                    <td>{!acc.BillingAddress}</td>
+                </tr>
+            </aura:iteration>
+        </tbody>
+    </table>
+   <lightning:button  class="slds-m-top--medium slds-align_absolute-center" variant="brand" onclick="{!c.show}"/>
+</aura:component>

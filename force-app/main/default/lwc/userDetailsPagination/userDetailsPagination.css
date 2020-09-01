@@ -1,0 +1,12 @@
+.font-style{
+    font-size: 1.2rem;
+}
+.slds-tabs--default__nav {
+    display: flex !important;
+    /* align-items: flex-start; */
+    /* border-bottom: var(--lwc-borderWidthThin,1px) solid var(--lwc-colorBorder,rgb(221, 219, 218)); */
+}
+.vl {
+    border-left: 6px solid green;
+    height: 500px;
+}

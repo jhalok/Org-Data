@@ -1,0 +1,21 @@
+.THIS {
+  
+}
+
+.THIS .acrdnHeader {
+    background-color:aliceblue;
+    border:5px solid black;
+    border-radius:10px;
+}
+
+.THIS .wk_warning {
+    background : #FFB75D !important;
+}
+
+.THIS .wk_success {
+    background : #04844B !important;
+}
+
+.THIS .heightSlider{
+    height:50px;
+}

@@ -1,0 +1,75 @@
+<aura:component controller="AccountPagination" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+    <aura:attribute name="accountList" type="list" />
+    <aura:attribute name="totalRecords" type="integer" default="0"/>
+    <aura:attribute name="PageNumber" type="integer" default="1"/>
+    <aura:attribute name="PageSize" type="integer" default="10" />
+    <aura:attribute name="RecordStart" type="integer" default="1" />
+    <aura:attribute name="RecordEnd" type="integer" default="0" />
+    
+    <div class="slds-float_right marginText slds-page-header slds-align_absolute-center" role="banner">
+        <lightning:select aura:Id ="pageSize" class="marginText" name="selectItem" value="{!v.selectedValue}" label="Display Records Per Page:" onchange="{!c.onSelectChange}" >
+            <option value="5" label = "5" />
+            <option value="10" label = "10" />  
+            <option value="15" label = "15"/>
+            <option value="20" label = "20"/>
+        </lightning:select>
+        <br/>
+    </div>
+    
+    <div>
+        <h2><center>
+            Account Pagination
+            </center>
+        </h2>
+    </div>
+    <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped slds-max-medium-table_stacked-horizontal">
+        <thead>
+            <tr class="slds-text-title_caps">
+                <th scope="col"><b>
+                    Account Name
+                    </b>
+                </th>
+                <th scope="col">
+                    <b>
+                        Contact First Name
+                    </b>
+                </th>
+                <th>
+                    <b>
+                        Mobile Number
+                    </b>
+                </th>
+            </tr>      
+        </thead>
+        
+        <tbody>
+            <aura:iteration items="{!v.accountList}" var="acc">
+                <tr>
+                    <td>
+                        {!acc.Name}
+                    </td>
+                    <td>
+                        <aura:iteration items="{!acc.Contacts}" var="con" indexVar="index">
+                                {!con.FirstName}
+                        </aura:iteration>     
+                    </td>
+                    <td>
+                        <aura:iteration items="{!acc.Contacts}" var="con" indexVar="index">            
+                            {!con.MobilePhone}
+                        </aura:iteration>
+                    </td>
+                </tr>
+            </aura:iteration>
+        </tbody>
+    </table>
+    <div>
+        <b>Total Records : {!v.RecordStart} of {!v.totalRecords} </b>
+    </div>
+    <div>
+        <center>
+            <lightning:button variant="brand" label="Prev" onclick="{!c.Prev}"/>
+            <lightning:button variant="brand" label="Next" onclick="{!c.Next}"/>            
+        </center>
+    </div>
+</aura:component>

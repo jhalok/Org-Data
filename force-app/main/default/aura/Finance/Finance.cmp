@@ -1,0 +1,20 @@
+<aura:component implements="lightning:isUrlAddressable,force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+	
+    <lightning:carousel disableAutoRefresh="false" class="heightSlider" disableAutoScroll="false">
+        <lightning:carouselImage
+            src = "{!$Resource.Finance}"
+            header = ""
+            description = ""
+            alternativeText = "First card accessible description."
+            href = "https://www.salesforce.com">
+          
+        </lightning:carouselImage>
+          <lightning:carouselImage
+            src = "{!$Resource.FinanceCoin}"
+            header = ""
+            description = ""
+            alternativeText = "First card accessible description."
+            href = "https://www.salesforce.com">
+        </lightning:carouselImage>
+    </lightning:carousel>
+</aura:component>

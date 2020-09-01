@@ -1,0 +1,24 @@
+<apex:page >
+    <center>
+        <b>Welcome. You are successfully authenticated.</b>
+    </center> 
+    <apex:form >
+        <apex:pageBlock title="Google Drive Integration">            
+            <apex:pageBlockSection >
+               
+            </apex:pageBlockSection>  
+            
+            <apex:pageBlockSection title="FOLDERS"  collapsible="true">
+                <apex:pageBlockSectionItem >
+                    
+                </apex:pageBlockSectionItem>
+                
+                
+            </apex:pageBlockSection>  
+            <apex:pageBlockSection title="FILES" collapsible="true">
+                
+                
+            </apex:pageBlockSection>
+        </apex:pageBlock>  
+    </apex:form>
+</apex:page>

@@ -1,0 +1,62 @@
+<aura:component controller="CsvImportComp">
+    <aura:attribute name="TableContent" type="String"/>
+    <aura:attribute name="TargetFileName" type="String"/>
+    <aura:attribute name="tableheaders" type="Object[]"/>
+    <aura:attribute name="fileContentData" type="String"/>
+    <aura:attribute name="filename" type="String"/>
+    <aura:attribute name="NumOfRecords" type="Integer" default="1000000"/> 
+    <aura:attribute name="showMain" type="Boolean" default="true"/>
+    <aura:attribute name="showFieldSec" type="Boolean" default="false"/>
+    <aura:attribute name="options" type="List" />
+    <aura:attribute name="selectedValue" type="String" />
+    <aura:attribute name="fieldOptions" type="List" />
+    <aura:handler name="init" value="{!this}" action="{!c.init}" />
+    <aura:attribute name="selectedItems" type="List" default="[]" description="Selected Genre Picklist Values"/>    
+    
+    <div class="c-container slds-align_absolute-center">
+        <lightning:layout multipleRows="true">
+            <lightning:layoutItem size="10" padding="around-small">
+                <div class="custom-box">
+                    <lightning:select name="Objects" label="Select object:" aura:id="onjId" value="{!v.selectedValue}" onchange="{!c.selectedObjectHelper}">
+                        <aura:iteration items="{!v.options}" var="objectname">
+                            <option value="{!objectname}" text="{!objectname}" />  
+                        </aura:iteration>
+                    </lightning:select>
+                    <div>
+                        {!v.selectedValue}
+                    </div>  
+                </div>
+            </lightning:layoutItem>
+        </lightning:layout>
+    </div>
+  
+    <aura:if isTrue="{!v.showFieldSec}">
+        <div class="slds-align_absolute-center">
+            <lightning:dualListbox name="multipleOptions"  
+                                   label= "Select Options" 
+                                   sourceLabel="Available"  
+                                   options="{!v.fieldOptions}" 
+                                   selectedLabel="Selected Value" 
+                                   value="{!v.selectedItems }"
+                                   onchange="{! c.handleChange }"
+                                   />   
+        </div>
+    </aura:if>
+    
+    <aura:if isTrue="{!v.showMain}">
+        <div  class="slds-m-around--large" ondragover="{!c.onDragOver}" ondrop="{!c.onDrop}" >
+            <div aura:id="holder" class="slds-m-top--medium slds-align--absolute-center" style="background-color:#bfbfb2; height:100px" >
+                <h1>Drag and Drop CSV file here</h1>
+            </div>
+        </div>
+        <aura:set attribute="else">
+            <ui:outputRichText class="uiOutputRichText slds-m-around--large" value="{!v.TargetFileName}"/> 
+            <ui:outputRichText class="uiOutputRichText slds-m--around-large" value="{!v.TableContent}"/>
+            <div class="slds-p-around--large slds-align--absolute-center">
+                <lightning:button label="Save" variant="brand" onclick="{!c.processFileContent}"/>
+                <lightning:button label="Cancel" variant="brand" onclick="{!c.cancel}" /> 
+            </div>
+        </aura:set>
+    </aura:if>
+    
+</aura:component>

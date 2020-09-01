@@ -1,0 +1,55 @@
+<apex:page Controller="ValidAccountInfo" >
+<script type="text/javascript">
+    function validateAccount(){
+        var accInfoArray = document.getElementsByClassName("test");
+        var messageArray = document.getElementsByClassName("error");
+        var count=0;
+        for(var i=0; i<accInfoArray.length;i++){
+            if(accInfoArray[i].value==""){
+                accInfoArray[i].style.borderColor='Red';
+                messageArray[i].style.display='block';
+            }
+            else{
+                accInfoArray[i].style.borderColor='White';
+                           count++;
+            }
+        }
+        if(count==accInfoArray.length){
+            save();
+        }
+    }   
+    </script>
+ 
+     <apex:form >
+        
+        <apex:pageBlock title="Account Info" id="pageblock">
+
+            <apex:pageBlockSection columns="1">
+              
+              <apex:inputText value="{!acc.Name}" styleClass="test"/>
+              <span class="error" style="Display:none;color:red;border:white;margin-left:135px;">
+                  Field can't be Empty,Please Enter Account Name 
+                </span>
+               <apex:inputText value="{!acc.BillingCity}" styleClass="test"/>
+               <span class="error" style="Display:none;color:red;border:white;margin-left:135px;">
+                   Field can't be Empty,Please Enter BillingCity 
+                </span>
+               <apex:inputText value="{!acc.BillingState}" styleClass="test"/>
+               <span class="error" style="Display:none;color:red;border:white;margin-left:135px;">
+                   Field can't be Empty,Please Enter BillingState
+                </span>
+                <apex:inputText value="{!acc.Phone}" styleClass="test"/>
+                <span class="error" style="Display:none;color:red;border:white;margin-left:135px;">
+                    Field can't be Empty,Please Enter Phone No
+                </span>
+
+
+                <div>
+                    <button type="button" onclick="validateAccount()"  style="align:center">Save</button>
+                    <apex:actionFunction action="{!save}" name="save"/>
+                </div>
+            </apex:pageBlockSection>
+           
+        </apex:pageBlock>
+    </apex:form> 
+</apex:page>

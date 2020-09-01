@@ -1,0 +1,23 @@
+<aura:component controller="PicklistController" access="global" >
+  
+	<aura:attribute name="sObjectName" type="String" />
+		<aura:attribute name="fieldName" type="String" />
+		<aura:attribute name="picklistValues" type="Object" />
+	<aura:handler name="init" action="{!c.doInit}" value="{!this}" />
+    
+    <div class="slds-form-element slds-p-left_x-large slds-p-right_x-large">
+		<label class="slds-form-element__label" for="form-element-01">Account Name</label>
+			<div class="slds-form-element__control">
+				<input type="text" id="form-element-01" required="true"  class="slds-input" />
+			</div>
+	</div>
+    
+    <div class="slds-form-element slds-p-left_x-large slds-p-right_x-large">
+		<label class="slds-form-element__label" for="form-element-01">Phone</label>
+			<div class="slds-form-element__control">
+				<input type="text" id="form-element-01" required="true" class="slds-input" />
+			</div>
+	</div>
+    <br/>
+     <lightning:button label="Submit" class="slds-button slds-align_absolute-center" variant="brand" onclick="{!c.Submit}"/>
+</aura:component>

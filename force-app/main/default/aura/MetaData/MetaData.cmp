@@ -1,0 +1,74 @@
+<aura:component controller="CallBackURLController" implements="lightning:isUrlAddressable,force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="AccessToken" type="String"/>
+    <aura:attribute name="link" type="String"/>
+    <aura:attribute name="response" type="List" />
+    <aura:attribute name="metaDataItem" type="List" />
+    <aura:attribute name="zipFile" type="String"/>
+    <aura:attribute name="showMetaData" type="boolean" default="false"/>
+    <aura:attribute name="showMetaDataItem" type="boolean" default="false"/>
+    <aura:attribute name="hideMetaDataButton" type="boolean" default="true"/>
+    <aura:attribute name="retrieveMetaDataItemButton" type="boolean" default="false"/>
+    <aura:attribute name="hideMetaDataItemButton" type="boolean" default="false"/>
+    <aura:attribute name="check" type="boolean"/>
+    <aura:attribute name="asyncId" type="String"/>
+   <!--<ltng:require scripts="{!$Resource.JsZip}"/>--> 
+    <ltng:require scripts="$Resource/jsZip" afterScriptsLoaded="{!c.extractZip}"></ltng:require>
+    
+  
+    <div class="slds-m-top_large slds-align_absolute-center slds-page-header__title slds-truncate">
+        <lightning:icon iconName="action:new_task" alternativeText="Approved"/>
+        <h1 class="slds-m-left_large">Retrieve Metadata</h1>
+    </div>   
+    
+    <aura:if isTrue="{!v.showMetaData}">
+        <div class="slds-grid  slds-gutters slds-align_absolute-center">
+                <div class="slds-col slds-size_6-of-12">
+                    <span>
+                            <div class="form-group">
+                                    <lightning:select  aura:id="curntSlctdVal" label="Metadata Type" onchange="{!c.slctdVal}">
+                                        <aura:iteration items="{!v.response}" var="val">                       
+                                            <option value="{!val.label}"> {!val.label}</option>
+                                        </aura:iteration>
+                                    </lightning:select>
+                            </div>
+                    </span>
+                </div>
+        </div>
+    </aura:if>
+  
+    <aura:if isTrue="{!v.showMetaDataItem}">
+          <!-- <div class="slds-grid slds-gutters slds-align_absolute-center">
+                    <div class="slds-col slds-size_8-of-12">
+                        <div class="slds-form-element">
+                               <lightning:input label = "Metadata Folder">
+                                   
+                               </lightning:input>
+                        </div>
+                </div>
+            </div> --> 
+        
+        <div class="slds-grid slds-m-top_medium slds-gutters slds-align_absolute-center">
+                <div class="slds-col slds-size_6-of-12">
+                    <span>
+                            <div class="form-group">
+                                    <lightning:select  aura:id="curnt" label="Metadata Item">
+                                        <aura:iteration items="{!v.metaDataItem}" var="mt">
+                                            <option value="{!mt.value}"> {!mt.value}</option>
+                                        </aura:iteration>
+                                    </lightning:select>
+                            </div>
+                    </span>
+                </div>
+        </div>
+        {!v.zipFile}
+        <lightning:button class="slds-m-top_medium slds-align_absolute-center slds-m-top_medium" variant="brand" label="Retrieve" onclick="{!c.reterieveMetaData}"/>
+    </aura:if>
+    <aura:if isTrue="{!v.hideMetaDataButton}">
+        <lightning:button class="slds-m-top_medium slds-align_absolute-center slds-m-top_medium" variant="brand" label="Retrieve MetaData List" onclick="{!c.metaDataList}"/>
+    </aura:if> 
+    <aura:if isTrue="{!v.hideMetaDataItemButton}">
+         <lightning:button class="slds-m-top_medium slds-align_absolute-center slds-m-top_medium" variant="brand" label="Retrieve Selected MetaData Item" onclick="{!c.metaDataItemList}"/>
+    </aura:if>
+        <lightning:button class="slds-m-top_medium slds-align_absolute-center slds-m-top_medium" variant="brand" label="Retrieve Zip file" onclick="{!c.extractZip}"/>
+</aura:component>

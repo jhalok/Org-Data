@@ -1,0 +1,38 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+	 <aura:attribute type="String[]" name="headers" />
+    <aura:attribute type="List" name="data" />
+    <aura:attribute type="Boolean" name="fileTypeError" default="false" />
+    
+    <lightning:card>
+        <input type="file" class="file" aura:id="file" accept=".csv, .CSV" />
+        <lightning:button variant="brand" label="Upload" onclick="{! c.handleUpload }" />
+    
+        <aura:if isTrue="{!v.fileTypeError == true}">
+            Wrong file type!
+            <aura:set attribute="else">
+                <table>
+                    <thead>
+                        <aura:iteration items="{!v.headers}" var="h">
+                        <th>
+                            {!h}
+                        </th>
+                        </aura:iteration>
+                    </thead>
+                    <tbody>
+                        <aura:iteration items="{!v.data}" var="row">
+                            <tr>
+                                <aura:iteration items="{!row}" var="cell">
+                                    <td>
+                                        {!cell}
+                                    </td>
+                                </aura:iteration>
+                            </tr>            
+                        </aura:iteration>
+                    </tbody>
+                </table>
+            </aura:set>
+        </aura:if>
+    </lightning:card>
+
+    <lightning:spinner aura:id="csvSpinner" class="slds-hide" variant="brand" size="small"/>
+</aura:component>

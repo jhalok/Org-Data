@@ -1,0 +1,5 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+	<div style="background-color:blue"  class="slds-p-top_medium slds-p-bottom_medium">
+        <h1 style="font-size:20px;float:right;color:white;background-color:blue"  class="slds-p-top_medium slds-p-bottom_medium">BRISKMINDS</h1>
+    </div>
+</aura:component>

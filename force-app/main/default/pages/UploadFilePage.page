@@ -1,0 +1,45 @@
+<apex:page controller="UploadFile_Controller" id="UploadFilePage" docType="html-5.0">
+    <script>
+        //Receive message from LC
+        window.addEventListener("message", function(event) {
+            data = event.data;
+
+            if(typeof(event.data.uploadFile) != 'undefined' && (event.data.uploadFile == true)){
+                document.getElementById('{!$Component.theForm.uploadFileButton}').click();
+            }
+        }, false);
+
+        var lexOrigin = 'https://{!$CurrentPage.parameters.lcHost}';
+
+        //Data for Google map
+        var data;
+
+        //Send message to LC
+        function sendToLC(message) {
+            if(typeof(lexOrigin) != 'undefined'){
+                parent.postMessage(message, lexOrigin);
+            }
+        }
+
+        sendToLC({'state':'LOADED', 'vfHost': "{!LEFT($CurrentPage.URL,FIND('/',$CurrentPage.URL,9))}"});
+
+    </script>
+
+    <apex:form id="theForm">
+        <apex:commandButton value="Save" action="{!uploadFile}" id="uploadFileButton" style="display:none;"/>
+        <apex:inputfile id="fileSelectedForUpload" onChange="sendToLC({'state': 'uploadFileSelected'});" value="{!objAttachment.body}" filename="{!objAttachment.Name}" size="{!objAttachment.BodyLength}" contentType="{!objAttachment.ContentType}"></apex:inputfile>
+    </apex:form>
+
+    <apex:pageBlock rendered="{!fileUploadProcessed == true}" id="theBlock">
+        <script>
+            //Hide pageBlock as we just need it to run <script>
+            var theBlock = document.getElementById('{!$Component.theBlock}');
+            theBlock.style.border = 'none';
+            theBlock.style.display = 'none';
+
+            //Send file uploaded message
+            sendToLC({'state': 'fileUploadprocessed', 'message': '{!message}', 'messageType': '{!messageType}'});
+        </script>
+    </apex:pageBlock>
+
+</apex:page>

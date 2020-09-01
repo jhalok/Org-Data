@@ -1,0 +1,147 @@
+<aura:component>
+
+<div style="height: 16rem;">
+<div class="slds-context-bar">
+<div class="slds-context-bar__primary">
+<div class="slds-context-bar__item slds-context-bar__dropdown-trigger slds-dropdown-trigger slds-dropdown-trigger_click slds-no-hover">
+<div class="slds-context-bar__icon-action">
+<button class="slds-button slds-icon-waffle_container slds-context-bar__button" title="Description of the icon when needed">
+<span class="slds-icon-waffle">
+<span class="slds-r1"></span>
+<span class="slds-r2"></span>
+<span class="slds-r3"></span>
+<span class="slds-r4"></span>
+<span class="slds-r5"></span>
+<span class="slds-r6"></span>
+<span class="slds-r7"></span>
+<span class="slds-r8"></span>
+<span class="slds-r9"></span>
+</span>
+<span class="slds-assistive-text">Open App Launcher</span>
+</button>
+</div>
+<span class="slds-context-bar__label-action slds-context-bar__app-name">
+<span class="slds-truncate" title="App Name">App Name</span>
+</span>
+</div>
+</div>
+<nav class="slds-context-bar__secondary" role="navigation">
+<ul class="slds-grid">
+<li class="slds-context-bar__item slds-is-active">
+<a href="javascript:void(0);" class="slds-context-bar__label-action" title="Home">
+<span class="slds-assistive-text">Current Page:</span>
+<span class="slds-truncate" title="Home">Home</span>
+</a>
+</li>
+<li class="slds-context-bar__item slds-context-bar__dropdown-trigger slds-dropdown-trigger slds-dropdown-trigger_click">
+<a href="javascript:void(0);" class="slds-context-bar__label-action" title="Menu Item">
+<span class="slds-truncate" title="Menu Item">Menu Item</span>
+</a>
+<div class="slds-context-bar__icon-action slds-p-left_none">
+<button class="slds-button slds-button_icon slds-button_icon slds-context-bar__button" aria-haspopup="true" title="Open menu item submenu">
+
+<span class="slds-assistive-text">Open menu item submenu</span>
+</button>
+</div>
+<div class="slds-dropdown slds-dropdown_right">
+<ul class="slds-dropdown__list" role="menu">
+<li class="slds-dropdown__item" role="presentation">
+<a href="javascript:void(0);" role="menuitem" tabindex="-1">
+<span class="slds-truncate" title="Main action">
+</span>
+</a>
+</li>
+<li class="slds-dropdown__header slds-has-divider_top-space" role="separator">
+<span class="slds-text-title_caps">Menu header</span>
+</li>
+<li class="slds-dropdown__item" role="presentation">
+<a href="javascript:void(0);" role="menuitem" tabindex="-1">
+<span class="slds-truncate" title="Menu Item One">Menu Item One</span>
+</a>
+</li>
+<li class="slds-dropdown__item" role="presentation">
+<a href="javascript:void(0);" role="menuitem" tabindex="-1">
+<span class="slds-truncate" title="Menu Item Two">Menu Item Two</span>
+</a>
+</li>
+<li class="slds-dropdown__item" role="presentation">
+<a href="javascript:void(0);" role="menuitem" tabindex="-1">
+<span class="slds-truncate" title="Menu Item Three">Menu Item Three</span>
+</a>
+</li>
+</ul>
+</div>
+</li>
+<li class="slds-context-bar__item">
+<a href="javascript:void(0);" class="slds-context-bar__label-action" title="Menu Item">
+<span class="slds-truncate" title="Menu Item">Menu Item</span>
+</a>
+</li>
+<li class="slds-context-bar__item">
+<a href="javascript:void(0);" class="slds-context-bar__label-action" title="Menu Item">
+<span class="slds-truncate" title="Menu Item">Menu Item</span>
+</a>
+</li>
+<li class="slds-context-bar__item">
+<a href="javascript:void(0);" class="slds-context-bar__label-action" title="Menu Item">
+<span class="slds-truncate" title="Menu Item">Menu Item</span>
+</a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+    
+  
+  
+    <lightning:avatar variant="circle" size="x-small" src="/docs/component-library/app/images/examples/avatar2.jpg" initials="JD" fallbackIconName="standard:person_account" alternativeText="Jane Doe" class="slds-m-right_small"/>
+    <lightning:avatar size="square"   src="/docs/component-library/app/images/examples/avatar3.jpg" initials="TP" fallbackIconName="standard:person_account" alternativeText="Tony Price" class="slds-m-right_small"/>
+    <lightning:avatar size="medium"  src="/docs/component-library/app/images/examples/avatar1.jpg" initials="RE" fallbackIconName="standard:person_account" alternativeText="Ryan Eddie" class="slds-m-right_small"/>
+    <lightning:avatar size="large"   src="/docs/component-library/app/images/examples/avatar2.jpg" initials="CR" fallbackIconName="standard:person_account" alternativeText="Cindy Rice" class="slds-m-right_small"/>
+
+
+    
+    <article class="slds-post">
+  <header class="slds-post__header slds-media slds-media--center">
+    <div class="slds-media__figure">
+      <a href="javascript:void(0);" title="Jason Rodgers" class="slds-avatar slds-avatar--circle slds-avatar--large">
+        <img src="/assets/images/avatar1.jpg" alt="Jason Rodgers" />
+      </a>
+    </div>
+    <div class="slds-media__body">
+      <div class="slds-grid slds-grid--align-spread slds-has-flexi-truncate">
+        <p><a href="javascript:void(0);" title="Jason Rodgers">Jason Rogers</a> — <a href="javascript:void(0);" title="Design Systems">Design Systems</a></p>
+        <button class="slds-button slds-button--icon-border slds-button--icon-x-small" aria-haspopup="true"
+          title="More Options">
+         
+          <span class="slds-assistive-text">More Options</span>
+        </button>
+      </div>
+      <p class="slds-text-body--small"><a href="javascript:void(0);" title="Click for single-item view of this post" class="slds-text-link--reset">5 days Ago</a></p>
+    </div>
+  </header>
+  <div class="slds-post__content slds-text-longform">
+    <p>Here&#x27;s the latest demo presentation <a href="javascript:void(0);" title="Jenna Davis">@Jenna Davis</a>, let me know if there are any changes. I&#x27;ve updated slides 3-8 and slides 16-18 slides with new product shots.</p>
+  </div>
+  <footer class="slds-post__footer">
+    <ul class="slds-post__footer-actions-list slds-list--horizontal">
+      <li class="slds-col slds-item slds-m-right--medium">
+        <a href="javascript:void(0);" title="Like this item" class="slds-post__footer-action">
+      	Like</a>
+      </li>
+      <li class="slds-col slds-item slds-m-right--medium">
+        <a href="javascript:void(0);" title="Comment on this item" class="slds-post__footer-action">
+         Comment</a>
+      </li>
+      <li class="slds-col slds-item slds-m-right--medium">
+        <a href="javascript:void(0);" title="Share this item" class="slds-post__footer-action">Share</a>
+      </li>
+    </ul>
+    <ul class="slds-post__footer-meta-list slds-list--horizontal slds-has-dividers--right slds-text-title">
+      <li class="slds-item">20 shares</li>
+      <li class="slds-item">259 views</li>
+    </ul>
+  </footer>
+</article>
+    
+</aura:component>

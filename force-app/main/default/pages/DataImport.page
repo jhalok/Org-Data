@@ -1,0 +1,184 @@
+<apex:page controller="Books4EveryoneSampleDataController">
+<apex:slds />
+<html >
+<apex:remoteObjects >
+
+<apex:remoteObjectModel name="Book__c" jsShorthand="Book">
+<apex:remoteObjectField name="Name" jsShorthand="name"/>
+<apex:remoteObjectField name="Author__c" jsShorthand="authorId"/>
+<apex:remoteObjectField name="Description__c" jsShorthand="description"/>
+<apex:remoteObjectField name="Genre__c" jsShorthand="genre"/>
+</apex:remoteObjectModel>
+
+<apex:remoteObjectModel name="Author__c" jsShorthand="Author">
+<apex:remoteObjectField name="Name" jsShorthand="name"/>
+<apex:remoteObjectField name="Biography__c" jsShorthand="biography"/>
+</apex:remoteObjectModel>
+
+<apex:remoteObjectModel name="Recommendation__c" jsShorthand="Recommendation">
+<apex:remoteObjectField name="Name" jsShorthand="name"/>
+<apex:remoteObjectField name="Book__c" jsShorthand="bookId"/>
+<apex:remoteObjectField name="Rating__c" jsShorthand="raiting"/>
+<apex:remoteObjectField name="Review__c" jsShorthand="review"/>
+</apex:remoteObjectModel>
+
+</apex:remoteObjects>
+
+<body style="padding:0;margin:0">
+
+  <div class="slds-scope">
+    <div class="slds-page-header" role="banner">
+      <div class="slds-media">
+        <div class="slds-media__figure">
+
+        </div>
+        <div class="slds-media__body">
+          <p class="slds-page-header__title slds-truncate slds-align-middle" title="Books4Everyone Sample Data">Books4Everyone Sample Data</p>
+          <p class="slds-text-body--small slds-page-header__info">Sample data for the Books4Everyone Application</p>
+        </div>
+      </div>
+    </div>
+    <div id="content" style="margin:20px">
+      <div style="padding-bottom:20px">Click the button below to initialize the Book, Author, and Recommendation objects with sample data.
+        <div style="color:red">All existing records in these objects will be deleted.</div>
+      </div>
+      <button class="slds-button slds-button--brand" onclick="initialize()">Initialize Sample Data</button>
+    </div>
+  </div>
+
+  <script>
+  var authors = [
+    {
+      name: "William",
+      biography: "A smart man with a lot of money."
+    },
+    {
+      name: "John Smith",
+      biography: "A mad man with a box."
+    },
+    {
+      name: "Iris West",
+      biography: "A girl following her journaling instinct."
+    },
+  ];
+
+  var books = [
+    {
+      name: "Save the West World",
+      author: 0,
+      description: "An Adventure book about saving the West World.",
+      genre: "Adventure"
+    },
+    {
+      name: "Time and Space",
+      author: 1,
+      description: "Come with me and run.",
+      genre: "Fantasy"
+    },
+    {
+      name: "Dragon Throne",
+      author: -1,
+      description: "Dragons will eventually rule this tormented land.",
+      genre: "Fantasy"
+    },
+    {
+      name: "Flashy Superhero",
+      author: 2,
+      description: "This exciting story is all about being fast. Really fast.",
+      genre: "Humor"
+    },
+    {
+      name: "Anatomy",
+      author: -1,
+      description: "A Doctor Drama",
+      genre: "Drama"
+    }
+  ];
+
+  var recommendations = [
+    {
+      book: 0,
+      raiting:"4",
+      review:"This was a really realistic story that I felt myself getting lost in."
+    },
+    {
+      book: 1,
+      raiting:"3",
+      review:"I feel like the book was a little too timey-wimey."
+    },
+    {
+      book: 2,
+      raiting:"5",
+      review:"I love all the Dragon Throne books and just want to know how it ends."
+    },
+    {
+      book: 3,
+      raiting:"2",
+      review:"The humor is really cheesy."
+    },
+    {
+      book: 4,
+      raiting:"5",
+      review:"I really enjoy following all the character storylines!"
+    },
+  ];
+  function initialize() {
+    "use strict";
+    Books4EveryoneSampleDataController.deleteAll(function(result, event) {
+      if (event.status) {
+        load();
+      } else {
+        alert("Something went wrong deleting existing records");
+      }
+    });
+  }
+  function load() {
+    "use strict";
+    var author = new SObjectModel.Author();
+    var book = new SObjectModel.Book();
+    var recommendation = new SObjectModel.Recommendation();
+
+    for (var i=0; i<authors.length; i++) {
+      let index = i;
+      author.create(authors[index], function(err, authorId) {
+        for (var j=0; j<books.length; j++) {
+          let jindex =j;
+          if (books[jindex].author == index) {
+            books[jindex].authorId = authorId[0];
+            delete books[jindex].author;
+            book.create(books[jindex], function(err, bookId){
+              for (var l=0; l<recommendations.length; l++) {
+                if (recommendations[l].book == jindex) {
+                  recommendations[l].bookId = bookId[0];
+                  delete recommendations[l].book;
+                  recommendation.create(recommendations[l], function(err, recommendationId){});
+                }
+              }
+            });
+          }
+        }
+      });
+    }
+
+    for (var k=0; k<books.length; k++) {
+      let kindex = k;
+      if (books[kindex].author == -1) {
+        console.log("Hi!" + books[kindex].author);
+        delete books[kindex].author;
+        book.create(books[kindex], function(err, bookId){
+          for (var m=0; m<recommendations.length; m++) {
+            if (recommendations[m].book == kindex) {
+              recommendations[m].bookId = bookId[0];
+              delete recommendations[m].book;
+              recommendation.create(recommendations[m], function(err, recommendationId){});
+            }  
+          }
+        });
+      }
+    }
+    alert("Successfully imported " + books.length + " books and " + authors.length + " authors and " + recommendations.length + " recommendations." );
+  }
+  </script>
+</body>
+</html>
+</apex:page>

@@ -1,0 +1,89 @@
+<!--
+* 
+* Description   - This VisualForce Page is used to store the data in corresponding Account fields & Reteriving from the Account
+* to show it in the Table below the form section
+* 
+* Created By    - Alok kumar
+* 
+* Created Date  - 11/07/2018
+* 
+* Revision Logs - V_1.0 - Created
+*      
+* 
+*-->
+
+<!--Visualforce page having a controller named DisplayController to store and Reterive data using apex class DisplayDetails-->
+<apex:page controller="DisplayAccountController">
+    
+    <!--form component to store the data from input field -->
+    <apex:form >
+        
+        <!--PageBlock component to store the data having attribute title to display on the pageBlock-->        
+        <apex:pageBlock title="Fill Your Account Details">
+            
+            <!--This pageMessages component will display the successfull message after inserting data-->
+            <apex:pageMessages />
+            
+            <!--pageBlockSection component used to store basic information -->
+            <apex:pageBlockSection title="Information">
+                
+                <!--It will be used to store the Name in Account-->
+                <apex:inputField value="{!accountRec.Name}"/>
+                
+                <!--It will be used to store the AccountNumber in Account-->
+                <apex:inputField value="{!accountRec.AccountNumber}"/>
+                
+            </apex:pageBlockSection>   
+            
+            <!--pageBlockSection component used to store Contact information -->
+            <apex:pageBlockSection title="Contact Information"  >
+                
+                <!--It will be used to store the Phone in Account-->
+                <apex:inputField value="{!accountRec.Phone}"/>
+                
+                <!--It will be used to store the Website in Account-->
+                <apex:inputField value="{!accountRec.Website}"/>
+                
+            </apex:pageBlockSection>
+            
+            <!--pageBlockButtons component having location attribute bottom to show button on the bottom of form-->
+            <apex:pageBlockButtons location="Bottom">
+                
+                <!--commandButton component is having action attribute which is used to save the data in Account on the save button click--> 
+                <apex:commandButton action="{!Save}" value="Save"/>
+                
+                  <apex:commandButton action="{!updateData}" value="Update"/>
+                
+            </apex:pageBlockButtons>   
+            
+        </apex:pageBlock> 
+        
+        <!--pageBlock component To show the Account data in the table -->
+        <apex:pageBlock title="Account Data">
+            
+            <!--Here We are providing the border radius to the pageBlockComponent-->
+            <apex:pageBlockSection columns="1">
+                
+                <!--Brought all the data from controller listRec then provided a var ref accFetchRec to store the related data in columns -->
+                <apex:pageBlockTable value="{!listRec}" var="accFetchRec">
+                    
+                    <!--Showing the Name Data in column-->
+                    <apex:column value="{!accFetchRec.Name}"/>
+                    
+                    <!--Showing the Phone Data in column-->
+                    <apex:column value="{!accFetchRec.Phone}"/>
+                    
+                    <!--Showing the AccountNumber Data in column-->
+                    <apex:column value="{!accFetchRec.AccountNumber}"/>
+                    
+                    <!--Showing the Website Data in column-->
+                    <apex:column value="{!accFetchRec.Website}"/>
+                                        
+                </apex:pageBlockTable>
+                
+            </apex:pageBlockSection>
+            
+        </apex:pageBlock> 
+        
+    </apex:form>
+</apex:page>

@@ -1,0 +1,81 @@
+<template>
+<lightning-card class="" title={cardTitle}>
+        <div class="slds-grid slds-gutters">
+            <div class="slds-col">
+                <span><h1 class="font-style slds-m-top_x-small slds-m-left_x-large"><b>
+                        User
+                    </b></h1>   
+                    <h1 class="slds-m-left_x-large font-style">Management</h1>    
+                </span>
+            </div>
+            <div class="slds-col slds-m-top_x-small">
+                <lightning-tabset>
+                    <lightning-tab label="ACTIVE USERS" value="tab1" onactive={tabselect}>
+                        <div>
+                                <!-- Detail view modal start -->
+    <template if:true={bShowModal}>
+        <section role="dialog" tabindex="-1"
+                    aria-labelledby="modal-heading-01"
+                    aria-modal="true"
+                    aria-describedby="modal-content-id-1"
+                class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <!-- modal header start -->
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeModal}>
+                    <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse" size="small" ></lightning-icon>
+                    </button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Record Detail</h2>
+                </header>
+                <!-- modal body start -->
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                <dl class="slds-list_horizontal slds-wrap">
+                    <dt class="slds-item_label slds-truncate" title="Name">Name:</dt>
+                    <dd class="slds-item_detail slds-truncate">{record.Name}</dd>
+                    <dt class="slds-item_label slds-truncate" title="Phone">Email:</dt>
+                    <dd class="slds-item_detail slds-truncate">{record.Email}</dd>
+                    <!-- <dt class="slds-item_label slds-truncate" title="Type">Profile Name</dt>
+                    <dd class="slds-item_detail slds-truncate">{record.profile.name}</dd>
+                    <dt class="slds-item_label slds-truncate" title="Phone">Email:</dt>
+                    <dd class="slds-item_detail slds-truncate">{record.user.Email}</dd>
+                    <dt class="slds-item_label slds-truncate" title="Type">Profile Name</dt>
+                    <dd class="slds-item_detail slds-truncate">{record.user.profile.name}</dd>
+                    <dt class="slds-item_label slds-truncate" title="Industry">Role Name:</dt>
+                    <dd class="slds-item_detail slds-truncate">{record.userrole.Name}</dd>-->
+                </dl>
+                </div>
+                <!-- modal footer start-->
+                <footer class="slds-modal__footer">
+                    <lightning-button variant="brand"
+                    label="Close"
+                    title="Close"
+                    onclick={closeModal}
+                    ></lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+                        </div>
+                    </lightning-tab>
+                    <lightning-tab label="DEACTIVATED USERS" value="tab2" >
+                        <div>tab2</div>
+                    </lightning-tab>
+                </lightning-tabset>
+            </div>
+            <div class="slds-m-top_large slds-float_right slds-m-right_x-large">
+                <span><lightning-button label="NEW" icon-name="utility:add"></lightning-button></span>
+            </div>
+        </div>
+        <lightning-datatable 
+        key-field="id"
+        data={parameters.data}
+        onrowaction={handleRowAction}
+        row-number-offset={rowOffset}
+        hide-checkbox-column="true"
+        columns={columns}></lightning-datatable>
+        
+    
+</lightning-card>
+
+</template>

@@ -1,0 +1,9 @@
+.THIS.mainHeader {
+    width:100%;
+    background-color:lightgray;
+}
+
+.THIS .subContent{
+    font-size: 20px;
+    font-weight: bold;
+}

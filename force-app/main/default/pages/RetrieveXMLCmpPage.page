@@ -1,0 +1,11 @@
+<apex:page showHeader="false" sidebar="false">
+	<apex:includeLightning />
+	<div id="lightning" />
+	<script>
+		$Lightning.use("c:LightningApp", function(){
+			$Lightning.createComponent("c:MetaData","","lightning",function(cmp){
+            });
+		});
+	</script>
+
+</apex:page>

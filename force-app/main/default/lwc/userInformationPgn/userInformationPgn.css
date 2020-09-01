@@ -1,0 +1,69 @@
+.font-style{
+    font-size: 1.2rem;
+}
+.slds-button_icon-bare{
+    display: none;
+}
+.userName_Header{
+    font-size: 18px;
+    font-weight: bold;
+}
+.dataTableUser .slds-p-bottom_small, .slds-p-bottom--small table{
+    line-height: 2rem !important;
+}
+.SecondDataTable .slds-p-bottom_small, .slds-p-bottom--small table{
+    line-height: 2rem !important;
+}
+.roleClass [lightning-input_input-host] {
+    display: initial !important;
+}
+.emailClass .forceStyle.desktop .slds-form .form-element__label, .forceStyle.desktop .slds-form .slds-form-element__label {
+    margin-right: 0px !important;
+    margin-left: calc(-1 * var(--lwc-spacingSmall,0.75rem)) !important;
+}
+.emailClass .slds-p-top_medium lightning-formatted-email a{
+    margin-left: 0px !important;
+}
+.emailClass.slds-p-top_medium.slds-form-element__label{
+    display: none !important;
+}
+.ref .slds-modal__header {
+    position: relative;
+    border-top-right-radius: var(--lwc-borderRadiusMedium,0.25rem);
+    border-top-left-radius: var(--lwc-borderRadiusMedium,0.25rem);
+    border-bottom: 0px !important;
+    padding: var(--lwc-spacingMedium,1rem);
+    text-align: center;
+}
+.slds-col .slds-form-element_small .slds-form-element_edit .slds-hint-parent .slds-form-element_1-col .slds-form-element .slds-form-element_stacked .slds-form-element__label{
+    display: none !important;
+}
+.slds-tabs_default__nav, .slds-tabs--default__nav .refrence{
+    display: flex;
+    align-items: flex-start;
+    border-bottom: none !important;
+}
+slot lightning-tabset div lightning-tab-bar ul{
+    align-items: flex-start;
+    border-bottom: none !important;
+}
+.slds-th__action .slds-truncate .slds-th__action-button {
+    display: none !important;
+}
+.refrence.slds-tabs_default__item:focus:after{
+    height: 3px !important;
+    background-color: gold !important;
+}
+lightning-tab-bar ul{
+    display: flex;
+    align-items: flex-start;
+    border-bottom: none !important;
+}
+.spins {
+    position: absolute;
+    content: 'Fetching Fields of the Object......';
+    width: 100%;
+    text-align: center;
+    top: calc(50% + 3em);
+    font-weight: bold;
+}

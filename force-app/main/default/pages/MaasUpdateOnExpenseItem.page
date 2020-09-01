@@ -1,0 +1,65 @@
+<!-- 
+Description     :       Created a Visualforce Page for mass edit and update
+
+Created By      :       Alok kumar
+
+Created Date    :       31/08/2018
+
+Revision Logs   :       V_1.0 - Created
+-->
+<apex:page standardController="Expense_Item__c" recordSetVar="item" docType="html-5.0" >
+    <apex:sectionHeader title="Edit"/>
+    
+    <!--apex form-->
+    <apex:form >
+        
+        <!--page Block-->
+        <apex:pageBlock mode="Mass Edit" rendered="{!(selected != null)}">
+            
+            <!--button-->
+            <apex:pageBlockButtons >
+                <apex:commandButton value="Save" action="{!save}"/>
+                <apex:commandButton value="Cancel" action="{!cancel}"/>
+            </apex:pageBlockButtons>
+            
+            <!--page block Section-->
+            <apex:pageBlockSection title="Edit Expense item Records" columns="1">
+                
+                <!--page block table-->
+                <apex:pageBlockTable value="{!selected}" var="sel" >
+                    
+                   
+                    <apex:column headerValue="Expense Amount" >
+                        <apex:inputField type="text"  value="{!sel.Expense_Amount__c}"/> 
+                    </apex:column>
+                    
+                   
+                    <apex:column headerValue="Description" >
+                        <apex:inputfield type="text" value="{!sel.Description__c}"/>
+                    </apex:column>
+                    
+                   
+                    <apex:column headerValue="Bill No" >
+                        <apex:inputfield type="text" value="{!sel.Bill_Number__c}"/>
+                    </apex:column>
+                    
+                    
+                    <apex:column headerValue="Expense" >
+                        <apex:inputfield type="text" value="{!sel.Expense__c}"/>
+                    </apex:column>
+                    
+                    <!--column 5-->
+                    <apex:column headerValue="Expense Type" >
+                        <apex:inputField type="text" value="{!sel.Expense_Type__c}"/>  
+                    </apex:column>
+                    
+                    <!--column 6-->
+                    <apex:column headerValue="Date">
+                        <apex:inputfield type="date" value="{!sel.Date__c}"/>
+                    </apex:column>
+                    
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

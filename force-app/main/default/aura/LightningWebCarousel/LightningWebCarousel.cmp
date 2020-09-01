@@ -1,0 +1,13 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >     
+    <lightning:carousel disableAutoScroll="false" disableAutoRefresh="false" scrollDuration = "3">
+        <div style="height:200px;width:100%">
+            <lightning:carouselImage src="{!$Resource.Shooping}"
+                                     header="Shoping">
+            </lightning:carouselImage>
+            <lightning:carouselImage src="{!$Resource.onlineshop}"
+                                     header="Shopingg">
+            </lightning:carouselImage>
+        </div>
+    </lightning:carousel> 
+    <c:LightningWebSocialMedia/>
+</aura:component>

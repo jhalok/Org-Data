@@ -1,0 +1,45 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global">
+ <aura:attribute name="recordId" type="String" default="true"></aura:attribute>
+    <div class="slds-align_absolute-center">
+        <lightning:button onclick="{! c.handleShowActiveSectionName }" label="Show Active Section Name"/>
+        <lightning:button onclick="{! c.handleSetActiveSectionC }" label="Open Section Address"/>
+    </div>
+    
+	<lightning:picklistPath aura:id="picklistPath" recordId="{!v.recordId}"
+        variant="non-linear"
+        picklistFieldApiName="LeadSource" 
+        onselect="{!c.Status}">
+    </lightning:picklistPath>
+    
+    <lightning:accordion aura:id="accordion" activeSectionName="A">
+       
+        <lightning:accordionSection name="A" label="Personal Details">
+            <aura:set attribute="actions">
+                <lightning:buttonMenu aura:id="menu" alternativeText="Show menu" menuAlignment="right" iconSize="large">
+                    <lightning:menuItem value="New" label="Menu Item One" />
+                    <lightning:menuItem value="Edit" label="Menu Item Two" />
+                </lightning:buttonMenu>
+            </aura:set>
+            
+            <form class="slds-form slds-form_horizontal">
+                 <lightning:input aura:id="form" label="First Name" name="inputtxt"/>    
+                 <lightning:input aura:id="form" label="Last Name" name="inputtxt"/>    
+                 <lightning:input aura:id="form" label="Age" name="inputtxt"/>    
+            </form>
+        </lightning:accordionSection>
+        
+        <lightning:accordionSection name="B" label="Contact Details">
+            <aura:set attribute="actions">
+                <lightning:buttonIcon iconName="utility:settings" variant="container" alternativeText="Settings" size="large" />
+            </aura:set>
+          
+             <form class="slds-form slds-form_horizontal">
+                 <lightning:input aura:id="form" label="Permanent Address" name="inputtxt"/>    
+                 <lightning:input aura:id="form" label="Temprory Address" name="inputtxt"/>    
+                 <lightning:input aura:id="form" label="Contact no." inputType="number" name="inputtxt"/>    
+            </form>
+          
+        </lightning:accordionSection>
+
+    </lightning:accordion>
+</aura:component>

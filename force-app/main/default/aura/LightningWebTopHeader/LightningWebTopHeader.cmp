@@ -1,0 +1,36 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <div class="mainHead ">
+        <div class="slds-grid slds-wrap">
+            <span>
+                <div class="slds-p-top_medium slds-p-bottom_medium searchBar slds-col slds-size_9-of-12">   
+                    <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_left">            
+                        <input type="text" id="text-input-id-1" class="slds-input" placeholder="Search art,artists..." />
+                    </div>
+                </div>
+            </span> 
+            <div class="slds-col slds-size_1-of-12">
+                <span><p class="slds-p-top_medium slds-p-bottom_medium headerSize" >COLLECTIONS</p></span>
+            </div>
+            <div class="slds-col slds-size_1-of-12">
+                <span><p class="slds-p-top_medium slds-p-bottom_medium headerSize" >GIFTS</p></span>
+            </div>
+            <div class="slds-col slds-size_4-of-12 ">
+                <p class="slds-align_absolute-center slds-p-top_small slds-p-bottom_small" style="font-size:25px;color:white">CURIOOS</p>
+            </div>
+            <div class="slds-col slds-size_1-of-12">
+                <span ><p class="slds-p-top_medium slds-p-left_medium slds-p-right_xxx-small slds-p-bottom_medium headerSize">MY CART</p></span>
+            </div>
+            <div class="slds-col slds-size_1-of-12">
+                <span><p class="slds-p-top_medium slds-p-bottom_medium slds-p-right_xxx-small  headerSize">LOGIN</p></span>
+            </div>
+            <div class="slds-col slds-size_1-of-12">
+                <span>
+                    <div class="slds-m-top_small" style="background-color:red;color:white;text-align:center">
+                        <p class="slds-p-top_x-small slds-p-bottom_x-small">OPEN A SHOP</p>   
+                    </div>
+                </span>
+            </div>
+        </div>
+    </div>  
+    <c:LightningWebSecHeader/>
+</aura:component>

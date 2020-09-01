@@ -1,0 +1,7 @@
+.remove_Border .slds-button_icon-border-filled, .slds-button--icon-border-filled, .slds-button_icon-border, .slds-button--icon-border {
+    /* vertical-align: middle; */
+    /* color: var(--lwc-colorTextIconDefault,rgb(112, 110, 107)); */
+    /* border: var(--lwc-borderWidthThin,1px) solid var(--lwc-colorBorderPrimary,rgb(221, 219, 218)); */
+    /* transition: border .15s linear; */
+    border-color: none !important;
+}

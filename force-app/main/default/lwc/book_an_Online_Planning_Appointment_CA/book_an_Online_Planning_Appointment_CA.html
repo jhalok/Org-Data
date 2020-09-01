@@ -1,0 +1,123 @@
+<template>
+    <div class="slds-m-top_small slds-float_right slds-m-right_x-large">
+        <lightning-button label="NEW" icon-name="utility:add" onclick={openNewAppoinmentModal}></lightning-button>
+    </div>
+    <template if:true={createtNewAppoinmentModal}>
+        <div class="">
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open slds-modal_small">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header header_BackGround">
+                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeNewAppoinmentModal}>
+                                <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse" size="small" ></lightning-icon>
+                        </button>
+                        <b>
+                            <h3 id="modal-heading-01" class="slds-text-heading_small slds-hyphenate font_Header">Book an Online Planning Appoinment</h3>
+                        </b>              
+                    </header>
+                    <div class="slds-modal__content slds-p-around_small" id="modal-content-id-2">
+                        <lightning-input required label="LastName" value={LastName} onchange={handleChange} class="slds-m-bottom_x-small"></lightning-input>
+                        <lightning-input required label="FirstName" value={FirstName} onchange={handleChange} class="slds-m-bottom_x-small"></lightning-input>
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <!--<lightning-button label="New Appoinment" variant="brand" onclick={submitContact}></lightning-button>-->
+                        <lightning-button class="slds-float_right slds-p-right_xx-small" label="Next" variant="brand" onclick={selectSlot}></lightning-button>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+    </template>
+    <template if:true={selectSlotModal}>
+        <div class="" style="height: 800px;">
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open slds-modal_small">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header header_BackGround">
+                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeSelectSlotModal}>
+                                <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse" size="small" ></lightning-icon>
+                        </button>
+                        <lightning-layout class="">
+                            <lightning-layout-item size="1" class="slds-p-right_xx-small">
+                                <button class="button-Style" onclick={backToNewAppoinmentModal}>
+                                    <lightning-icon class="button-Style" onclick={backToNewAppoinmentModal} icon-name="utility:chevronleft" alternative-text="Up arrow" variant="inverse" size="small"></lightning-icon>
+                                </button>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="2" class="slds-p-right_xx-small">
+                            </lightning-layout-item>
+                            <lightning-layout-item size="6" class="slds-m-top_xx-small">
+                                <b>
+                                    <h3 id="modal-heading-03" class="slds-text-heading_small slds-hyphenate font_Header">Book an Online Planning Appoinment</h3>
+                                </b>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_xx-small" id="modal-content-id-3">
+                        <p>show time slots</p>
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <lightning-button class="slds-float_right slds-p-right_xx-small" label="Next" variant="brand" onclick={selectThankU}></lightning-button>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+    </template>
+    <template if:true={openThankUScreen}>
+        <div class="" style="height: 800px;">
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open slds-modal_small">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header header_BackGround">
+                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeThankUModal}>
+                                <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse" size="small" ></lightning-icon>
+                        </button>
+                        <lightning-layout class="">
+                            <lightning-layout-item size="1" class="slds-p-right_xx-small">
+                                <button class="button-Style" onclick={backToNewAppoinmentModal}>
+                                    <lightning-icon class="button-Style" icon-name="utility:chevronleft" alternative-text="Up arrow" variant="inverse" size="small"></lightning-icon>
+                                </button>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="2" class="slds-p-right_xx-small">
+                            </lightning-layout-item>
+                            <lightning-layout-item size="6" class="slds-m-top_xx-small">
+                                <b>
+                                    <h3 id="modal-heading-04" class="slds-text-heading_small slds-hyphenate font_Header">Book an Online Planning Appoinment</h3>
+                                </b>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_xx-small" id="modal-content-id-4">
+                        {label}
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <lightning-button class="slds-float_right slds-p-right_xx-small" label="Next" variant="brand" onclick={selectFinalModal}></lightning-button>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+    </template>
+    <template if:true={openFinalModal}>
+        <div class="" style="height: 800px;">
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open slds-modal_small">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header header_BackGround">
+                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeFinalModal}>
+                                <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse" size="small" ></lightning-icon>
+                        </button>
+                        <b>
+                            <h3 id="modal-heading-05" class="slds-text-heading_small slds-hyphenate font_Header">Book an Online Planning Appoinment</h3>
+                        </b>              
+                    </header>
+                    <div class="slds-modal__content slds-p-around_xx-small" id="modal-content-id-5">
+                        <div class="slds-align_absolute-center">
+                            <img src={kitchenLogo} style="width: 300px;height:300px;margin-top:40px;margin-bottom:40px">
+                        </div>
+                    </div>
+                    <footer class="slds-modal__footer">
+                            <lightning-button variant="brand" class="slds-float_right slds-p-right_xx-small" label="Done" onclick={submitContact}></lightning-button>      
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+    </template>
+</template>

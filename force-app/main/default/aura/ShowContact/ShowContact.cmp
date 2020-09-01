@@ -1,0 +1,11 @@
+<aura:component controller="ShowContact" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:handler name="init" action="{!c.doInIt}" value="{!this}"/>
+    <aura:attribute name="showData" type="List"/>
+    
+    <div class="bgColour">
+        <aura:iteration items="{!v.showData}" var="con"> 
+            {!con.LastName}  <br></br>
+        </aura:iteration>        
+    </div>
+    
+</aura:component>

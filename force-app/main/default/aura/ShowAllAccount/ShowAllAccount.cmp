@@ -1,0 +1,10 @@
+<aura:component controller="ShowAllAccountController" >
+    <aura:attribute name="showAcc" type="Account[]"/>
+    <lightning:button  class="slds-m-top--medium slds-align_absolute-center" variant="brand" onclick="{!c.fetchDetails}">Fetch_Account_Details</lightning:button>
+    hiii {!v.showAcc}
+    <aura:iteration items="{!v.showAcc}" var="shw">
+   	<ui:outputText value="{!shw.Name}"/>
+    <p>{!shw.id}</p>
+    </aura:iteration>
+    
+</aura:component>

@@ -1,0 +1,18 @@
+<aura:component controller="test1" implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" >
+    <aura:handler name='init' action="{!c.doInIt}" value="{!this}"/>
+    <aura:attribute name="showConName" type="Contact"/>
+    <aura:attribute name="showEmail" type="Object"/>
+    <aura:attribute name="disp" type="boolean" default="false"/>
+    
+    
+    <aura:if isTrue="{!v.disp}">
+        <p>Contact Name</p>
+        {!v.showConName} <br/>
+        {!v.showEmail}  
+    </aura:if>
+    
+    <aura:iteration items="{!v.showConName}" var="con">
+        {!con.Name} <br></br>
+    </aura:iteration>
+    <lightning:button label="show" variant="brand" onclick="{!c.showData}"></lightning:button>
+</aura:component>

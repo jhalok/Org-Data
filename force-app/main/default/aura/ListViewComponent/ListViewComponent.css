@@ -1,0 +1,27 @@
+.THIS lightning-icon.some-indicator > lightning-primitive-icon > svg > use{
+    fill: green;
+}
+
+.THIS .slds-icon-standard-lead-list {
+    background-color: #f88962;
+}
+
+.THIS .horizontalButtonStyle{
+   	padding:5px 5px;
+    float:left;
+    background-color:#92c1ec;
+    box-shadow: 0 6px 7px 0px #420303;
+    z-index:1
+}
+
+.THIS .lastHorzButn{
+   	padding:5px 5px;
+    background-color:#92c1ec;
+    box-shadow: 0 6px 7px 0px #420303;
+    z-index:1;
+}
+
+.THIS .verticalButtonStyle{
+   
+   padding:5px 5px;background-color:#92c1ec;box-shadow: 0 6px 8px 3px #420303;
+   }

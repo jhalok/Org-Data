@@ -1,0 +1,51 @@
+.font_Header{
+    color:gray;
+}
+.slds-p-around_medium, .slds-p-around--medium {
+    padding: var(--lwc-spacingMedium,1rem);
+    float: right !important;
+}
+.slds-tabs_default__link[tabindex="0"]:focus{
+    text-decoration: none !important;
+}
+.slds-th__action-button .slds-button_icon-bare{
+	display: none !important;
+}
+lightning-tab-bar ul{
+    display: flex;
+    align-items: flex-start;
+    border-bottom: none !important;
+}
+.emailClass span{
+	display: none !important;
+}
+.emailClass label{
+	display: none !important;
+}
+.refrence .slds-tabs_default__item.slds-is-active:after{
+	background-color: gold !important;
+    	height: .1875rem;
+}
+/*.action-test .slds-table th, .slds-table td {
+    /* padding: var(--lwc-tableCellSpacing,0.25rem 0.5rem); */
+    padding-left: 20px !important;
+    /* white-space: nowrap; */
+    /* position: relative; */
+}*/
+.action-test .slds-table_bordered, .slds-table--bordered {
+    padding-left: 20px !important;
+    border-collapse: separate;
+    border-top: var(--lwc-borderWidthThin,1px) solid var(--lwc-colorBorder,rgb(221, 219, 218));
+    border-bottom: var(--lwc-borderWidthThin,1px) solid var(--lwc-colorBorder,rgb(221, 219, 218));
+}
+.createUserRef .slds-modal__header {
+    position: relative;
+    border-top-right-radius: var(--lwc-borderRadiusMedium,0.25rem);
+    border-top-left-radius: var(--lwc-borderRadiusMedium,0.25rem);
+    border-bottom: none !important;
+    padding: var(--lwc-spacingMedium,1rem);
+    text-align: center;
+}
+.createUserDataTable .slds-form .slds-is-relative .slds-grid .slds-col .slds-form-element .slds-form-element_stacked .slds-assistive-text .forceStyle.desktop .slds-form .slds-form-element__label{
+   display: none !important; 
+}

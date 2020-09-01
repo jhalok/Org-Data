@@ -1,0 +1,18 @@
+.THIS .boxDisplay {
+	border-bottom: 1px solid black;
+    border-left: 1px solid black;
+    border-top: 1px solid black;
+    border-right: 1px solid;
+    width: 10%;
+    height: 20%;
+    margin-right:7%; 
+}
+.THIS .imageProp{
+    text-align: center;
+    width: 70%;
+   
+    height: 100%;
+}
+.THIS .selected{
+    color:orange;
+}

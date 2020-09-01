@@ -1,0 +1,20 @@
+<apex:page controller="CustomContForAccount">
+    
+    <apex:pageBlock >
+        <apex:messages />
+        
+        <apex:pageBlockSection columns="1">
+        
+            <apex:pageBlockTable value="{!listDetAcc}" var="accRef" columns="3">	                   
+          
+            <apex:column value=" {!accRef.Id}"/>
+            
+            <apex:column value=" {!accRef.House_Owner__r.Name}"/>            
+            
+            <apex:column value=" {!accRef.Address__c}"/>
+                   
+        </apex:pageBlockTable>        
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+    
+</apex:page>

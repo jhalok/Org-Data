@@ -1,0 +1,14 @@
+.THIS .headerSize {
+	font-size:16px;
+    color:white;
+}
+
+.THIS.mainHead {
+    width:100%;
+    background-color:black;
+}
+
+.THIS .searchBar{
+    margin-left: 16%;
+    margin-top: -2%;
+}

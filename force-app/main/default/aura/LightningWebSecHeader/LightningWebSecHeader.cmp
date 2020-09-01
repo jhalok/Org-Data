@@ -1,0 +1,21 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+	 <div class="slds-align_absolute-center mainHeader" >
+        <div class="slds-grid slds-wrap">       
+            <div class="slds-col slds-size_6-of-12">
+                <span><p class="slds-p-top_medium slds-p-bottom_medium slds-p-left_medium slds-p-right_medium subContent" >WALLART</p></span>
+            </div>
+            <div class="slds-col slds-size_6-of-12">
+                <span><p class="slds-p-top_medium slds-p-bottom_medium slds-p-left_medium slds-p-right_medium subContent" >WOMEN'S</p></span>
+            </div>
+         </div>
+         <div class="slds-grid slds-wrap">       
+            <div class="slds-col slds-size_6-of-12 ">
+                <span><p class=" slds-p-top_medium slds-p-bottom_medium slds-p-left_medium slds-p-right_medium subContent">MEN'S</p></span>
+            </div>
+            <div class="slds-col slds-size_6-of-12">
+                <span><p class="slds-p-top_medium slds-p-bottom_medium slds-p-left_medium slds-p-right_medium subContent">HOME</p></span>
+            </div>
+        </div>
+    </div>  
+    <c:LightningWebCarousel/>
+</aura:component>

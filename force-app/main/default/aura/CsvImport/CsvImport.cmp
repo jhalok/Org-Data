@@ -1,0 +1,27 @@
+<aura:component controller="CsvImportExport">          
+    <!-- export attributes start  -->
+    <!--aura init handler, call js "loadContactList" function on component load, and display contact data on table-->   
+    <aura:handler name="init" value="{!this}" action="{!c.loadContactList}"/>
+    
+    <!--Declare Attribute for store Contact Records List-->  
+    <aura:attribute name="ListOfContact" type="Account[]"/> 
+    <!-- export attributes end-->
+    
+    <!-- Import attributes start  -->
+    <aura:attribute name="ShowModule" type="boolean" default="false"/>
+    <aura:attribute name="showcard" type="boolean" default="false"/>
+    <!-- Import attributes end  -->
+    
+    <div>
+        <input type="file" class="file" aura:id="file" onchange="{!c.showfiledata}"/>
+        <lightning:button label="Create Accounts" onclick="{!c.CreateRecord}" class="slds-button slds-button--brand"/>
+        <lightning:button label="Download Account As CSV" onclick="{!c.downloadCsv}" class="slds-button slds-button--brand"/>        
+    </div>
+    
+    <aura:if isTrue = "{!v.showcard}">
+        <lightning:card>
+            <div id="divCSV">
+            </div>  
+        </lightning:card>
+    </aura:if>
+</aura:component>

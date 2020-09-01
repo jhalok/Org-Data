@@ -1,0 +1,72 @@
+<aura:component controller="PaginatController" implements="flexipage:availableForAllPageTypes,force:appHostable" >
+  
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" /> 
+    <aura:attribute name="AccountList" type="Account[]"/>
+    <aura:attribute name="PageNumber" type="integer" default="1"/>
+    <aura:attribute name="TotalPages" type="integer" default="0"/>
+    <aura:attribute name="TotalRecords" type="integer" default="0"/>
+    <aura:attribute name="RecordStart" type="integer" default="0"/>
+    <aura:attribute name="selectedValue" type="integer" default="5"/>
+    <aura:registerEvent name="showToast" type="force:showToast"/>
+     
+    <div class="slds-m-around_xx-medium marginText">
+        <div class="slds-float_right marginText slds-page-header slds-align_absolute-center" role="banner">
+              <lightning:select aura:Id ="pageSize" class="marginText" name="selectItem" value="{!v.selectedValue}" label="Display Records Per Page:" onchange="{!c.onSelectChange}" >
+                <option value="5" label = "5" />
+                <option value="10" label = "10" />  
+                <option value="15" label = "15"/>
+                <option value="20" label = "20"/>
+            </lightning:select>
+            <br/>
+        </div>
+         
+        <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped slds-max-medium-table_stacked-horizontal">
+            <thead>
+                <tr>
+                    <th scope="col">
+                        <div class="slds-truncate" title="Name">Name</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="Phone">Phone</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="Email">Website</div>
+                    </th>
+                     <th scope="col">
+                        <div class="slds-truncate" title="AccountNumber">AccountNumber</div>
+                    </th>
+                     <th scope="col">
+                        <div class="slds-truncate" title="Industry">Industry</div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <aura:iteration items="{!v.AccountList}" var="acc"> 
+                    <tr>
+                        <th> {!acc.Name}</th>
+                        <th> {!acc.Phone}</th>
+                        <th> {!acc.Website}</th>               
+                        <th> {!acc.AccountNumber}</th>
+                        <th> {!acc.Industry}</th>
+                    </tr>
+                </aura:iteration> 
+            </tbody>
+        </table>
+        <br/>
+        
+          <div class="slds-page-header slds-align_absolute-center" role="banner">
+                    <b class="slds-m-right_small mrgnTop">Page No.</b>
+                        <lightning:input name="input1" class="widthPageNoBox" value="{!v.PageNumber}" onchange="{!c.setPageNum}"/>  
+                        <b class="slds-m-right_xx-small mrgnTop "> of Total Pages: {!v.TotalPages} </b>
+                    	<b class="slds-m-right_xx-small mrgnTop"> from Total Records: {!v.TotalRecords} </b>
+        </div>
+            
+        <div class="slds-page-header slds-align_absolute-center" role="banner">
+            <lightning:button disabled="{!v.PageNumber == 1}" variant="brand" label="First" onclick="{!c.handleFirst}" />  
+            <lightning:button disabled="{!v.PageNumber == 1}" variant="brand" aura:id="prevPage" label="Prev" onclick="{!c.handlePrev}" />            
+            <lightning:button disabled="{!v.PageNumber == v.TotalPages}" aura:id="nextPage" variant="brand" label="Next" onclick="{!c.handleNext}"/>
+            <lightning:button disabled="{!v.PageNumber == v.TotalPages}"  variant="brand" label="Last" onclick="{!c.handleLast}"/>
+        </div>
+   </div>
+       	
+</aura:component>

@@ -1,0 +1,8 @@
+<aura:component controller="condt" implements="lightning:isUrlAddressable,force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="AccessToken" type="List"/>
+    <aura:iteration  items="{!v.AccessToken}" var="item">
+    		{!item.LastName}
+    </aura:iteration>
+   
+</aura:component>

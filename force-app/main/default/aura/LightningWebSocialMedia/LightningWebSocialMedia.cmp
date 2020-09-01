@@ -1,0 +1,25 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <div style="width:5%;height:35%;background-color:black;position:fixed;top:300px;list-style:none">
+        <li class="slds-p-bottom_medium slds-p-top_medium">
+            <a href="www.fb.com">
+                <img src="{!$Resource.Product}"/>
+            </a>
+            <a href="">
+                <img src="{!$Resource.onlineshop}"/>
+            </a>
+             <a href="">
+                <img src="{!$Resource.onlineshop}"/>
+            </a>
+             <a href="">
+                <img src="{!$Resource.onlineshop}"/>
+            </a>
+             <a href="">
+                <img src="{!$Resource.onlineshop}"/>
+            </a>
+             <a href="">
+                <img src="{!$Resource.onlineshop}"/>
+            </a>
+        </li>
+    </div>
+    <c:LightningWebContent/>
+</aura:component>

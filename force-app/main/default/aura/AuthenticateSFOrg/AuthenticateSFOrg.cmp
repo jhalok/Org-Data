@@ -1,0 +1,21 @@
+<aura:component controller="Authenticate" implements="lightning:isUrlAddressable,force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:attribute name="showData" type="List"/>
+    <aura:attribute name="clientId" type="Id" />
+    <aura:attribute name="clientSecret" type="Id"/>
+    <lightning:layout>	
+        <lightning:layoutItem class="slds-align_absolute-center slds-text-heading_medium slds-p-around_xx-small">
+            <h3>Authenticate SalesForce Org</h3>
+        </lightning:layoutItem>
+    </lightning:layout>
+    <hr></hr>
+    <lightning:layout>
+        <lightning:layoutItem class="slds-align_absolute-center">
+            <p>Click on the button bellow to Authenticate the Org:-</p>
+        </lightning:layoutItem>
+    </lightning:layout>
+    <lightning:layout>	
+        <lightning:layoutItem class="slds-align_absolute-center slds-p-top_medium slds-p_xx-small">
+            <lightning:button variant="brand" label="Authenticate" onclick="{!c.authenticateOrg}"/>
+        </lightning:layoutItem>    
+    </lightning:layout>
+</aura:component>

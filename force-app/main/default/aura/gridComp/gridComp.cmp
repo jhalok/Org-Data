@@ -1,0 +1,155 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global">
+    <lightning:layout horizontalAlign="spread" multipleRows="true">
+
+ <lightning:layoutItem flexibility="grow" size="12"><div class="slds-box">1</div></lightning:layoutItem>
+        <lightning:layoutItem flexibility="grow" size="8" mediumDeviceSize="10" largeDeviceSize="8"><div class="slds-box">2</div></lightning:layoutItem>
+        <lightning:layoutItem flexibility="grow" size="4" mediumDeviceSize="2" largeDeviceSize="4"><div class="slds-box">3</div></lightning:layoutItem>
+         
+        <div class="slds-col slds-size_1-of-1">
+            <b>Account Information</b>
+            <div class="slds-p-top_x-large"></div>
+        </div>
+        <div class="slds-grid slds-wrap">
+
+
+            
+            <div class="slds-col slds-size_6-of-12">
+                <span>Name</span> 
+                <div class="slds-p-top_x-large"></div>
+            </div>
+            <div class="slds-col slds-size_6-of-12">
+                <span>----</span>    
+                <div class="slds-p-top_x-large"></div>
+            </div>
+            
+            
+            <div class="slds-col slds-size_6-of-12">
+                <span>Phone</span>
+                <div class="slds-p-top_x-large"></div>
+            </div>
+            <div class="slds-col slds-size_6-of-12">
+                <span>----</span>    
+                <div class="slds-p-top_x-large"></div>
+            </div>
+            
+            <div class="slds-col slds-size_6-of-12">
+                <span>Fax</span>
+                <div class="slds-p-top_x-large"></div>
+            </div>
+            <div class="slds-col slds-size_6-of-12">
+                <span>----</span>    
+                <div class="slds-p-top_x-large"></div>
+            </div>
+            
+            <div class="slds-col slds-size_6-of-12">
+                <span>Website</span>
+                <div class="slds-p-top_x-large"></div>
+            </div>
+            <div class="slds-col slds-size_6-of-12">
+                <span>----</span>    
+                <div class="slds-p-top_x-large"></div>
+            </div>
+            
+            <div class="slds-col slds-size_6-of-12">
+                <span>No of Information</span>
+                <div class="slds-p-top_x-large"></div>
+            </div>
+            <div class="slds-col slds-size_6-of-12">
+                <span>----</span>    
+                <div class="slds-p-top_x-large"></div>
+            </div>
+            
+            <div class="slds-col slds-size_6-of-12">
+                <span>Custom field 1</span>
+                <div class="slds-p-top_x-large"></div>
+            </div>
+            <div class="slds-col slds-size_6-of-12">
+                <span>----</span>    
+                <div class="slds-p-top_x-large"></div>
+            </div>
+            
+            <div class="slds-col slds-size_6-of-12">
+                <span>Custom field 2</span>
+                <div class="slds-p-top_x-large"></div>
+            </div>
+            <div class="slds-col slds-size_6-of-12">
+                <span>----</span>    
+                <div class="slds-p-top_x-large"></div>
+            </div>
+            
+        </div>
+        
+        <div class="slds-grid slds-wrap">
+            
+            <div class="slds-col slds-size_6-of-12">
+                <span>Primary Address</span>
+                <div class="slds-p-top_x-large"></div>
+            </div>
+            <div class="slds-col slds-size_6-of-12">
+                <span>----</span>    
+                <div class="slds-p-top_x-large"></div>
+            </div>
+            
+            <div class="slds-col slds-size_6-of-12">
+                <span>Secondary Address</span>
+                <div class="slds-p-top_x-large"></div>
+            </div>
+            <div class="slds-col slds-size_6-of-12">
+                <span>----</span>    
+                <div class="slds-p-top_x-large"></div>
+            </div>
+            
+            <div class="slds-col slds-size_6-of-12">
+                <span>Address</span>
+                <div class="slds-p-top_x-large"></div>
+            </div>
+            <div class="slds-col slds-size_6-of-12">
+                <span>----</span>    
+                <div class="slds-p-top_x-large"></div>
+            </div>
+            
+            <div class="slds-col slds-size_6-of-12">
+                <span>City</span>
+                <div class="slds-p-top_x-large"></div>
+            </div>
+            <div class="slds-col slds-size_6-of-12">
+                `<span>----</span>  
+                <div class="slds-p-top_x-large"></div>
+            </div>
+            
+            <div class="slds-col slds-size_6-of-12">
+                <span>State</span>
+                <div class="slds-p-top_x-large"></div>
+            </div>
+            <div class="slds-col slds-size_6-of-12">
+                <span>----</span>  
+                <div class="slds-p-top_x-large"></div>
+            </div>
+            
+            <div class="slds-col slds-size_6-of-12">
+                <span>Country</span>
+                <div class="slds-p-top_x-large"></div>
+            </div>
+            <div class="slds-col slds-size_6-of-12">
+                <span>----</span>  
+                <div class="slds-p-top_x-large"></div>
+            </div>
+            
+            
+            <div class="slds-col slds-size_6-of-12">
+                <span>Zip</span>
+                <div class="slds-p-top_x-large"></div>
+            </div>
+            <div class="slds-col slds-size_6-of-12">
+                <span>----</span>  
+                <div class="slds-p-top_x-large"></div>
+            </div>
+            
+        </div>
+       
+          <div class="slds-size_6-of-12">
+    	<div class="slds-box slds-box_x-small slds-text-align_center slds-m-around_x-small">.slds-size_6-of-12</div>
+  </div>
+              
+    </lightning:layout>
+</aura:component>

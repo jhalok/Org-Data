@@ -1,0 +1,6 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+  <aura:attribute name="total" type="Integer" default='0'/>
+    <c:ChildAuraMthd aura:id='idOfChildCmp'/>
+    	<lightning:button variant="brand" label="Submit" onclick="{!c.handleClick}" />
+    {!total}
+</aura:component>

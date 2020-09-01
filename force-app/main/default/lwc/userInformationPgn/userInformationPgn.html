@@ -1,0 +1,254 @@
+<template>
+<lightning-card class="" title={cardTitle}>
+            <div class="c-container">
+                <lightning-layout>
+                    <lightning-layout-item flexibility="auto">
+                        <div class="custom-box">
+                                <h1 class="font-style slds-p-left_large"><b>
+                                        User
+                                    </b></h1>   
+                                <h1 class="slds-p-left_large font-style">Management</h1>             
+                        </div>
+                    </lightning-layout-item>
+                    
+                    <lightning-layout-item class="slds-tabs_default__nav">
+                                <lightning-tabset class="refrence">
+                                        <lightning-tab label="ACTIVE USERS" class="" value="tab1" onactive={tabselect}>                                     
+                                        </lightning-tab>
+                                        <lightning-tab label="DEACTIVATED USERS" value="tab2" onactive={tabselect}>                                               
+                                        </lightning-tab>
+                                </lightning-tabset>     
+                    </lightning-layout-item>
+                    <lightning-layout-item flexibility="auto" >
+                        <div class="slds-m-top_small slds-float_right slds-m-right_x-large">
+                            <lightning-button label="NEW" icon-name="utility:add" onclick={createUserModal}></lightning-button>
+                        </div>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </div>
+</lightning-card>
+<template if:true={selectedTab}>
+        <div id="dataUser" class="dataTableUser">
+                <lightning-datatable class="slds-p-top_small slds-p-bottom_small action-test"
+                key-field="id"
+                data={currentPageData}
+                columns={columns}
+                hide-checkbox-column="true"
+                onrowaction={handleRowActions}
+                enable-infinite-loading
+                onloadmore={loadMoreData}
+                show-row-number-column="true"
+                >
+                </lightning-datatable>
+
+            </div>
+</template>
+<template if:true={tabbb}>
+    <div class="SecondDataTable">
+        <lightning-datatable class="slds-p-top_small slds-p-bottom_small action-test"
+            key-field="id"
+            data={currentPage}
+            columns={columnData}
+            hide-checkbox-column="true"
+            onrowaction={handleRowActions}
+            enable-infinite-loading
+            onloadmore={loadMoreData}
+            show-row-number-column="true"
+            >
+        </lightning-datatable>
+    </div>
+</template>
+<template if:true={createtUsrModel}>
+        <div class="" style="height: 800px;">
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container createUserRef">
+                    <header class="slds-modal__header">
+                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeModal}>
+                                <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse" size="small" ></lightning-icon>
+                        </button>
+                        <b>
+                            <h3 id="modal-heading-01" class="slds-text-heading_small slds-hyphenate font_Header">CREATE A NEW USER &amp; CONTACT ACCOUNT</h3>
+                        </b>
+                            <p style="color:#009ddc" class="slds-p-top_medium">WHAT ARE USER AND CONTACTS ACCOUNT?</p>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_xx-large createUserDataTable" id="modal-content-id-1">
+                                <lightning-record-form
+                                    object-api-name="User"
+                                    fields={userCreationFields}
+                                    columns="2"
+                                    mode="edit"
+                                    onsubmit={handleSub}>
+                                </lightning-record-form>
+                                <p style="color:gray;text-align:justify;width:48%;margin-top:20px"><b>Please make sure all the information is correct before creating.</b>Once you submit this information it can't be edited unless you contact our support team.</p>
+                    </div>
+                 <!--   <div class="slds-modal__content slds-p-around_xx-large createUserDataTable" id="modal-content-id-1">
+                    <lightning-record-edit-form record-id={currentRecordId} object-api-name="User" onsuccess={handleSuccess}>
+                        <lightning-messages></lightning-messages>
+                        <div class="slds-m-around_medium">
+                            <lightning-input-field field-name='Name'></lightning-input-field>
+                            <lightning-input-field field-name='ProfileId'></lightning-input-field>
+                            <lightning-input-field field-name='UserRoleId'></lightning-input-field>
+                            <lightning-input-field field-name='CommunityNickname'></lightning-input-field>
+                            <lightning-input-field field-name='Username'></lightning-input-field>
+                            <div class="slds-m-top_medium">
+                                <lightning-button variant="brand" type="submit" name="save" label="Create User">
+                                </lightning-button>
+                           </div>
+                       </div>
+                    </lightning-record-edit-form>
+                    </div> -->
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+</template>
+<template if:true={openmodel}>
+        <div class="" style="height: 800px;">
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-02" aria-modal="true" aria-describedby="modal-content-id-2" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeModal}>
+                                <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse" size="small" ></lightning-icon>
+                        </button>
+                        <b>
+                            <h3 id="modal-heading-02" class="slds-text-heading_small slds-hyphenate">SEND NEW PASSWORD EMAIL</h3>
+                        </b>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content">
+                            <div class="slds-align_absolute-center slds-m-top_x-large">
+                                <h3><b>SEND NEW PASSWORD EMAIL TO:</b></h3><br/>
+                            </div>
+                            <div class="slds-align_absolute-center slds-text-heading_medium slds-m-top_x-large">
+                                <b style="font-size:20px">{currentRowEmail}</b></br>
+                            </div>
+                           <!-- <lightning-output class="slds-align_absolute-center" disabled value={currentRowEmail}></lightning-output>-->
+                        <div class="slds-align_absolute-center slds-m-top_xx-large">
+                            <lightning-button label="SEND" variant="Brand" onclick={sendEmail}></lightning-button>
+                        </div>
+                    </div>
+                   <!-- <footer class="slds-modal__footer">
+                        <lightning-button label="Cancel" variant="neutral" onclick={closeModal}></lightning-button>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <lightning-button label="Save" variant="brand" onclick={saveMethod}></lightning-button>
+                    </footer> -->
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+</template>
+<template if:true={openmodel1}>
+    <div class="" style="height: 800px;">
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-03" aria-modal="true" aria-describedby="modal-content-id-3" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeModal1}>
+                            <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse" size="small" ></lightning-icon>
+                    </button>
+                    <b>
+                        <h3 id="modal-heading-03" class="slds-text-heading_small slds-hyphenate">SEND NEW PASSWORD EMAIL</h3>
+                    </b>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content1">
+                    <lightning-card title='File Uploadr' icon-name="custom:custom19">
+                        <lightning-file-upload
+                                label="Attach receipt"
+                                name="fileUploader"
+                                accept={acceptedFormats}
+                                record-id={recordId}
+                                onuploadfinished={handleUploadFinished}
+                                multiple>
+                            </lightning-file-upload>
+                    </lightning-card>
+                </div>
+               <!-- <footer class="slds-modal__footer">
+                    <lightning-button label="Cancel" variant="neutral" onclick={closeModal}></lightning-button>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <lightning-button label="Save" variant="brand" onclick={saveMethod}></lightning-button>
+                </footer> -->
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </div>
+</template>
+<template if:true={bShowModal}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open"> 
+<div class="slds-modal__container ref">
+<!-- modal header -->
+<header class="slds-modal__header">
+    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeModal}>
+        <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse" size="small" ></lightning-icon>
+    </button>
+</header>
+<!-- modal body -->
+       <!-- showing record edit form -->
+       <div if:true={isEditForm} class="slds-theme_default">
+        <lightning-record-edit-form layout-type="Full" record-id={currentRecordId} object-api-name="User" onsuccess={handleSuccess} onsubmit={handleSubmit} >
+           <!-- <lightning-messages></lightning-messages> -->
+            <img class="slds-avatar--empty slds-p-around_large slds-align_absolute-center slds-avatar_group-image-large slds-avatar_circle" src ={currentRecordImage}>
+            <div class="slds-align_absolute-center slds-m-top_x-small">
+                <b style="font-size:20px;color:gray">{currentRecordFirstName}&nbsp;{currentRecordLastName}</b>
+            </div>
+            <p class="slds-align_absolute-center">User Information</p>
+            <lightning-layout class="slds-p-around_large">
+                <lightning-layout-item size="6" class="slds-p-around_large">
+                    <div class=""><b>FIRST NAME *</b>
+                        <lightning-input-field disabled field-name="FirstName" variant="label-hidden"></lightning-input-field >
+                    </div>
+                    <div class="slds-p-top_medium">
+                        <b>LAST NAME *</b>
+                        <lightning-input-field disabled field-name="LastName"  variant="label-hidden"></lightning-input-field>
+                    </div>
+                   <!-- <div class="slds-p-top_x-large">
+                        <b>EMAIL *</b>
+                        <lightning-input-field field-name="Email"  variant="label-hidden"></lightning-input-field>
+                    </div> -->
+                    <div class="roleClass slds-p-top_medium">
+                            <b>PROFILE *</b>
+                            <lightning-input disabled value={currentRecordProfile}></lightning-input>
+                    </div>
+                   
+                    <div class="slds-p-top_medium">
+                        <b>USERNAME *</b>
+                        <lightning-input-field disabled field-name="Username"  variant="label-hidden"></lightning-input-field>
+                    </div>
+                </lightning-layout-item>
+                <lightning-layout-item size="6" class="slds-p-around_large">
+                        <b>NICKNAME *</b>
+                        <lightning-input-field disabled field-name="CommunityNickname"  variant="label-hidden"></lightning-input-field>
+                    <div class="roleClass slds-p-top_medium">
+                        <label><b>ROLE *</b></label>
+                        <lightning-input disabled mode="edit" value={currentRecordRole}></lightning-input>
+                    </div>
+                    <div class="emailClass slds-p-top_medium">
+                            <b>EMAIL *</b>
+                            <lightning-record-form class="slds-p-vertical_medium" fields={myFields} variant="label-hidden" record-id={currentRecordId} object-api-name="User" columns="1" onsuccess={handleSuccess} onsubmit={handleSubmit}>></lightning-record-form>
+                    </div>
+                </lightning-layout-item>
+            </lightning-layout>
+        </lightning-record-edit-form>
+        <br/>
+        <!--
+        <lightning-button class="slds-m-top_small"
+        variant="brand"
+        type="submit"
+        name="update"
+        label="Update Record"></lightning-button>-->
+        <div style="text-align:center;">
+                        <p style="color:gray;font-size: 13px;">Due to legal compiance reasons. You can not update the first and last names.</p>
+                        <p style="color:#b6a9a9;margin-top:10px;font-size: 13px;">If you need to update any information besides your email address please contact us at</p>
+                        <p style="color: #009ddc;font-weight: 500;font-size: 13px;padding-bottom:50px;">partnerportal@sunpower.com</p>
+        </div>
+    </div>
+    <!-- modal footer start-->
+    <footer class="slds-modal__footer" if:false={isEditForm}>
+        <lightning-button variant="brand"
+                          label="Close"
+                          title="Close"
+                          onclick={closeModal}></lightning-button>
+    </footer>
+</div>
+</section>
+<div class="slds-backdrop slds-backdrop_open"></div>
+<div class="">
+    <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+</div>
+</template>
+</template>

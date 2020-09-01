@@ -1,0 +1,43 @@
+.THIS {
+}
+
+.THIS .marginText{
+    
+}
+
+.THIS .mrgnTop{
+  
+}
+
+.THIS .widthPageNoBox {
+    border-radius: .25rem;
+    width: 12%;
+    transition: border .1s linear,background-color .1s linear;
+    display: inline-block;
+    padding: 0 1rem 0 .75rem;
+    line-height: 1.875rem;
+    min-height: calc(1.875rem + (1px * 2));
+}
+
+.THIS .wk_warning {
+    background : #FFB75D !important;
+}
+
+.THIS .wk_success {
+    background : #04844B !important;
+}
+
+.THIS .buttonPosition {
+    margin-top: 29px;
+}
+
+.THIS .pageNoDisplay{
+    margin-top:35px;
+}
+
+.THIS.exampleHolder{
+    position: relative;
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+}

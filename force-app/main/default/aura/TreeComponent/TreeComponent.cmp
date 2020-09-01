@@ -1,0 +1,16 @@
+<aura:component controller="TreeStructureWithPagination" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" > 
+    <aura:attribute type="Account[]" name="acctList"/>
+    <aura:attribute name="gridColumns" type="List" />
+    <aura:attribute name="gridData" type="Object" />
+    <aura:attribute name="gridExpandedRows" type="Object" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.fetchAccounts}"/>
+    
+    <lightning:treeGrid columns="{! v.gridColumns }"
+        data="{! v.gridData }"
+        keyField="Id"
+        aura:id="mytree"
+    />
+        
+
+</aura:component>

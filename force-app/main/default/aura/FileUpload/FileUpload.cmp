@@ -1,0 +1,27 @@
+<aura:component controller="FileUploadController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+	
+<aura:attribute name="accept" type="List" default="['.jpg', '.jpeg',’.pdf','.docx']"/>  
+
+   <aura:attribute name="multiple" type="Boolean" default="true"/>  
+
+   <aura:attribute name="disabled" type="Boolean" default="false"/>  
+
+   <div id="div1">  
+
+   <lightning:fileUpload name="fileUploader"  
+
+               label= "Client Collateral folder"  
+
+               multiple="{!v.multiple}"  
+
+               accept="{!v.accept}"  
+
+               disabled="{!v.disabled}"  
+
+               recordId="{!v.recordId}"  
+
+               onuploadfinished="{! c.handleUploadFinished }"/><br/>  
+
+   </div>  
+
+ </aura:component>

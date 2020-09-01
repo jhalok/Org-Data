@@ -1,0 +1,8 @@
+<aura:component controller="customButtonData" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+  	<aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+    <aura:attribute name="currentProfileName" type="String" />
+  <div class="slds-align_absolute-center">
+        <lightning:button variant="neutral" label="Move to 10K Connect"  onclick="{!c.action }"/>
+  </div>
+    
+</aura:component>

@@ -1,0 +1,9 @@
+.THIS {
+}
+
+.THIS .wk_warning {
+    background : #FFB75D !important;
+}
+.THIS .wk_success {
+    background : #04844B !important;
+}

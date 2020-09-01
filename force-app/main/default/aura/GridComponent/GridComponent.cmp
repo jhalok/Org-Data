@@ -1,0 +1,20 @@
+<aura:component implements="flexipage:availableForAllPageTypes">
+   <div class="slds-page-header" role="banner">
+  <div class="slds-grid">
+    <div class="slds-col slds-has-flexi-truncate">
+      <!-- HEADING AREA -->
+      <p class="slds-text-title_caps slds-line-height_reset">Accounts</p>
+      <h1 class="slds-page-header__title slds-truncate" title="My Accounts">My Accounts</h1>
+      <!-- / HEADING AREA -->
+    </div>
+    <div class="slds-col slds-no-flex slds-grid slds-align-top">
+      <button class="slds-button slds-button_neutral">New Account</button>
+    </div>
+  </div>
+  <div class="slds-grid">
+    <div class="slds-col slds-align-bottom slds-p-top_small">
+      <p class="slds-text-body_small">COUNT items</p>
+    </div>
+  </div>
+</div>
+</aura:component>

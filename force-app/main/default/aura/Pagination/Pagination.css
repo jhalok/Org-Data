@@ -1,0 +1,30 @@
+.THIS {
+}
+
+.THIS .marginText{
+    margin-top: 18px;
+    font-weight: bolder;
+    color: black;
+}
+
+.THIS .mrgnTop{
+    margin-top: 28px;
+}
+
+.THIS .widthPageNoBox {
+    border-radius: .25rem;
+    width: 8%;
+    transition: border .1s linear,background-color .1s linear;
+    display: inline-block;
+    padding: 0 1rem 0 .75rem;
+    line-height: 1.875rem;
+    min-height: calc(1.875rem + (1px * 2));
+}
+
+.THIS .wk_warning {
+    background : #FFB75D !important;
+}
+
+.THIS .wk_success {
+    background : #04844B !important;
+}

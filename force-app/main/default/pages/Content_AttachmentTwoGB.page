@@ -1,0 +1,24 @@
+<apex:page >
+    <chatter:feed entityId="5006F00002bfEtFQAU" />
+    <script>
+    $('.uploadFileSizeLimit').hide();           
+    
+    $('.contentPublisherSlideDown.customPanel.alignTop').css('border', '0');
+    
+    $('.clearContentPanelButtonContainer').hide();
+    
+    $('.publisherFeedItemTypeChoices').hide();      
+    
+    $('.cxfeedinnerwrapper').hide();  
+    
+    $('.publisherBottomBarPlaceholder').hide();
+    
+    $('.publisherTextAreaPlaceholder.alignCenter').hide();
+    if($('.file')[1].files.length > 0){
+        $('#publishersharebutton').trigger('click');
+    }else{
+        alert('Please select a file');
+        
+    }
+    </script>
+</apex:page>

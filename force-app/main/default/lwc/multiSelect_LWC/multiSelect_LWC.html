@@ -1,0 +1,85 @@
+<template>
+        <lightning-card>
+                    <div class={txtclassname} data-id="resultBox" aria-expanded="false" aria-haspopup="listbox" role="combobox">
+                            <div class="slds-col slds-size_8-of-12" role="none">
+                                <div class="slds-input-has-icon slds-input-has-icon">
+                                    <lightning-input label="Search Cases" required={required} data-id="userinput" placeholder="Search CaseId, CaseName" onchange={searchField}></lightning-input>
+                                </div>
+                            </div>
+                            <div if:true={multiSearch}>
+                                <div style="width:56%;margin-left:24%" class="slds-p-top_x-small slds-p-bottom_x-small" role="none">
+                                    <template for:each={selectedRecords} for:item="serecord">
+                                        <span class="slds-m-top_xx-large slds-m-bottom_xx-large"  key={serecord.Id}>
+                                             <lightning-pill  label={serecord.Name} name={serecord.Id} onremove={removeRecord}>
+                                               <!-- <lightning-icon icon-name={iconName} variant="circle" alternative-text={serecord.recName}></lightning-icon>-->
+                                               <span class="slds-icon_container slds-icon-standard-account">
+                                                    <lightning-icon icon-name={iconName} class="slds-icon slds-icon slds-icon_small slds-icon-text-default" size="x-small"></lightning-icon>
+                                                </span>
+                                            </lightning-pill>
+                                        </span>
+                                    </template>
+                                </div>
+                            
+                                <!-- Second part display result -->
+                                <div id="listbox-id-1" class="slds-dropdown slds-dropdown_fluid slds-col slds-align_absolute-center slds-size_6-of-12" role="listbox">
+                                    <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                                        <template for:each={searchRecords} for:item="serecord">
+                                            <li role="presentation" class="slds-listbox__item" key={serecord.recId}>                  
+                                                <div data-id={serecord.Id} data-name={serecord.Name} data-phone={serecord.Phone} onclick={setSelectedRecord} class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta" role="option">
+                                                    <span class="slds-media__figure">
+                                                        <span class="slds-icon_container slds-icon-standard-account">
+                                                            <lightning-icon icon-name={iconName} class="slds-icon slds-icon slds-icon_small slds-icon-text-default" size="x-small"></lightning-icon>
+                                                        </span>
+                                                    </span>
+                                                    <span class="slds-media__body">
+                                                        <span class="slds-listbox__option-text slds-listbox__option-text_entity">{serecord.Name}</span>
+                                                        <span class="slds-listbox__option-text slds-listbox__option-text_entity">{serecord.Phone}</span>
+                                                       <!-- <span class="slds-listbox__option-meta slds-listbox__option-meta_entity">{objectName} • {serecord.recName}</span>-->
+                                                    </span>
+                                                </div>
+                                            </li>
+                                        </template>
+                                    </ul>
+                                </div>
+                                <div if:true={messageFlag}>
+                                    No result found related to your searched term.
+                                </div>
+                                <div if:true={LoadingText}>
+                                    Loading...
+                                </div>
+                        </div>
+                    </div>
+                    <!--This is for single search-->
+                    <div if:true = {singleSearch}>
+                        <div class={txtclassname} data-id="resultBox" aria-expanded="false" aria-haspopup="listbox" role="combobox">
+                            <div id="listbox-id-2" class="slds-dropdown slds-dropdown_fluid slds-col slds-align_absolute-center slds-size_6-of-12" role="listbox">
+                                <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                                    <template for:each={searchRecords} for:item="serecord">
+                                            <li role="presentation" class="slds-listbox__item" key={serecord.recId}>                                                    
+                                                <div data-id={serecord.Id} data-name={serecord.Name} data-phone={serecord.Phone} onclick={setSelectedRecord} class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta" role="option">
+                                                    <a data-record-id={serecord.Id} onclick={handleItemClicked}>{serecord.Name}{serecord.Phone}</a>
+                                                       
+                                                </div>
+                                            </li>
+                                    </template>
+                                </ul>
+                            </div>
+                        </div>   
+                    </div>                   
+        </lightning-card>
+        <!--Data table to display multiple data-->
+        <template if:true={showAllSelectedData}>
+                <div style="height: 250px;">
+                    <lightning-datatable class="slds-p-top_small slds-p-bottom_small action-test"
+                          key-field="id"
+                          data={selectedRecords}
+                          columns={columns}
+                          onloadmore={loadMoreData}
+                          hide-checkbox-column="true"
+                          onrowaction={handleRowActions}
+                          show-row-number-column="true"
+                          >
+                    </lightning-datatable>
+                </div>
+          </template>
+    </template>

@@ -1,0 +1,40 @@
+<template>
+
+    <div style="height: 350px;">
+        <lightning-datatable
+                key-field="id"
+                data={data}
+                columns={columns}
+                enable-infinite-loading
+                onloadmore={loadMoreData}
+                onrowaction={handleRowAction}
+                is-loading={tableLoadingState}
+                onsave={handleSave}
+                show-row-number-column="false"
+                hide-checkbox-column="true"
+                >
+        </lightning-datatable>
+
+        {loadMoreStatus}
+    </div>   
+
+    <div if:true = {showSelected}>
+        <!--
+            <template for:each={recordIds} for:item="serecord">
+                    <li role="presentation" class="slds-listbox__item" key={serecord.recId}>                                                   
+                        <div>
+                             <a data-record-id={serecord.Id} onclick={handleItemClicked}>{serecord}</a>
+                        </div>
+                    </li>
+            </template>
+        -->
+
+        <lightning-datatable
+                key-field="id"
+                data={recordIds}
+               
+                >
+        </lightning-datatable>
+
+    </div> 
+</template>

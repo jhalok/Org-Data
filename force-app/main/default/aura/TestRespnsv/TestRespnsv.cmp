@@ -1,0 +1,24 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <div class="slds-grid slds-wrap">
+        <div class="slds-small-size--2-of-12 slds-p-around_medium" style="text-align:center;background-color:black">hello</div>
+        <div class="slds-small-size--10-of-12 slds-p-around_medium">
+            <div class="slds-grid slds-wrap">
+                <div class="slds-small-size--2-of-12 slds-align_absolute-center" style="background-color:yellow">ret</div>
+                <div class="slds-small-size--2-of-12 slds-p-around_medium">etre</div>
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-small-size--0-of-12 slds-p-around_medium">HOME</div>
+                    <div class="slds-small-size--2-of-12 slds-p-around_medium">ACCOUNTS</div>
+                    <div class="slds-small-size--3-of-12 slds-p-around_medium">REPORT AND ANALYTICS</div>
+                    <div class="slds-small-size--3-of-12 slds-p-around_medium">MY FINANCIAL ADVICE</div>
+                    <div class="slds-small-size--4-of-12 slds-p-around_medium">ACTION, TASKS AND CALENDERS</div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <div class="slds-grid slds-wrap">
+        <div class="slds-size--1-of-2 slds-medium-size--1-of-1 slds-large-size--1-of-2">6</div>
+        <div class="slds-size--1-of-2 slds-medium-size--1-of-1 slds-large-size--1-of-2">7</div>
+    </div>
+    
+</aura:component>

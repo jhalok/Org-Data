@@ -1,0 +1,13 @@
+.THIS .slds-carousel__content {
+    /* background: rgb(255, 255, 255); */
+     padding: 0rem;
+    /* border-bottom-left-radius: .25rem; */
+    /* border-bottom-right-radius: .25rem; */
+    /* text-align: center; */
+    height: 0rem !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+}
+.THIS .slds-button_icon-x-small{
+    display: none;
+}

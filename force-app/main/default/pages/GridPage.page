@@ -1,0 +1,43 @@
+<apex:page showHeader="false" standardStylesheets="false" sidebar="false" applyHtmlTag="false" applyBodyTag="false" docType="html-5.0">
+    
+    <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" lang="en">
+        
+        <head>
+            <meta charset="utf-8" />
+            <meta http-equiv="x-ua-compatible" content="ie=edge" />
+            <title>Salesforce Lightning Design Grid System</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            
+            <!-- Import the Design System style sheet -->
+            <apex:slds />
+            
+        </head>
+        
+        <body>
+            
+            
+            <div class="slds-scope">
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-col slds-size_6-of-12">
+                        <span>Name</span>    
+                    </div>
+                    <div class="slds-col slds-size_6-of-12">
+                        <span>Primary Address</span>    
+                    </div>
+                    
+                    
+                    <div class="slds-col slds-size_6-of-12">
+                        <span>----</span>
+                    </div>
+                    <div class="slds-col slds-size_6-of-12">
+                        <span>----</span>    
+                    </div>
+                    
+                </div>              
+            </div>
+            
+            
+        </body>
+    </html>
+    
+</apex:page>

@@ -1,0 +1,56 @@
+<apex:page controller="ObjectRetrController">
+    
+    <apex:form >
+        
+        <apex:pageBlock >
+            <apex:pageBlockSection >
+                <apex:selectList value="{!curruntObject}" style="float:centre" size="1" >
+                    <apex:actionSupport action="{!ObjectInformation}" event="onchange" reRender="tb" ></apex:actionSupport>
+                    <apex:selectOptions value="{!listOfObjects}"/>
+                </apex:selectList>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+        <apex:pageBlock >
+            <apex:pageBlockSection >
+                <apex:pageBlockTable value="{!curruntObject}" var="aList" id="tb">
+                    <apex:column >
+                        <apex:facet name="header">Name</apex:facet>
+                        {!curruntObject}
+                    </apex:column>
+                    <apex:column >
+                        <apex:facet name="header">Create</apex:facet>
+                        <apex:inputCheckbox selected="{!createCheckBox}"/>
+                    </apex:column>
+                    <apex:column >
+                        <apex:facet name="header">View</apex:facet>
+                        <apex:inputCheckbox selected="{!viewCheckBox}"/>
+                    </apex:column>
+                    <apex:column >
+                        <apex:facet name="header">Delete</apex:facet>
+                        <apex:inputCheckbox selected="{!deleteCheckBox}"/>
+                    </apex:column>
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+        
+        <apex:pageBlock >
+            <apex:commandButton value="Show Field"/>
+             <apex:pageBlockTable value="{!curruntObject}" var="aList" id="tb">
+                    <apex:column >
+                        <apex:facet name="header">Name</apex:facet>
+                        {!curruntObject}
+                    </apex:column>
+                    <apex:column >
+                        <apex:facet name="header">Read</apex:facet>
+                        <apex:inputCheckbox selected="False"/>
+                    </apex:column>
+                    <apex:column >
+                        <apex:facet name="header">Visible</apex:facet>
+                        <apex:inputCheckbox selected="false"/>
+                    </apex:column>
+                  
+                </apex:pageBlockTable>
+        </apex:pageBlock>
+        
+    </apex:form>
+</apex:page>

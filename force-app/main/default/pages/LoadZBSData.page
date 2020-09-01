@@ -1,0 +1,396 @@
+<apex:page controller="ZBSDataLoadController">
+<apex:slds />
+<html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+        <apex:remoteObjects >
+            <!-- Instantiate remoteObjects for Show, Syndication, Contact and Account -->
+            <apex:remoteObjectModel name="Show__c" jsShorthand="Show">
+                <apex:remoteObjectField name="Name" jsShorthand="name"/>
+                <apex:remoteObjectField name="Format__c" jsShorthand="format"/>
+                <apex:remoteObjectField name="Host__c" jsShorthand="host"/>
+                <apex:remoteObjectField name="Active_Syndications__c" jsShorthand="active_synd"/>
+            </apex:remoteObjectModel>
+    
+            <apex:remoteObjectModel name="Syndication__c" jsShorthand="Syndication">
+                <apex:remoteObjectField name="End_Date__c" jsShorthand="end_date"/>
+                <apex:remoteObjectField name="Start_Date__c" jsShorthand="start_date"/>
+                <apex:remoteObjectField name="Show__c" jsShorthand="show"/>
+                <apex:remoteObjectField name="Subscriber_Station_Network__c" jsShorthand="subscriber"/>
+            </apex:remoteObjectModel>
+
+            <apex:remoteObjectModel name="Contact" jsShorthand="Con">
+                <apex:remoteObjectField name="FirstName" jsShorthand="firstname"/>
+                <apex:remoteObjectField name="LastName" jsShorthand="lastname"/>
+                <apex:remoteObjectField name="Email" jsShorthand="email"/>
+                <apex:remoteObjectField name="Title" jsShorthand="title"/>
+                <apex:remoteObjectField name="AccountId" jsShorthand="acctId"/>
+            </apex:remoteObjectModel>
+
+            <apex:remoteObjectModel name="Account" jsShorthand="Acct">
+                <apex:remoteObjectField name="Name" jsShorthand="name"/>
+                <apex:remoteObjectField name="Phone" jsShorthand="phone"/>
+                <apex:remoteObjectField name="Active_Subscriptions__c" jsShorthand="active_subs"/>
+                <apex:remoteObjectField name="Active_Syndications__c" jsShorthand="active_synds"/>
+            </apex:remoteObjectModel>
+            
+        </apex:remoteObjects>
+        
+        <body style="padding:0;margin:0">
+            
+        <div class="slds-scope">
+            <div class="slds-page-header" role="banner">
+                <div class="slds-media">
+                    <div class="slds-media__figure">
+                        <svg class="slds-icon slds-icon-standard-user .slds-icon--small" aria-hidden="true">
+                                <use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/custom-sprite/svg/symbols.svg#custom13')}"></use>
+                        </svg>
+                    </div>
+                    <div class="slds-media__body">
+                        <p class="slds-page-header__title slds-truncate slds-align-middle" title="ZBS Sample Data">ZBS Sample Data</p>
+                        <p class="slds-text-body--small slds-page-header__info">Sample data for the ZBS Lightning Application</p>
+                    </div>
+                </div>
+            </div>
+            <div id="content" style="margin:20px">
+                <div style="padding-bottom:20px">Click the button below to create Show, Syndication, Contact and Account objects with sample data.
+                    <div style="color:red">All existing records in these objects will be deleted.</div>
+                </div>
+                <button class="slds-button slds-button--brand" onclick="initialize()">Initialize Sample Data</button>
+            </div>
+
+            <div id="spinner" class="slds-spinner_container" style="display:none">
+              <div class="slds-spinner slds-spinner--large" role="alert">
+                <span class="slds-assistive-text">Loading</span>
+                <div class="slds-spinner__dot-a"></div>
+                <div class="slds-spinner__dot-b"></div>
+              </div>
+            </div>
+
+        </div>
+        
+        <script>
+        
+        var today = new Date();
+        var past1 = new Date();
+        past1.setFullYear(past1.getFullYear() - 1);
+        var past2 = new Date();
+        past2.setFullYear(past2.getFullYear() - 2);
+        var future1 = new Date();
+        future1.setFullYear(future1.getFullYear()+2);
+        var future2 = new Date();
+        future2.setFullYear(future2.getFullYear()+2); 
+
+        var acctIds = [];
+        var showIds = [];
+        var accounts = [
+        {
+            name: "Pickles Productions",
+            phone: "555-777-9311",
+            active_subs: 0,
+            active_synds: 6
+        },
+        {
+            name: "Know Governor Limits, Inc.",
+            phone: "1-800-649-2568",
+            active_subs: 0,
+            active_synds: 1
+        },
+        {
+            name: "Outer Limits Radio Network",
+            phone: "555-867-5309",
+            active_subs: 3,
+            active_synds: 0
+        },
+        {
+            name: "Top o' the Stack Heap Content, LLC",
+            phone: "000-489-4608",
+            active_subs: 2,
+            active_synds: 0
+        },
+        {
+            name: "API First Communications",
+            phone: "000-606-0842",
+            active_subs: 3,
+            active_synds: 0
+        }
+        ];
+
+        var contacts = [
+        {
+            firstname: "Gerta",
+            lastname: "Pickles",
+            email: "gerta@picklesprod.biz",
+            title: "DJ, CEO",
+            accindx : 0
+        },
+        {
+            firstname: "Elba",
+            lastname: "Gherkin",
+            email: "elba@picklesprod.biz",
+            title: "DJ",
+            accindx : 0
+        },
+        {
+            firstname: "Max",
+            lastname: "VanSocks",
+            email: "maxvans@knowgovnor.ltd",
+            title: "Vlogger",
+            accindx : 1
+        },
+        {
+            firstname: "Wali",
+            lastname: "Melinki",
+            email: "prez@outerlimits.net",
+            title: "Network President",
+            accindx : 2
+        },
+        {
+            firstname: "Mazrïn",
+            lastname: "DeBüg",
+            email: "maz@topostack.llc",
+            title: "Head of Content",
+            accindx : 3
+        },
+        {
+            firstname: "Angela",
+            lastname: "Ruiz",
+            email: "veep@api.one",
+            title: "VP Content Acquisition",
+            accindx : 4
+        }
+        ];
+
+        var shows = [
+            {
+                name: "Deployment Phish Hour",
+                format: "Podcast",
+                active_synd: 2,
+                hostindx : 0
+            },
+            {
+                name: "Is Not Null",
+                format: "Vlog",
+                active_synd: 3,
+                hostindx : 0
+            },
+            {
+                name: "Clicks B4 Code",
+                format: "Podcast",
+                active_synd: 1,
+                hostindx : 1
+            },
+            {
+                name: "Console Dot Log Countdown",
+                format: "Radio",
+                active_synd: 2,
+                hostindx : 2
+            }
+        ];
+
+        var syndications = [
+                {
+                    end_date : future2,
+                    start_date : future1,
+                    showindx : 0,
+                    subindx : 2
+                },
+                {
+                    end_date : future1,
+                    start_date : past2,
+                    showindx : 0,
+                    subindx : 2
+                },
+                {
+                    end_date : future2,
+                    start_date : past1,
+                    showindx : 0,
+                    subindx : 4
+                },
+                {
+                    end_date : future2,
+                    start_date : past2,
+                    showindx : 0,
+                    subindx : 3
+                },
+                {
+                    end_date : past1,
+                    start_date : past2,
+                    showindx : 1,
+                    subindx : 3
+                },
+                {
+                    end_date : future2,
+                    start_date : past1,
+                    showindx : 1,
+                    subindx : 3
+                },
+                {
+                    end_date : future2,
+                    start_date : today,
+                    showindx : 1,
+                    subindx : 2
+                },
+                {
+                    end_date : future2,
+                    start_date : past1,
+                    showindx : 1,
+                    subindx : 4
+                },
+                {
+                    end_date : future2,
+                    start_date : today,
+                    showindx : 2,
+                    subindx : 2
+                },
+                {
+                    end_date : future1,
+                    start_date : past1,
+                    showindx : 3,
+                    subindx : 2
+                },
+                {
+                    end_date : past1,
+                    start_date : past2,
+                    showindx : 3,
+                    subindx : 2
+                },
+                {
+                    end_date : future2,
+                    start_date : today,
+                    showindx : 3,
+                    subindx : 4
+                }
+        ];
+          
+    
+        function initialize() {
+            "use strict";
+
+            // This deletes all data--
+            ZBSDataLoadController.deleteAll(function(result, event) {
+                if (event.status) {
+                    loadRecords();
+                } else {
+                    alert("Something went wrong deleting existing records");
+                }
+            });
+           
+
+           
+        }
+        
+        function loadRecords() {
+            var promises = [];
+            showSpinner(true);
+
+            for(var i=0;i<accounts.length; i++){
+                promises.push(createAccount(i));
+            }
+            Promise.all(promises).then(
+                function(){
+                    showSpinner(false);
+                    showStatus("Successfully imported data!");
+                },
+                function(error){
+                    showSpinner(false);
+                    showStatus("A problem occurred." + error);
+                });
+        }
+
+        function createAccount(index){
+            return new Promise(function(resolve, reject){
+                var acctRO = new SObjectModel.Acct();
+                acctRO.create(accounts[index], function(err,accountId){
+                    if(err){
+                        reject(err);
+                    } else {
+                        acctIds.push(accountId[0]);
+                        var contactCreatePromises = [];
+                        for(var j=0; j<contacts.length; j++){
+                            if(contacts[j].accindx == index){
+                                contacts[j].acctId = accountId[0];
+                                delete contacts[j].accindx;
+                                contactCreatePromises.push(createContact(contacts[j], j));
+                            }
+                        }
+                        Promise.all(contactCreatePromises).then(resolve, reject);
+                    }
+                });
+            });
+        } 
+
+        function createContact(contact, index){
+            console.log('create contact index: '+index);
+            return new Promise(function(resolve, reject){
+                var contactRO = new SObjectModel.Con();
+                contactRO.create(contact, function(err, contactId){
+                    if(err){
+                        reject(err);
+                    } else {
+                        var showCreatePromises = [];
+                        for(var k=0; k<shows.length; k++){
+                            if(shows[k].hostindx == index){
+                                shows[k].host = contactId[0];
+                                delete shows[k].hostindx;
+                                showCreatePromises.push(createShow(k));    
+                            }
+                        }
+                        Promise.all(showCreatePromises).then(resolve, reject);
+                    }
+                });
+            });
+        }
+
+        function createShow(index) {
+        console.log('create show index: '+index);
+            return new Promise(function(resolve, reject){
+                var showRO = new SObjectModel.Show();
+                showRO.create(shows[index], function(err, showId){
+                    if(err){
+                        reject(err);
+                    } else {
+                        showIds.push(showId[0]);
+                        var syndCreatePromises = [];
+                        for(var h=0; h<syndications.length; h++){
+                            if(syndications[h].showindx == index){
+                                syndications[h].show = showId[0];
+                                delete syndications[h].showindx;
+                                syndications[h].subscriber = acctIds[syndications[h].subindx];
+                                delete syndications[h].subindx;
+                                syndCreatePromises.push(createSyndication(h));
+                            }
+                        }
+                        Promise.all(syndCreatePromises).then(resolve,reject);
+                    }
+                });
+            });
+        }
+
+        function createSyndication(index){
+        console.log('create syndication index: '+ index);
+            return new Promise(function(resolve, reject){
+                var syndRO = new SObjectModel.Syndication();
+                syndRO.create(syndications[index], function(err, syndicationId){
+                    if(err){
+                        reject(err);
+                    } else {
+                        resolve(syndicationId);
+                    }
+                });
+            });
+        }
+
+        function showSpinner(visible) {
+            document.getElementById("spinner").style.display = visible ? "inline" : "none";
+        }
+
+        function showStatus(status) {
+            setTimeout(function() {
+                alert(status);
+            });
+        }
+
+        </script>
+        </body>
+    </html>                 
+</apex:page>

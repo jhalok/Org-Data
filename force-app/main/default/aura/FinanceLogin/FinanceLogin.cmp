@@ -1,0 +1,108 @@
+<!-- add implements="forceCommunity:availableForAllPageTypes" to surface the component in community builder -->
+<aura:component controller="LightningLoginFormController" implements="lightning:isUrlAddressable,force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <ltng:require scripts="{!join(',',$Resource.Jquery)}" />
+    <aura:attribute name="showError" type="Boolean" required="true" description="" default="false" access="private"/>
+    <aura:attribute name="errorMessage" type="String" required="false" default="Your login attempt has failed. Make sure the email (username) and password are correct." description="" access="global"/>
+    <aura:attribute name="startUrl" type="String" required="false" description="The url you go to after a successful login" />
+    <aura:attribute name="usernameLabel" type="String" required="false" default="Username"/>
+    <aura:attribute name="passwordLabel" type="String" required="false" default="Password"/>
+    <aura:attribute name="loginButtonLabel" type="String" required="false" default="Log in"/>
+    
+    <aura:attribute name="forgotPasswordLabel" type="String" required="false" default="Forgot password?"/>
+    <aura:attribute name="selfRegisterLabel" type="String" required="false" default="Not a member?"/>
+    <aura:attribute name="forgotPasswordUrl" type="String" required="false" default="/ForgotPassword"/>
+    <aura:attribute name="selfRegisterUrl" type="String" required="false" default="/SelfRegister"/>
+    <aura:attribute name="rememberEmail" type="Boolean" default="false"/>
+    
+    
+    <aura:attribute name="isUsernamePasswordEnabled" type="Boolean" access="private"/>
+    <aura:attribute name="isSelfRegistrationEnabled" type="Boolean" access="private"/>
+    <aura:attribute name="communityForgotPasswordUrl" type="String" access="private"/>
+    <aura:attribute name="communitySelfRegisterUrl" type="String" access="private"/>
+    
+    <aura:registerevent name="sitePropagatedStartUrl" type="c:setStartUrl"/>
+    <aura:handler name="init" value="{!this}" action="{!c.initialize}"/>
+    <aura:dependency resource="c:setStartUrl" type="EVENT"/>
+    <aura:dependency resource="siteforce:registerQueryEventMap" type="EVENT"/>
+    <aura:handler event="c:setStartUrl" action="{!c.setStartUrl}"/>
+    
+    <div>     
+        <lightning:layout  verticalAlign="stretch" multipleRows="true">
+            <lightning:layoutItem size="12" padding="around-medium" smallDeviceSize="12" mediumDeviceSize="5">
+                <aura:renderIf isTrue="{!v.isUsernamePasswordEnabled}">
+                    <div class="">
+                        
+                        <div class="login_header">
+                            <h3>WEALTH CONNECT</h3>
+                        </div>
+                        <div class="logindiv">
+                            <div class="InvstrDiv">
+                                <h3>Investor Login</h3>
+                                <p labelClass="assistiveText">Welcome Back,Please login to your account</p>
+                            </div>
+                            
+                            <div id="sfdc_username_container" class="sfdc">
+                                <span id="sfdc_user" class="login-icon" data-icon="a"></span>
+                                <p labelClass="assistiveText">{!v.usernameLabel}</p>
+                                <ui:inputText value="" aura:id="username" placeholder="name@company.com" keyup="{!c.onKeyUp}" class="input sfdc_usernameinput sfdc" />
+                            </div>
+                            <div id="sfdc_password_container" class="sfdc">
+                                <span id="sfdc_lock" class="login-icon sfdc" data-icon="c"></span>
+                                <p labelClass="assistiveText">{!v.passwordLabel}</p>
+                                <ui:inputSecret value="" aura:id="password" placeholder="*************" keyup="{!c.onKeyUp}" class="input sfdc_passwordinput sfdc" />
+                            </div> 
+                            <lightning:layout multipleRows="true">
+                                <lightning:layoutItem size="6" smallDeviceSize="12" mediumDeviceSize="6">
+                                    <div id="sfdc_checkbox_container" class="sfdc">
+                                        <ui:inputCheckbox aura:id="rememberMe" label="Remember me" change="{!c.onCheck}"/>
+                                    </div>
+                                </lightning:layoutItem>
+                                <lightning:layoutItem size="6" smallDeviceSize="12" mediumDeviceSize="6">
+                                    <div id="sfdc_forgot" class="sfdc forgot_p">
+                                        <span><a href="{!if(v.communityForgotPasswordUrl == null, v.forgotPasswordUrl, v.communityForgotPasswordUrl)}">{!v.forgotPasswordLabel}</a></span>
+                                        <aura:renderIf isTrue="{!v.isSelfRegistrationEnabled}">
+                                            <span style="float:right" ><a href="{!if(v.communitySelfRegisterUrl == null, v.selfRegisterUrl, v.communitySelfRegisterUrl)}">{!v.selfRegisterLabel}</a></span>
+                                        </aura:renderIf>
+                                    </div>
+                                </lightning:layoutItem>
+                            </lightning:layout>
+                            
+                            
+                            <span>
+                                <aura:renderIf isTrue="{!v.showError}">
+                                    <div id="error" class="slds-notify slds-p-around_medium slds-m-bottom_large" role="alert">
+                                        <ui:outputRichText value="{!v.errorMessage}"/>
+                                    </div>
+                                </aura:renderIf>
+                            </span>
+                            
+                            
+                            
+                            
+                            <div class="slds-grid slds-gutters">
+                                <div class="slds-col">
+                                    <span><div class="sfdc">
+                                        <ui:button aura:id="submitButton" label="{!v.loginButtonLabel}" press="{!c.handleLogin}" class="slds-button--brand"/>
+                                        </div></span>
+                                </div>
+                                <div class="slds-col">
+                                    <span> <div class="sfdc">
+                                        <ui:button aura:id="signUpButton" label="sign Up" press="{!c.handleLogin}" class="slds-button--brand slds-signupbutton--neutral"/>
+                                        </div></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </aura:renderIf>
+            </lightning:layoutItem>
+            <lightning:layoutItem size="12" smallDeviceSize="12" mediumDeviceSize="7">
+                <aura:renderIf isTrue="{!v.isUsernamePasswordEnabled}">
+                    <div class="">
+                        <img src="{!$Resource.Mountain}" style="width:100%;height:85vh;"></img>
+                    </div>
+                </aura:renderIf>
+            </lightning:layoutItem>
+        </lightning:layout>
+    </div>
+    
+</aura:component>

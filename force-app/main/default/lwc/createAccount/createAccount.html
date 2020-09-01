@@ -1,0 +1,24 @@
+<template>
+    <lightning-record-edit-form layout-type="Full" record-id={currentRecordId} object-api-name="Account" onsuccess={handleSuccess} onsubmit={handleSubmit} >
+        <!-- <lightning-messages></lightning-messages> -->
+         <img class="slds-avatar--empty slds-p-around_large slds-align_absolute-center slds-avatar_group-image-large slds-avatar_circle" src ={currentRecordImage}>
+         <div class="slds-align_absolute-center slds-m-top_x-small">
+         </div>
+         <p class="slds-align_absolute-center">Account Information</p>
+         <lightning-layout class="slds-p-around_large">
+             <lightning-layout-item size="6" class="slds-p-around_large">
+                 <div class=""><b>FIRST NAME *</b>
+                     <lightning-input-field disabled field-name="FirstName" variant="label-hidden"></lightning-input-field >
+                 </div>
+                 <div class="slds-p-top_medium">
+                     <b>LAST NAME *</b>
+                     <lightning-input-field disabled field-name="LastName"  variant="label-hidden"></lightning-input-field>
+                 </div>
+                 <div class="slds-p-top_medium">
+                    <b>City*</b>
+                    <lightning-input-field disabled field-name="City"  variant="label-hidden"></lightning-input-field>
+                </div>
+            </lightning-layout-item>
+        </lightning-layout>
+    </lightning-record-edit-form>
+</template>

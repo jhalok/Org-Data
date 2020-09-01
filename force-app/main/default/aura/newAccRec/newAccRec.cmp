@@ -1,0 +1,51 @@
+<aura:component implements="flexipage:availableForAllPageTypes,force:appHostable" access="global" controller="newAccRecController" >
+    
+    <aura:attribute name="newAcc" type="Account[]" default="{ 'sobjectType': 'Account' }" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="options" type="List"/>
+    <aura:registerEvent name="showToast" type="force:showToast"/>
+   
+  
+        <form class="slds-box slds-theme_shade slds-theme_alert-texture">   
+               <p class="slds-text-heading_label slds-align_absolute-center">Create New Account</p>
+
+            <lightning:input aura:id="accform" class="" label="Account Name"
+                             name="accClient"
+                             value="{!v.newAcc.Name}"
+                             required="true"/> 
+       
+   				<lightning:layout>
+                    <lightning:layoutItem size="6">
+                		  <lightning:input aura:id="accform" maxlength="10" label="Phone"
+                             name="accClient"
+                             value="{!v.newAcc.Phone}"
+                             required="true"
+                             placeholder=""/>
+                    </lightning:layoutItem>
+                        
+               		<lightning:layoutItem size="6">
+                		    <lightning:input type="number" aura:id="accform" label="Rating"
+                             name="accClient"
+                             value="{!v.newAcc.Rating}"
+                             placeholder=""/>
+                    </lightning:layoutItem>
+           	 </lightning:layout>
+             
+             <lightning:input aura:id="accform" label="Website"
+                             name="accClient"
+                             value="{!v.newAcc.Website}"
+                             placeholder=""/>
+           
+            <lightning:select name="currPmtType" label="Industry" aura:id="accform" value="{!v.newAcc.Industry}" >
+                 <option>--none--</option>
+                <aura:iteration items="{!v.options}" var="item">
+                    <option text="{!item}" value="{!item.value}" selected="{!v.item.selected}"/>
+                </aura:iteration>
+            </lightning:select>
+           
+            <lightning:button label="Create Account" 
+                              class="slds-m-top--medium slds-align_absolute-center wk_warning wk_success"
+                              variant="brand"
+                              onclick="{!c.clickCreate}"/>
+        </form>
+</aura:component>

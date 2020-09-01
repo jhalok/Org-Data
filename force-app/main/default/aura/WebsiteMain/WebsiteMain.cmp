@@ -1,0 +1,13 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+   <div></div>
+    <ul style="float:right" class="slds-list_horizontal slds-has-block-links_space slds-p-top_large slds-theme_shade">
+        <li class="slds-item fontColor"><a href="javascript:void(0);">CALIFORNIA APARTMENT ASSOCIATION</a></li>
+        <li class="slds-item fontColor"><a href="javascript:void(0);">MEMBER SERVICES</a></li>
+        <li class="slds-item fontColor"><a href="javascript:void(0);">GOVERMENT</a></li>
+        <li class="slds-item fontColor"><a href="javascript:void(0);">SIGN IN</a></li>
+        <li class="slds-item fontColor"><a href="javascript:void(0);">SEARCH</a></li>
+    </ul>
+    <div style="height: 40px;padding-top: 5px;background-color: #4D72BB;">
+    INDUSTRY
+    </div>
+</aura:component>

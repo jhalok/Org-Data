@@ -1,0 +1,10 @@
+<apex:page controller="RedirectWithParametersController">
+    <script>
+    </script>
+    <apex:form >
+    <apex:variable var="classic" value="{! $User.UIThemeDisplayed == 'Theme2' || $User.UIThemeDisplayed == 'Theme3' }"/>
+    	<apex:actionFunction name="NavigateForClassic" action="{!redirect}"/>
+
+	
+    </apex:form>
+</apex:page>

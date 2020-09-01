@@ -1,0 +1,72 @@
+<aura:component implements="flexipage:availableForAllPageTypes,force:hasRecordId">
+
+    <aura:attribute name="account" type="Object"/>
+    <aura:attribute name="simpleAccount" type="Object"/>
+    <aura:attribute name="accountError" type="String"/>
+    <force:recordData aura:id="accountRecordLoader"
+        recordId="{!v.recordId}"
+        fields="Name,BillingCity,BillingState"
+        targetRecord="{!v.account}"
+        targetFields="{!v.simpleAccount}"
+        targetError="{!v.accountError}"
+    />
+
+    <aura:attribute name="newContact" type="Object" access="private"/>
+    <aura:attribute name="simpleNewContact" type="Object" access="private"/>
+    <aura:attribute name="newContactError" type="String" access="private"/>
+    <force:recordData aura:id="contactRecordCreator"
+        layoutType="FULL"
+        targetRecord="{!v.newContact}"
+        targetFields="{!v.simpleNewContact}"
+        targetError="{!v.newContactError}"
+        />
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+    <!-- Display a header with details about the account -->
+    <div class="slds-page-header" role="banner">
+        <p class="slds-text-heading_label">{!v.simpleAccount.Name}</p>
+        <h1 class="slds-page-header__title slds-m-right_small
+            slds-truncate slds-align-left">Create New Contact</h1>
+    </div>
+
+    <!-- Display Lightning Data Service errors, if any -->
+    <aura:if isTrue="{!not(empty(v.accountError))}">
+        <div class="recordError">
+            <ui:message title="Error" severity="error" closable="true">
+                {!v.accountError}
+            </ui:message>
+        </div>
+    </aura:if>
+    <aura:if isTrue="{!not(empty(v.newContactError))}">
+        <div class="recordError">
+            <ui:message title="Error" severity="error" closable="true">
+                {!v.newContactError}
+            </ui:message>
+        </div>
+    </aura:if>
+
+    <!-- Display the new contact form -->
+     <lightning:input aura:id="contactField" name="firstName" label="First Name"
+                     value="{!v.simpleNewContact.FirstName}" required="true"/>
+  
+    <lightning:input aura:id="contactField" name="lastname" label="Last Name"
+                  value="{!v.simpleNewContact.LastName}" required="true"/>
+            
+    <lightning:input aura:id="contactField" name="title" label="Title"
+                  value="{!v.simpleNewContact.Title}" />
+    
+    <lightning:input aura:id="contactField" type="phone" name="phone" label="Phone Number"
+                     pattern="^(1?(-?\d{3})-?)?(\d{3})(-?\d{4})$"
+                     messageWhenPatternMismatch="The phone number must contain 7, 10, or 11 digits. Hyphens are optional."
+                   value="{!v.simpleNewContact.Phone}" required="true"/>
+    
+    <lightning:input aura:id="contactField" type="email" name="email" label="Email"
+                value="{!v.simpleNewContact.Email}" />
+        
+    <lightning:button label="Cancel" onclick="{!c.handleCancel}" class="slds-m-top_medium" />
+    <lightning:button label="Save Contact" onclick="{!c.handleSaveContact}"
+               variant="brand" class="slds-m-top_medium"/>
+     
+    
+</aura:component>

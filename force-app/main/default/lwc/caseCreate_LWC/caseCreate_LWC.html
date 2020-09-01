@@ -1,0 +1,75 @@
+<template>
+    <div class= "slds-box slds-theme_default slds-p-bottom_small">
+            <div class={txtclassname} data-id="resultBox" aria-expanded="false" aria-haspopup="listbox" role="combobox">
+                <div class="c-container">
+                    <lightning-layout>
+                        <lightning-layout-item flexibility="auto">
+                            <div class="slds-p-around_small slds-col slds-size_8-of-12 slds-input-has-icon slds-input-has-icon">
+                                <lightning-input label="Search Cases" required={required} data-id="userinput" placeholder="Search CaseId, Status, Subject" onchange={searchField}></lightning-input>
+                            </div>
+                        </lightning-layout-item>
+                        <lightning-layout-item flexibility="auto">
+                            <div class="slds-p-top_x-large slds-float_right slds-m-right_x-large">
+                                <lightning-button label="Create Case" variant="brand" onclick={caseModal}></lightning-button>
+                            </div>             
+                        </lightning-layout-item>
+                    </lightning-layout>                        
+                </div>
+            </div>       
+    <template if:true={createCaseModel}>
+            <div class="" style="height: 800px;">
+                <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                    <div class="slds-modal__container createUserRef">
+                        <header class="slds-modal__header">
+                            <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeModal}>
+                                    <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse" size="small" ></lightning-icon>
+                            </button>
+                            <b>
+                                <h3 id="modal-heading-01" class="slds-text-heading_small slds-hyphenate font_Header">CREATE A NEW CASE</h3>
+                            </b>
+                        </header>
+                        <div class="slds-modal__content slds-p-around_xx-large" id="modal-content-id-1">
+                            <lightning-record-form
+                                object-api-name="Case"
+                                fields={caseCreationFields}
+                                columns="1"
+                                mode="edit"
+                                onsubmit={handleSub}>
+                            </lightning-record-form>
+                        </div>
+                    </div>
+                </section>
+                <div class="slds-backdrop slds-backdrop_open"></div>
+            </div>
+    </template>
+<div if:true={showAllData}>
+    <div style="height: 350px;">
+            <lightning-datatable
+                    key-field="id"
+                    data={data}
+                    columns={columns}
+                    enable-infinite-loading
+                    onloadmore={loadMoreData}
+                    onrowaction={handleRowAction}
+                    hide-checkbox-column="true">   
+            </lightning-datatable>    
+            <div class="slds-align_absolute-center">
+                    <b>{loadMoreStatus}</b>
+            </div>
+    </div>
+</div> 
+    <!--Data table to display searched data only-->
+    <div if:true={showSearchData}>
+        <div style="height: 350px;">
+            <lightning-datatable class="slds-p-top_small slds-p-bottom_small action-test"
+                    key-field="id"
+                    data={searchRecords}
+                    columns={columns}
+                    onloadmore={loadMoreData}
+                    hide-checkbox-column="true"
+                    onrowaction={handleRowActions}>
+            </lightning-datatable>
+        </div>
+    </div>
+    </div>
+</template>

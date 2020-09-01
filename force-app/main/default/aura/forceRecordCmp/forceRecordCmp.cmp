@@ -1,0 +1,13 @@
+<aura:component>
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="record" type="Object" />
+    <aura:attribute name="simpleRecord" type="Object" />
+     <force:recordData recordId="{!v.recordId}"
+          targetRecord ="{!v.record}"
+          targetFields ="{!v.simpleRecord}"
+          fields="Id, Name" />
+    <div class="recordName">
+        <p class="slds-text-heading--medium">
+        <lightning:formattedtext title="Record Name" value="{!v.simpleRecord.Name}" /></p>
+    </div>
+</aura:component>

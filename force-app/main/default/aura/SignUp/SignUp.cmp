@@ -1,0 +1,44 @@
+<aura:component controller="Sign_Up_Controller" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:attribute name="userName" type="String"/>
+    <aura:attribute name="emailId" type="String"/>
+    <aura:attribute name="password" type="String"/>
+    <aura:attribute name="confirmPassword" type="String"/>
+    <div class="c-container">
+        <div class="slds-grid slds-gutters">
+            <div class="slds-col slds-size_5-of-12">
+                <div class="sign"><br />
+                    <h2><b>Wealth Connect</b></h2>
+                    <br />
+                    
+                    <div class="slds-box slds-box_x-small">
+                        
+                        <lightning:input aura:id="firstName" name="input1" label="FirstName" />
+                    </div>
+                    <div class="slds-box slds-box_x-small">
+                        
+                        <lightning:input aura:id="lastName" name="input2" label="LastName" />
+                        
+                    </div>
+                    <div class="slds-box slds-box_x-small">
+                        <p>
+                            <lightning:input aura:id="userName" name="input3" label="UserName" />
+                        </p>
+                    </div>
+                    
+                    <div class="slds-box slds-box_x-small">
+                        
+                        <lightning:input aura:id="emailId" type="email" name="email1" value=" " label="Email Address" />
+                        
+                    </div>
+                    <div class="buttons">
+                        <lightning:button variant="brand" label="Login" title="Login" onclick="{! c.handleClick }" />
+                        <lightning:button variant="neutral" label="SignUp" title="SignUp" onclick="{! c.SignUp }" />
+                    </div>
+                </div>
+            </div>
+            <div class="slds-col slds-size_7-of-12">
+                <img src="{!$Resource.bgImage}" alt="bg"></img>
+            </div>
+        </div>
+    </div>
+</aura:component>

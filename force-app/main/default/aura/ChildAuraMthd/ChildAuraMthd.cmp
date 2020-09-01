@@ -1,0 +1,9 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:attribute name="total" type="Integer" default='0'/>
+    <aura:method name="childMehtod" action="{!c.callingChildMethod}">
+        <aura:attribute name="firstParam" type="Integer"/>
+        <aura:attribute name="secParam" type="Integer"/>
+    </aura:method>
+    {!total}
+    {!secParam}
+</aura:component>

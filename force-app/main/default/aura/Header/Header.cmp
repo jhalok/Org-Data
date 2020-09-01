@@ -1,0 +1,9 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+	<lightning:navigationItemAPI aura:id="navigationItem" />
+	<div>
+        <li>Testing</li>
+		<lightning:button label="Focus Navigation Item" onclick="{! c.focusNavigationItem }" />
+        <lightning:button label="Focus Navigation Item2" onclick="{! c.focusNavigationItem }" />
+        <lightning:button label="Focus Navigation Item3" onclick="{! c.focusNavigationItem }" />
+	</div>		
+</aura:component>

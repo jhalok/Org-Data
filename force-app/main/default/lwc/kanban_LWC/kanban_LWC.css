@@ -1,0 +1,24 @@
+.slds-item {
+    border: 1px solid #d8dde6;
+    border-radius: 0.25rem;
+    background-clip: padding-box;
+    padding: 0.45rem;
+    margin: 0.25rem;
+}
+.stageContainer{
+    float:left;
+    border: 2px solid #d8dde6;
+    margin: 0.05rem;
+    border-radius: .25rem;
+}
+.slds-page-header__title {
+    padding: 0rem 0.5rem;
+    background: #f7f9fb;
+}
+
+.dropZone{
+    min-height:25rem;
+}
+.completed{
+    background-color: #aafac3;
+}

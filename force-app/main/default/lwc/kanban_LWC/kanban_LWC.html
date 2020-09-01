@@ -1,0 +1,34 @@
+<template>
+    <div class="slds-page-header">
+        <div class="slds-media">
+            <div class="slds-media__figure">
+                <span class="slds-icon_container" title="Description of icon when needed">
+                    <lightning-icon icon-name="utility:kanban" alternative-text="Up arrow" variant="bare" size="small">
+                    </lightning-icon>
+
+                </span>
+            </div>
+            <div class="slds-media__body">
+                <h1 class="slds-page-header__title slds-truncate slds-align-middle" title="Kanban - Drag &amp; Drop">
+                    Kanban - Drag &amp; Drop</h1>
+            </div>
+        </div>
+    </div>
+    <div>
+        <template if:true={kanbanData}>
+            <template for:each={kanbanData.recordsCount} for:item="kdata">
+
+                Total Records: {kdata.recordCount}}
+
+            </template>
+        </template>
+    </div>
+    <lightning-card>
+
+
+
+
+       
+    </lightning-card>
+
+</template>

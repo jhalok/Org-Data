@@ -1,0 +1,9 @@
+<apex:page controller="DropBoxController">
+    <apex:form >
+        <center>
+            <apex:commandButton action="{!DropAuth}" value="Dropbox">
+                
+            </apex:commandButton>
+        </center> 
+    </apex:form>
+</apex:page>

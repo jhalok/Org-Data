@@ -1,0 +1,42 @@
+.THIS .topDiv{
+    width:100%;
+    height:100%
+}
+.THIS .fullWidth{
+    width:100%;
+}
+.THIS .firstUl{
+    padding:26px;
+    background-color: black;
+    width: 15%;
+}
+.THIS .rightTopHeader{
+    width:85%;
+    background-color:aqua;
+}
+.THIS .listul{
+    background-color: #3e4247;
+    padding: 15px 20px 15px 20px;
+    font-size: 14px;
+    font-family: auto;
+    text-decoration: none;
+}
+.THIS .listShadow{
+    background-color: #151514;
+    box-shadow: 0px 0px 0.5px 0px;
+    text-decoration: none;
+    
+}
+.THIS.sideNav{
+    height:50%;
+    width: 15%;
+    background-color: gray;
+}
+.THIS .ahref{
+    text-decoration: none;
+    color:white;
+}
+
+/*.THIS ul:hover {
+background-color: gray;
+}*/

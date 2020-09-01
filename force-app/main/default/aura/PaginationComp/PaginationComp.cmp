@@ -1,0 +1,66 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes" 
+                access="global" 
+                controller="Pagination">
+    <aura:attribute name="data" type="Object"/>
+    <aura:attribute name="columns" type="List"/>
+    <aura:attribute name="recordId" type="String"/>
+    
+    <aura:attribute name="allData" type="List"/>
+    <aura:attribute name="currentPageNumber" type="Integer" default="1"/>
+    <aura:attribute name="pageSize" type="Integer" default="10"/>
+    <aura:attribute name="totalPages" type="Integer" default="0"/>
+    <aura:attribute name="pageList" type="List"/>
+
+    
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+    
+    
+    <!-- You must define keyField as 'Id' to save the record back in Salesforce
+ 'onsave' attribute will executed when user clicks on save button -->
+    
+    <lightning:card title="Datatable With Pagination">
+        <lightning:layout multipleRows="true" horizontalAlign="center">
+            <lightning:layoutItem padding="around-small" size="12">
+                <lightning:datatable
+                                     aura:id="accountDataTable"
+                                     columns="{! v.columns }"
+                                     data="{! v.data }"
+                                     keyField="Id"
+                                     hideCheckboxColumn="true"/>
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" flexibility="auto">
+                <lightning:button label="First" iconName="utility:left" iconPosition="left"
+                                  onclick="{!c.onFirst}" disabled="{! v.currentPageNumber == 1}"/>
+                <lightning:button iconName="utility:chevronleft" iconPosition="left"
+                                  onclick="{!c.onPrev}" disabled="{! v.currentPageNumber == 1}"/>
+                <span class="slds-p-horizontal_x-small">
+                    <a onclick="{!c.processMe}" name="1" 
+                       class="{! (v.currentPageNumber == 1) ? 'selected' : ''}">1</a>
+                </span>
+                <span class="slds-p-horizontal_xxx-small">
+                    <a>...</a>
+                </span>
+                
+                <aura:iteration items="{!v.pageList}" var="item">
+                    <span class="slds-p-horizontal_x-small">
+                        <a onclick="{!c.processMe}" name="{!item}"
+                           class="{! (v.currentPageNumber == item) ? 'selected' : ''}">{!item}</a>
+                    </span>
+                </aura:iteration>
+                
+                <span class="slds-p-horizontal_xxx-small">
+                    <a>...</a>
+                </span>
+                <span class="slds-p-horizontal_x-small">
+                    <a onclick="{!c.processMe}" name="{!v.totalPages}"
+                       class="{! (v.currentPageNumber == v.totalPages) ? 'selected' : ''}">{!v.totalPages}</a>
+                </span>
+                <lightning:button iconName="utility:chevronright" iconPosition="right" 
+                                  disabled="{! v.currentPageNumber == v.totalPages}" onclick="{!c.onNext}"/>
+                <lightning:button label="Last" iconName="utility:right" iconPosition="right" 
+                                  disabled="{! v.currentPageNumber == v.totalPages}" onclick="{!c.onLast}"/>
+            </lightning:layoutItem>
+        </lightning:layout>
+    </lightning:card>
+    
+</aura:component>

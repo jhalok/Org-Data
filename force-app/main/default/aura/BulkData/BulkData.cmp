@@ -1,0 +1,52 @@
+<aura:component controller="BulkApi" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+    <aura:attribute name="accessToken" type="String"/>
+    <aura:attribute name="jobId" type="String"/>
+    <aura:attribute name="response" type="List"/>
+    <aura:attribute name="options" type="List" />
+    <aura:attribute name="selectedValue" type="String" />
+    <aura:attribute name="fileToBeUploaded" type="Object[]"/>
+    <lightning:spinner aura:id="mySpinner" class="slds-hide"/>
+    <aura:attribute name="showMain" type="Boolean" default="false"/>
+    <aura:attribute name="showObjects" type="Boolean" default="true"/>
+    <aura:attribute name="showFailed" type="Boolean" default="false"/>
+    <aura:attribute name="failedData" type="List" />
+    
+    <aura:if isTrue="{!v.showObjects}">
+        <div class="slds-p-around_large slds-align_absolute-center">
+            <lightning:layout multipleRows="true">
+                <lightning:layoutItem size="10" padding="around-small">
+                    <div class="custom-box">
+                        <lightning:select name="Objects" label="Select object:" aura:id="slctdId" value="{!v.selectedValue}" onchange="{!c.selectedObject}">
+                            <option>----- Please select a object -----</option>
+                            <aura:iteration items="{!v.options}" var="objectname">
+                                <option value="{!objectname}" text="{!objectname}" />  
+                            </aura:iteration>
+                        </lightning:select>
+                        <div>
+                        </div>  
+                    </div>
+                </lightning:layoutItem>
+            </lightning:layout>
+        </div>
+    </aura:if>
+    <aura:if isTrue="{!v.showMain}">
+        <div class="slds-p-around_large slds-box slds-align_absolute-center">
+            <lightning:input aura:id="file-input" type="file"
+                             files="{!v.fileToBeUploaded}"
+                             onchange="{!c.onFileUploaded}"
+                             accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                             label="Please select a csv file to process."
+                             name="file" multiple="true"/>
+        </div>
+    </aura:if>
+    <aura:if  isTrue="{!v.showFailed}" >
+        <span class="slds-align_absolute-center slds-p-around_large slds-text-heading_small">
+            <H1><b>Please check the proceeded bulk API job with the JobID <a href="javascript:void(0);">{!v.jobId}</a> is complete or not.<br/>
+                If the status of the job is complete then click on the bellow button to get the failed Data.</b></H1>
+        </span><br/>
+        <div class="slds-align_absolute-center slds-p-around_large">
+            <lightning:button variant="brand" label="Failed Data" onclick="{!c.showFailedData}"></lightning:button>
+        </div>
+    </aura:if>
+</aura:component>

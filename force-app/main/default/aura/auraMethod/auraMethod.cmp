@@ -1,0 +1,9 @@
+<!-- c:auraMethod -->
+<aura:component>
+    <aura:method name="logParam"
+      description="Sample method with parameter">
+        <aura:attribute name="message" type="String" default="default message" />
+    </aura:method>
+    
+    <p>This component has an aura:method definition.</p>
+</aura:component>

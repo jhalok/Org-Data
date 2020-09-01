@@ -1,0 +1,73 @@
+<apex:page controller="DynamicApexController" tabStyle="Contact">
+    <apex:form >
+        
+        <apex:pageBlock id="pbId">
+            <!--Section to show the picklist of sobject-->
+            <apex:pageBlockSection title="Object Info">
+                <apex:selectList value="{!selectedObject}" size="1">
+                    <apex:actionSupport event="onchange" rerender="pbId" status="status"/>
+                    <apex:selectOptions value="{!ListObjectName}"/>
+                </apex:selectList>
+            </apex:pageBlockSection>
+            
+            <apex:actionRegion >     
+                   <!--Section to show the button of object permission, show fields and Insert Records-->
+                <apex:pageBlockSection rendered="{!selectedObject!='None'}">
+                    <div align="center">
+                        <apex:outputPanel >
+                            <apex:commandButton value="Show Permissions"  action="{!objPermission}" immediate="true"/>
+                            <apex:commandButton value="Show Fields" action="{!showFields}" immediate="true"/>
+                            <apex:commandButton value="Insert Records" action="{!InsertRecords}" immediate="true"/>
+                        </apex:outputPanel>
+                    </div>
+                </apex:pageBlockSection>
+            </apex:actionRegion>
+            
+              <!--pageBlockTable to display the button of object permission of selected object-->
+            <apex:pageBlockTable value="{!objPrmsn}" var="show" id="objfield" rendered="{!selectedObject!='None' && objPrmsn.size > 0 }" style="width: 100%; height: 15px; font-size: 12px;">
+                <apex:column headerValue="Object">
+                    {!selectedObject}
+                </apex:column>
+                <apex:column headerValue="Read">
+                    <apex:inputCheckbox selected="{!show.PermissionsRead}"/>
+                </apex:column>
+                <apex:column headerValue="Edit">
+                    <apex:inputCheckbox selected="{!show.PermissionsEdit}"/>
+                </apex:column>
+                <apex:column headerValue="Create">
+                    <apex:inputCheckbox selected="{!show.PermissionsCreate}"/>
+                </apex:column>
+                <apex:column headerValue="Delete">
+                    <apex:inputCheckbox selected="{!show.PermissionsDelete}"/>
+                </apex:column>
+                <apex:column headerValue="ViewAll">
+                    <apex:inputCheckbox selected="{!show.PermissionsViewAllRecords}"/>
+                </apex:column>
+                <apex:column headerValue="ModifyAll">
+                    <apex:inputCheckbox selected="{!show.PermissionsModifyAllRecords}"/>
+                </apex:column>
+            </apex:pageBlockTable>
+            
+            <apex:pageBlockTable title="Field permissions"  id="fieldPerm" value="{!listField}" var="field" rendered="{!if(listField.size > 0 ,true,false)}">
+                <apex:column value="{!field.fieldName }" headerValue="Name" />
+                <apex:column value="{!field.fieldAPIName }"  headerValue="API Name"/>
+                <apex:column headerValue="Read">
+                    <apex:inputCheckbox selected="{!field.readPermission}" disabled="true"/>
+                </apex:column>
+                <apex:column headerValue="Edit">
+                    <apex:inputCheckbox selected="{!field.editPermission}" disabled="true"/>  
+                </apex:column>
+            </apex:pageBlockTable>
+            
+            
+            <apex:pageBlockSection title="Insert Record" id="insRec" collapsible="true" rendered="{!insertfield.size > 0}">
+                
+                <apex:repeat value="{!insertfield}" var="Field">
+                    <apex:inputField value="{!insObject[Field.fieldAPIName ]}" />
+                </apex:repeat>
+                <apex:commandButton action="{!SaveRecords}" value="Save Records"/>
+                
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

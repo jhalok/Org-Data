@@ -1,0 +1,9 @@
+.THIS.droparea{
+    border: 1px solid black;
+    margin: 10px;
+}
+.THIS.droparea .row {
+    border: 1px solid green;
+    padding: 12px;
+    margin: 3px;
+}

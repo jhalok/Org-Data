@@ -1,0 +1,9 @@
+<!--Parent.cmp-->
+<aura:component >
+    <aura:attribute name="eventMessage" type="String"/> 
+    <aura:handler name="sampleCmpEvent" event="c:SampleComponentEvent" action="{!c.parentComponentEvent}"/>
+    <div class="slds-m-around_xx-large">
+        <c:Child />
+        <p>{!v.eventMessage}</p> 
+    </div>
+</aura:component>

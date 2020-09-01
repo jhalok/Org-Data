@@ -1,0 +1,81 @@
+<apex:page >
+    <apex:includeScript value="https://code.jquery.com/jquery-2.2.4.js"/>
+    <script>
+    var CaseId = '0036F00003MnmyE'; 
+    jQuery(document).ready(function($) {
+        console.log('inside jquery');
+        $('input').on('change', function(e){
+            console.log('inside input chnage');
+            for (var i = 0; i < this.files.length; i++) {
+                console.log('inside for loop');
+                //console.log('file size'+JSON.stringify(this.files.length));
+                uploading += 1;
+                console.log('upldng'+uploading);
+                //console.log('-----this.files[i]'+JSON.stringify(this.files[i]));
+                //console.log('error'+err''+resp);
+                upload_file(this.files[i], CaseId, function(err, res){ 
+                    console.log('calling uploadFile mthd');
+                   
+                    if (uploading === uploaded){
+                        console.log('uploaded'); 
+                        alert('Your file is Uploaded');
+                    }
+                })
+            }
+        });
+        var uploading = 0;
+        var uploaded = 0;
+        var upload_file = function(file, parentId, callback) {
+            console.log('inside first upload_file');
+            filetoBase64(file, function(err, content){
+                 console.log('inside second filetoBase64');
+                var attachment_object = {
+                    parentId: parentId,
+                    Body: content, 
+                    Name: file.name, 
+                    ContentType: file.type 
+                };
+                $.ajax({
+                    url: '/services/data/v38.0/sobjects/Attachment',
+                    data: JSON.stringify(attachment_object),
+                    type: 'POST',
+                    processData: false,
+                    contentType: false,
+                    headers: {'Authorization': 'Bearer {!$Api.Session_ID}', 'Content-Type': 'application/json'},
+                    xhr: function(){
+                        var xhr = new window.XMLHttpRequest();
+                        //Upload progress
+                        xhr.upload.addEventListener("progress", function(evt){
+                            if (evt.lengthComputable) {
+                                var percentComplete = evt.loaded / evt.total;
+                                console.log('parcentComplete---'+percentComplete);
+                            }
+                        }, false);
+                        console.log('returned value-----'+xhr);
+                        return xhr;
+                    },
+                    success: function(response) {
+                        uploaded += 1;
+                        console.log('inside success'+response); // the id of the attachment
+                        callback(null, true)
+                    }
+                });
+            })
+        }
+        
+        var filetoBase64 = function(file, callback){
+            var reader = new FileReader();
+            console.log('inside fileReader');
+            reader.onload = function() {
+                var fileContents = reader.result;
+                var base64Mark = 'base64,';
+                var dataStart = fileContents.indexOf(base64Mark) + base64Mark.length;
+                fileContents = fileContents.substring(dataStart);
+                callback(null, fileContents);
+            }
+            reader.readAsDataURL(file);
+        }
+    });
+    </script>
+    Select File to upload : <input type="file" multiple="multiple"/>
+</apex:page>

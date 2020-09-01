@@ -1,0 +1,29 @@
+<apex:component controller="AccCompController">
+    <apex:attribute name="AccountList" type="Account" description="Sample component."/>
+   
+    <apex:pageBlockSection title="Account Information" rendered="{!currentPageId != null}"> 
+        <apex:repeat value="{!$ObjectType.Account.FieldSets.AccountWiz_fieldSet}" var="fields">  
+            <apex:outputField value="{!AccountList[fields]}" /> 
+        </apex:repeat> 
+    </apex:pageBlockSection> 
+    
+    <apex:pageBlockSection title="Account Information" rendered="{!currentPageId == null}"> 
+        <apex:repeat value="{!$ObjectType.Account.FieldSets.AccountWiz_fieldSet}" var="fields" >  
+            <apex:inputField value="{!AccountList[fields]}" /> 
+        </apex:repeat> 
+    </apex:pageBlockSection> 
+    
+    
+     <apex:pageBlockSection title="Account Information" rendered="{!currentPageId != null}"> 
+        <apex:repeat value="{!$ObjectType.Account.FieldSets.AccountWiz_fieldSet}" var="fields">  
+            <apex:outputField value="{!AccountList[fields]}" /> 
+        </apex:repeat> 
+    </apex:pageBlockSection> 
+    
+    <apex:pageBlockSection title="Billing Information" rendered="{!currentPageId == null}"> 
+        <apex:repeat value="{!$ObjectType.Account.FieldSets.AccountWiz_fieldSet}" var="fields" >  
+            <apex:inputField value="{!AccountList[fields]}" /> 
+        </apex:repeat> 
+    </apex:pageBlockSection> 
+    
+</apex:component>

@@ -1,0 +1,202 @@
+<aura:component implements="lightning:isUrlAddressable,forceCommunity:availableForAllPageTypes,force:appHostable" controller="productListController" >
+    <aura:attribute name="items" type="Product2[]"/>
+	<aura:attribute name="newItem" type="Product2" default="{'Name':'','Quantity__c':0,'Price__c':0,'Packed__c':false,'sobjectType':'Product2'}"/>
+	<aura:handler name="init" action="{!c.doInit}" value="{!this}" />
+    <aura:attribute name="showProduct" type="boolean" default="false"/>
+     <aura:attribute name="showBilling" type="boolean" default="true"/>
+    <aura:attribute name="amount" type="Integer"/>
+    <aura:registerEvent name="showToast" type="force:showToast"/>
+    <aura:attribute name="billingDetails" type="List"/>
+   
+    
+    <aura:if isTrue="{!v.showBilling}">
+     <lightning:carousel disableAutoRefresh="false" class="heightSlider" disableAutoScroll="false">
+        <lightning:carouselImage
+            src = "{!$Resource.Shooping}"
+            header = ""
+            description = ""
+            alternativeText = "First card accessible description."
+            href = "https://www.salesforce.com">
+          
+        </lightning:carouselImage>
+          <lightning:carouselImage
+            src = "{!$Resource.Product}"
+            header = ""
+            description = ""
+            alternativeText = "First card accessible description."
+            href = "https://www.salesforce.com">
+          
+        </lightning:carouselImage>
+    </lightning:carousel>
+        
+        
+	<lightning:layout class="slds-page-header slds-align_absolute-center">
+    	<lightning:layoutItem>
+        	<lightning:icon iconName="action:record"></lightning:icon>
+        </lightning:layoutItem>  
+        <lightning:layoutItem>
+        	 <div>
+                <h1 class="slds-text-heading--medium slds-p-top_x-small slds-p-left_large">Product</h1>
+                <h2 class="slds-text-heading--small slds-p-left_large">Product List</h2>
+            </div>
+        </lightning:layoutItem>
+    </lightning:layout>
+        
+   
+ <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+  <thead>
+    <tr class="slds-line-height_reset">
+      <th class="slds-text-title_caps slds-cell-wrap" scope="col">
+        <div class="slds-truncate" title="Name">Name</div>
+      </th>
+      <th class="slds-text-title_caps slds-cell-wrap" scope="col">
+        <div class="slds-truncate" title="Description">Description</div>
+      </th>
+      <th class="slds-text-title_caps slds-cell-wrap" scope="col">
+        <div class="slds-truncate" title="Quantity">Quantity</div>
+      </th>
+      <th class="slds-text-title_caps slds-cell-wrap" scope="col">
+        <div class="slds-truncate" title="Price">Price</div>
+      </th>  
+    </tr>
+  </thead>
+ 		<tbody>
+            <aura:iteration items="{!v.items}" var="itm">		
+                <tr>
+                    <td><ui:outputText value="{!itm.Name}"/></td>
+                    <td>{!itm.Description}</td>
+                    <td><lightning:input aura:id="ttlNo" onchange="{!c.CalcSum}" value="{!itm.Quantity__c}"/></td>
+                    <aura:iteration items="{!itm.PricebookEntries}" var="prc">
+						<td>{!prc.UnitPrice}</td>                     
+                    </aura:iteration>
+                </tr>
+            </aura:iteration>
+        </tbody>
+    </table>
+        <b style="float:right;margin-right:60px;font-size:16px;">Total Amount: {!v.amount}</b>
+   		 <lightning:button label="Add To Cart" class="slds-m-top--medium slds-align_absolute-center" variant="brand" onclick="{!c.billing}"/>
+    </aura:if>
+  
+    <aura:if isTrue="{!v.showProduct}">
+          
+           
+    <lightning:layout class="slds-page-header slds-align_absolute-center">
+    	<lightning:layoutItem>
+        	<lightning:icon iconName="action:record"></lightning:icon>
+        </lightning:layoutItem>  
+        <lightning:layoutItem>
+        	 <div>
+                <h1 class="slds-text-heading--medium slds-p-top_x-small slds-p-left_large">Billing Information</h1>
+                 <h2 class="slds-text-heading--small slds-p-left_large">Billing Details</h2>
+            </div>
+        </lightning:layoutItem>
+    </lightning:layout>
+    
+   
+    <lightning:accordion aura:id="accordion" activeSectionName="A">
+        <lightning:accordionSection class="acrdnHeader" name="A" label="Shipping Details">
+           
+	<fieldset class="slds-form-element slds-form_compound slds-form-element_address">
+<div class="slds-form-element__control">
+<div class="slds-form-element__group">
+<div class="slds-form-element__row">
+<div class="slds-form-element slds-size_1-of-1">
+	<lightning:input aura:id="expenseform" label="Shipping Address" name="Address" value="{!v.billingDetails.ShippingAddress}" required="true"/> 
+</div>
+</div>
+<div class="slds-form-element__row slds-p-top_large">
+    <div class="slds-form-element slds-size_3-of-6">
+        <lightning:input aura:id="expenseform" label="Shipping City" name="city" value="{!v.billingDetails.ShippingCity}" required="true"/> 
+    </div>
+    <div class="slds-form-element slds-size_3-of-6">
+        <lightning:input aura:id="expenseform" label="Shipping State/Province" name="state" value="{!v.billingDetails.ShippingState}" required="true"/> 
+    </div>
+</div>
+<div class="slds-form-element__row slds-p-top_large">
+    <div class="slds-form-element slds-size_3-of-6">
+     <lightning:input aura:id="expenseform" label="Shipping Zip/Postal Code" name="name" value="{!v.billingDetails.ShippingZip}" required="true"/> 
+    </div>
+    <div class="slds-form-element slds-size_3-of-6">
+     <lightning:input aura:id="expenseform" label="Shipping country" name="country" value="{!v.billingDetails.ShippingCountry}" required="true"/> 
+    </div>
+</div>
+</div>
+</div>
+</fieldset>
+        </lightning:accordionSection>
+        
+       
+<lightning:accordionSection class="acrdnHeader" name="B" label="Billing Details">                
+<fieldset class="slds-form-element slds-form_compound slds-form-element_address">
+<div class="slds-form-element__control">
+<div class="slds-form-element__group">
+<div class="slds-form-element__row">
+<div class="slds-form-element slds-size_1-of-1">
+	<lightning:input aura:id="expenseform" label="Billing Address" name="Address" value="{!v.billingDetails.BillingAddress}" required="true"/> 
+</div>
+</div>
+<div class="slds-form-element__row slds-p-top_large">
+    <div class="slds-form-element slds-size_3-of-6">
+        <lightning:input aura:id="expenseform" label="Billing City" name="city" value="{!v.billingDetails.BillingCity}" required="true"/> 
+    </div>
+    <div class="slds-form-element slds-size_3-of-6">
+        <lightning:input aura:id="expenseform" label="Billing State/Province" name="state" value="{!v.billingDetails.BillingState}" required="true"/> 
+    </div>
+</div>
+<div class="slds-form-element__row slds-p-top_large">
+    <div class="slds-form-element slds-size_3-of-6">
+     <lightning:input type="number" aura:id="expenseform" label="Billing Zip/Postal Code" name="name" value="{!v.billingDetails.BillingZip}" required="true"/> 
+    </div>
+    <div class="slds-form-element slds-size_3-of-6">
+     <lightning:input aura:id="expenseform" label="Billing country" name="country" value="{!v.billingDetails.BillingCountry}" required="true"/> 
+    </div>
+</div>
+</div>
+</div>
+</fieldset>
+       
+        
+    </lightning:accordionSection >
+        <lightning:accordionSection name="C" class="acrdnHeader" label="Card Details">
+    <fieldset class="slds-form-element slds-form_compound slds-form-element_address">
+<div class="slds-form-element__control">
+	<div class="slds-form-element__group">
+		<div class="slds-form-element__row slds-p-top_large">
+    		<div class="slds-form-element slds-size_6-of-6">
+        		  <lightning:input aura:id="expenseform" label="Card Number" name="cNumber" value="{!v.billingDetails.CardNum}" required="true"/> 
+   			 </div>
+		</div>
+<div class="slds-form-element__row slds-p-top_large">
+    <div class="slds-form-element slds-size_2-of-6">
+         <lightning:input type="number" aura:id="expenseform" label="Expiration date" name="eDate" placeholder="month" value="{!v.billingDetails.ExpDate}" required="true"/> 
+    </div>
+    <div class="slds-form-element slds-size_2-of-6">
+     	<lightning:input type="number" aura:id="expenseform" name="eDate" value="{!v.billingDetails.Year}" placeholder="year" required="true"/> 
+    </div>
+    <div class="slds-form-element slds-size_2-of-6">
+       		<lightning:input type="number" aura:id="expenseform" name="CVV" label="CVV" value="{!v.billingDetails.CVV}" placeholder="last 3 digit on back of the card" required="true"/> 
+    </div>
+</div>
+    
+   <div class="slds-form-element__row slds-p-top_large">
+        <div class="slds-form-element slds-size_6-of-6">
+       		   <lightning:input aura:id="expenseform" label="Name mentioned on card" name="name" placeholder="Name" value="{!v.billingDetails.FullName}" required="true"/> 
+        </div>
+    </div>
+  </div>
+</div>
+
+   </fieldset>
+        </lightning:accordionSection>
+    </lightning:accordion>
+       <lightning:layout horizontalAlign="space">
+            <lightning:layoutItem padding="around-medium">
+                <div class="header-column slds-align_absolute-center">
+    	  			<lightning:button variant="brand" class="slds-button" onclick="{!c.backToProduct}">Back to products</lightning:button> 
+                     <lightning:button label="Make Payment" class="slds-button" variant="brand" onclick="{!c.Payment}"/>
+                </div>
+            </lightning:layoutItem>
+        </lightning:layout>
+        
+    </aura:if>
+</aura:component>

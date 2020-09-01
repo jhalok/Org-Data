@@ -1,0 +1,25 @@
+<apex:page cache="false" controller="CsvDynamicFileUploader" showheader="false" sidebar="false">
+    <apex:form >
+        <apex:pageblock title="Create Records Using Csv File">
+            <apex:pageblocksection collapsible="false" columns="1" showheader="true">
+                <apex:pageblocksectionitem >
+                    <apex:outputlabel for="scenarioObj" value="Select Object">
+                        <apex:selectlist id="scenarioObj" multiselect="false" required="true" size="1" value="{!selectedObject}">
+                            <apex:selectoptions value="{!ObjectNames}">
+                            </apex:selectoptions></apex:selectlist>
+                    </apex:outputlabel></apex:pageblocksectionitem>
+            </apex:pageblocksection>
+          
+                <apex:inputfile filename="{!nameFile}" value="{!contentFile}"> </apex:inputfile> <apex:commandbutton action="{!ReadFile}" id="theButton" style="width: 70px;" value="Upload File">
+                </apex:commandbutton>
+            <apex:pageblocktable rendered="{!NOT(ISNULL(uploadedAccounts))}" value="{!uploadedAccounts}" var="acc">
+                <apex:repeat value="{!headervalues}" var="hvalues">
+                    <apex:column headervalue="{!hvalues}">
+                        {!acc[hvalues]} 
+                    </apex:column>
+                </apex:repeat>
+            </apex:pageblocktable> 
+            
+        </apex:pageblock>       
+    </apex:form>   
+</apex:page>

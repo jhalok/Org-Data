@@ -1,0 +1,26 @@
+<aura:component controller="paginationLightApex">
+    <aura:attribute name="currentPageNumber" type="Integer"/>
+    <aura:attribute name="maxPageNumber" type="Integer"/>
+    <aura:handler name="change" action="{!c.handlePageChange}" value="{!v.pageNumber}"/>
+    <aura:attribute name="recordsper" type="Integer"/>
+    <aura:attribute name="limitcurnt" type="Integer"/>
+    <aura:attribute name="currentList" type="Account[]" />
+    <aura:attribute name="limitvalue" type="Integer" default="2000"/> 
+    <aura:attribute name="AccountList" type="Account[]"/>
+      
+    <div class="slds-button-group Selector slds-align_absolute-center">
+        <lightning:button disabled="{!v.currentPageNumber == 1}" variant="brand" label="First" onclick="{!c.firstPage}" />  
+        <lightning:button disabled="{!v.currentPageNumber == 1}" variant="brand" aura:id="prevPage" label="Prev" onclick="{!c.prevPage}" />            
+        <lightning:button aura:id="nextPage" variant="brand" label="Next" onclick="{!c.nextPage}"/>
+        <lightning:button disabled="{!v.currentPageNumber == v.maxPageNumber}" variant="brand" label="Last" onclick="{!c.lastPage}"/>
+    </div>
+    
+    <br></br>
+    <div class="slds-float_right slds-p-right_x-medium">
+        <lightning:layout>
+            <lightning:layoutItem class="boxSize 4-of-4">
+       	 		Page no:<lightning:input value="{!v.currentPageNumber}"/> of Total pages {!v.maxPageNumber}
+            </lightning:layoutItem>
+        </lightning:layout>
+    </div>
+</aura:component>

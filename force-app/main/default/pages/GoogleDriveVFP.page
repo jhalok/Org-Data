@@ -1,0 +1,83 @@
+<apex:page controller="GoogleDriveController" >
+    <apex:form >
+        <apex:slds />
+        <apex:pageBlock id="rfrsh"> 
+            <apex:pageMessages ></apex:pageMessages>
+            <div style="text-align: center;font-size: 22px;font-weight: 600;">Google Drive Integration</div>
+            <div align="center" draggable="false" >
+                <apex:commandButton action="{!DriveAuth}" value="Authorize drive" rendered="{!!isVisible}" >
+                </apex:commandButton>
+            </div>
+            <hr/>
+            
+            <apex:pageBlock >
+                <apex:variable value="{!0}" var="Indx"/>
+                <nav role="navigation" aria-label="Breadcrumbs">
+                    <ol class="slds-breadcrumb slds-list_horizontal slds-wrap">
+                        <apex:repeat value="{!brdcrmbdata}" var="brd"> 			
+                            <li class="slds-breadcrumb__item"> 
+                                <apex:actionRegion >
+                                    <apex:commandLink action="{!callbrdcrumb}" value="{!brd.name}" reRender="rfrsh" >             
+                                        <apex:param value="{!Indx}" name="root" assignTo="{!Index}"/>Root
+                                        {!Indx}
+                                        <apex:param value="{!brd.id}" name="fldrIdCnt" assignTo="{!fldrId}"/>
+                                        <apex:param value="{!brd.name}" assignTo="{!fldrName}" />
+                                    </apex:commandLink>
+                                </apex:actionRegion> 
+                            </li>
+                            <apex:variable value="{!Indx+1}" var="Indx"/>
+                        </apex:repeat>
+                    </ol>
+                </nav>
+            </apex:pageBlock>                  
+            
+             <apex:pageBlock title="Upload File" rendered="{!isVisible}" >
+                <div>Select a file to upload:</div>
+                    <apex:inputfile value="{!file}" contentType="{!filetype}" filename="{!filename}"/>        
+                        <apex:actionRegion >
+                            <apex:commandButton action="{!callingUpld}" value="Upload"></apex:commandButton>
+                        </apex:actionRegion>
+            </apex:pageBlock>
+            
+            <apex:pageBlock title="The folders existing in drive:" rendered="{!isVisible}">         
+                <apex:pageBlockTable value="{!fldrsdata}" var="row" id="frst">   
+                    <apex:column >
+                        <apex:actionRegion >
+                            <apex:commandLink action="{!callbrdcrumb}" value="{!row.name}" onclick=""  reRender="rfrsh" >   
+                                <apex:param value="{!row.id}" name="fldrIdCnt" assignTo="{!fldrId}"/>
+                                <apex:param value="{!row.name}" name="fldrNameCnt" assignTo="{!fldrName}"/>
+                            </apex:commandLink>
+                        </apex:actionRegion> 
+                    </apex:column>
+                    <apex:column style="float: right;margin-right:142px;">
+                        <apex:actionRegion >
+                            <apex:commandLink action="{!callingDlt}" onclick="if(!confirm('Do you want to delete the record?')) return false;"  reRender="rfrsh" >
+                                <apex:image id="theImage" value="{!$Resource.dlticon}" width="20" height="20"/>
+                                <apex:param value="{!row.Id}" name="idToDel" assignTo="{!idtoDlt}"/>
+                            </apex:commandLink>
+                        </apex:actionRegion> 
+                    </apex:column> 
+                </apex:pageBlockTable>
+            </apex:pageBlock>
+            
+            <apex:pageBlock title="The file in existing in drive:" rendered="{!isVisible}">
+                <apex:pageBlockTable value="{!filesdata}" var="row">     
+                    <apex:column value="{!row.name}"/>
+                    <apex:outputLink value="https://drive.google.com/open?id={!row.id}">{!row.name}</apex:outputLink>
+                    <apex:column style="float: right;margin-right: 100px;">
+                        <apex:actionRegion >
+                            <apex:commandLink action="{!callingDlt}" onclick=""  reRender="rfrsh">
+                                <apex:image id="dltimg" value="{!$Resource.dlticon}" width="20" height="20"/>
+                                <apex:param value="{!row.Id}" name="idToDel" assignTo="{!idtoDlt}"/>
+                            </apex:commandLink> &nbsp; | &nbsp;         
+                            <apex:commandLink action="{!callingDwnld}" onclick="" reRender="rfrsh">
+                                <apex:image id="dwnldimg" value="{!$Resource.dwnldicon}" width="20" height="20"/>
+                                <apex:param value="{!row.Id}" name="idToDwnld" assignTo="{!idtoDwnld}"/>                        
+                            </apex:commandLink>
+                        </apex:actionRegion>
+                    </apex:column>
+                </apex:pageBlockTable>
+            </apex:pageBlock>
+        </apex:pageBlock>          
+    </apex:form>
+</apex:page>

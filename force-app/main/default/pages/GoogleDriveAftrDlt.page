@@ -1,0 +1,29 @@
+<apex:page renderAs="pdf" controller="GoogleDriveController" >
+    <apex:form >
+        <apex:pageBlock title="Google Drive Integration" id="rfrsh">            
+            <div align="center" draggable="false" >
+                <apex:commandButton action="{!DriveAuth}" value="Authorize drive">
+                </apex:commandButton>
+            </div>
+            
+            <div><h1>  
+                <center>The selected file is downloaded</center>
+            </h1></div>   
+             
+        </apex:pageBlock>        
+        <!-- <apex:pageBlock>
+<apex:pageBlockSection title="The folders existing in drive:">
+<apex:repeat value="{!fldrsdata}" var="fld">          
+{!fld.name}
+</apex:repeat>
+</apex:pageBlockSection> 
+</apex:pageBlock>
+<apex:pageBlock>//
+<apex:pageBlockSection title="The file in existing in drive:">
+<apex:repeat value="{!filesdata}" var="fil">          
+{!fil.name}
+</apex:repeat>
+</apex:pageBlockSection> 
+</apex:pageBlock>-->
+    </apex:form>
+    </apex:page>

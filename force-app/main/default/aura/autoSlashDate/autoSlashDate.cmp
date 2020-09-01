@@ -1,0 +1,16 @@
+<aura:component implements="lightning:isUrlAddressable,force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:attribute name="DOB" type="String" /> 
+	
+    <div class="slds-align_absolute-center slds-page-header__title slds-truncate">
+        <lightning:icon iconName="action:new_task" alternativeText="Approved"/>
+        <h1 class="slds-m-left_large">AutoSlash</h1>
+    </div>   
+
+    <div class="slds-grid  slds-gutters slds-align_absolute-center">
+        <div class="slds-col slds-size_6-of-12">
+            <label>OnKeyUp :</label>
+            <ui:inputDate aura:id="inputData" value="{!v.DOB}" format="MM/dd/yyyy" displayDatePicker="true" keyup="{!c.onChange}" change="{!c.onChange}" updateOn="keyup,change" />
+        </div>
+    </div>
+   
+</aura:component>

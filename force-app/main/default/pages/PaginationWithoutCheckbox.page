@@ -1,0 +1,93 @@
+<apex:page controller="PaginationCheckboxHandler" action="{!searchAcc}" sidebar="false" showHeader="false">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script type="text/javascript">
+        window.onload=function() {
+        // document.getElementById("{!$Component.thePb.thepbs.accName}").focus();
+    }
+    </script>
+    <apex:form >        
+        <apex:pageBlock id="thePb" title="Account Details To Search">            
+            <apex:pageblockSection id="thepbs">                
+                <apex:inputField value="{!acc.Name}" required="false" id="accName"/>                
+                <apex:inputfield value="{!acc.accountNumber}"/>                
+            </apex:pageblockSection>            
+            <apex:pageblockButtons location="bottom" id="thepbb">                
+                <apex:commandButton value="Search" action="{!searchAcc}" id="btnSearch" />                
+                <apex:commandButton value="Deleted" onclick="getSelected()" rerender="thePb"/>                
+            </apex:pageblockButtons>            
+        </apex:pageBlock>  
+        <apex:pageBlock title="Account Details" id="noRec" rendered="{! IF( accountList != null && accountList.size ==0 , true, false)}" >            
+            <apex:outputPanel >                
+                <h1>No Records Found </h1>                
+            </apex:outputPanel>            
+        </apex:pageBlock>
+        <apex:pageBlock title="Account Details" id="details" rendered="{! IF( accountList != null && accountList.size >0, true, false)}" >            
+            <table width="100%" id="tbl">                
+                <tr>                    
+                    <td><input type="checkbox" id="selectAll" onclick="selectAllCheckboxes(this,'inputId')"/></td>                    
+                    <!--<td></td>-->                    
+                    <td>Name</td>                    
+                    <td>Account Number</td>                    
+                    <td>Industry</td>                    
+                    <td>Phone</td>                    
+                </tr>                
+                <tbody id="tblbody">                    
+                    <apex:repeat value="{!accountList}" var="a">                        
+                        <tr>                            
+                            <td> <input type="checkbox" value="{!a.Id}" id="inputId"/></td>                            
+                            <!--<td><a href="#" onclick="return reject('{!a.Id}')">Reject</a></td>-->                            
+                            <td><apex:outputLink target="_blank" value="/{!a.id}">{!a.Name}</apex:outputLink></td>                            
+                            <td>{!a.accountNumber}</td>                            
+                            <td>{!a.Industry}</td>                            
+                            <td>{!a.Phone}</td>                            
+                        </tr>                        
+                    </apex:repeat>                    
+                </tbody>                
+            </table>
+            <apex:pageblockButtons >                
+                <apex:commandButton value="First Page" rerender="details" action="{!FirstPage}" disabled="{!prev}" oncomplete="uncheck()" />                
+                <apex:commandButton value="Previous" rerender="details" action="{!previous}" disabled="{!prev}" oncomplete="uncheck()"/>                
+                <apex:commandButton value="Next" rerender="details" action="{!next}" disabled="{!nxt}" oncomplete="uncheck()"/>                
+                <apex:commandButton value="Last Page" rerender="details" action="{!LastPage}" disabled="{!nxt}" oncomplete="uncheck()"/>                
+            </apex:pageblockButtons>
+        </apex:pageBlock>        
+        <script>        
+        function uncheck(){            
+            document.getElementById('selectAll').checked=false;            
+        }
+        
+        function selectAllCheckboxes(obj,receivedInputID){            
+            var inputCheckBox = document.getElementsByTagName("input");      
+            for(var i=0; i<inputCheckBox.length; i++){          
+                if(inputCheckBox[i].id.indexOf(receivedInputID)!=-1){                  
+                    inputCheckBox[i].checked = obj.checked;                    
+                }                
+            }            
+        }        
+        
+        function getSelected(){            
+            var ids=[];            
+            $('#tblbody').find('input[type="checkbox"]:checked').each(function () {                
+                ids.push($(this).val());
+                
+            });            
+            if(ids.length>0){                
+                var idsstring=JSON.stringify(ids);               
+                PaginationCheckboxHandler.delAccount(idsstring,function(result,event){                    
+                    if(event.status){                        
+                        if(result){                            
+                            document.getElementById("{!$Component.thePb.thepbb.btnSearch}").click();                            
+                        }                        
+                        else{                            
+                            alert('Record is related with other records');                            
+                        }                        
+                    }                    
+                });                
+            }            
+        }        
+        function reject(Id){            
+            alert(Id);   
+        }
+        </script> 
+    </apex:form>
+ </apex:page>

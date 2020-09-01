@@ -1,0 +1,212 @@
+<aura:component controller="condt"  extends="forceCommunity:navigationMenuBase" implements="lightning:isUrlAddressable,force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global">
+    <aura:attribute name="showLeftNav" type="boolean" default="false"/>
+    <aura:attribute name="showNavButton" type="boolean" default="true"/> 
+    <aura:attribute name="showNavCloseButton" type="boolean" default="false"/> 
+    <aura:attribute name="AccessToken" type="List"/>
+    <aura:iteration  items="{!v.AccessToken}" var="item">
+        {!item}
+    </aura:iteration>
+    <div class="topDiv">
+        <div class="fullWidth">
+            <!-- <aura:if isTrue="{!v.showNavButton}"> -->
+            <div style="float:left;width:15%;padding:14px;background-color:#292c33" class="slds-align_absolute-center">
+                <lightning:buttonIcon size="large" iconName="utility:assignment" variant="bare" onclick="{! c.showLeftNav }" alternativeText="Settings" />
+            </div>
+            <!--  </aura:if> -->
+            <!--<aura:if isTrue="{!v.showNavCloseButton}">
+                <div style="float:left;width:15%;padding:14px;background-color:#292c33" class="slds-align_absolute-center">
+                    <lightning:buttonIcon size="large" iconName="utility:close" variant="bare" onclick="{! c.showLeftNav }" alternativeText="Settings" />
+                </div>
+            </aura:if> -->
+            <div style="float:left;width:85%;background-color:cornflowerblue;">
+                <div style="width:30%;float:left">
+                    <div style="width:100%">
+                        <div style="float:left;width:50%">
+                            
+                        </div>
+                        <div style="float:right;width:50%">
+                            
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="float:right;width:70%;background-color:white;padding:10px">
+                    <div style="width:100%;height:100%;">
+                        <div style="width:30%;float:left;">
+                        </div>
+                        <div style="width:70%;float:right">
+                            <div style="float:left;width:100%">
+                                <ul style="float:left;padding:9px;width:10%;font-size: smaller;color:#9fa3a7">
+                                    <li>
+                                        HOME
+                                    </li>
+                                </ul>
+                                <ul style="float:left;padding:9px;width:12%;font-size: smaller;color:#9fa3a7">
+                                    <li>
+                                        ACCOUNTS
+                                    </li>
+                                </ul>
+                                <ul style="float:left;padding:9px;width:24%;font-size: smaller;color:#9fa3a7">
+                                    <li>
+                                        REPORT AND ANALYTICS
+                                    </li>
+                                </ul>
+                                <ul style="float:left;padding:9px;width:24%;font-size: smaller;color:#9fa3a7">
+                                    <li>
+                                        MY FINANCIAL ADVICE
+                                    </li>
+                                </ul>
+                                <ul style="float:left;padding:9px;width:30%;font-size: smaller;color:#9fa3a7">
+                                    <li>
+                                        ACTION, TASKS AND CALENDAR
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>      
+                </div>
+            </div>
+        </div>
+        <!-- <aura:if isTrue="{!v.showLeftNav}"> -->
+        
+        <div style="width:100%;height:100%;">
+            <div style="width:15%;min-height:100vh;float:left;background-color:#3e4247;">
+                <div style="width:100%;height:100">
+                    <div class="">
+                        <ul class="listShadow" onclick="{!c.onClick}">
+                            <li class="listul">
+                                <a href="javascript:void(0);" class="ahref">
+                                    Super and Reteirment <span style="font-size:20px;margin-left:18%">&#8250;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="listShadow">
+                        <ul class="" onclick="{!c.onClick}">
+                            <li class="listul">
+                                
+                                <a href="javascript:void(0);" class="ahref" >
+                                    Investments <span style="font-size:20px;margin-left:53%">&#8250;</span>
+                                    
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="listShadow">
+                        <ul class="" onclick="{!c.onClick}">
+                            <li class="listul">
+                                <a href="javascript:void(0);" class="ahref" >
+                                    Advice <span style="font-size:20px;margin-left:66%">&#8250;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="listShadow">
+                        <ul class="" onclick="{!c.onClick}">
+                            <li class="listul">
+                                <a href="javascript:void(0);" class="ahref">
+                                    Insaurance <span style="font-size:20px;margin-left:55%">&#8250;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="listShadow">
+                        <ul class="" onclick="{!c.onClick}">
+                            <li class="listul">
+                                <a href="javascript:void(0);" class="ahref" >
+                                    Tools <span style="font-size:20px;margin-left:70%">&#8250;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="slds-col.content slds-grid slds-grid--vertical slds-navigation-list--vertical">
+                        <ul class="listShadow" onclick="{!c.onClick}">
+                            <li class="listul">
+                                <a href="javascript:void(0);" class="ahref" >
+                                    Contact us <span style="font-size:20px;margin-left:55%">&#8250;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>     
+        <!-- </aura:if> -->
+        <div style="float:right;width:85%">
+            <div style="width:100%;float:right">
+                <!-- <img src="{!$Resource.ChatSuprt}"/> -->
+            </div>
+        </div>
+    </div>
+    <div>
+        <div style="float:left;width:100%;background-color:white;padding:10px">        
+            <div style="width:60%;float:left">
+                <div style="float:left;width:100%">
+                    <ul style="float:left;padding:9px;width:12%;font-size: small;color:#6a96f7">
+                        <li>
+                            Stock Ticker
+                        </li>
+                    </ul>
+                    <ul style="float:left;padding:9px;width:16%;font-size: small;color:#6a96f7">
+                        <li>
+                            Shareholder Center
+                        </li>
+                    </ul>
+                    <ul style="float:left;padding:9px;width:10%;font-size: small;color:#6a96f7">
+                        <li>
+                            Careers
+                        </li>
+                    </ul>
+                    <ul style="float:left;padding:9px;width:12%;font-size: small;color:#6a96f7">
+                        <li>
+                            Newsroom
+                        </li>
+                    </ul>
+                    <ul style="float:left;padding:9px;width:15%;font-size: small;color:#6a96f7">
+                        <li>
+                            Find an Adviser
+                        </li>
+                    </ul>
+                    <ul style="float:left;padding:9px;width:30%;font-size:small;color:#6a96f7">
+                        <li>
+                            Terms and Condition
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div style="width:40%;float:left;">
+                <div style="width:100%;">
+                    <div style="width:15%;float:left">
+                        
+                    </div>  
+                    <div style="width:25%;float:right">
+                        <ul style="float:left" class="">
+                            <li class="">
+                                <a href="https://www.twitter.com">
+                                    <img src="{!$Resource.Twitter}" width="30" height="40" /></a>
+                            </li>
+                        </ul>
+                        <ul style="float:left"  class="">
+                            <li class="">
+                                <a href="https://www.linkedin.com">
+                                    <img src="{!$Resource.Linkedin}" width="30" height="50"/></a>
+                            </li>
+                        </ul>
+                        <ul style="float:left">
+                            <li class="">
+                                <a href="https://www.youtube.com">
+                                    <img src="{!$Resource.Youtube}" width="30" height="30"/></a>
+                            </li>
+                        </ul>
+                        <ul style="float:left">
+                            <li class="">
+                                <a href="https://www.google.com">
+                                    <img src="{!$Resource.Facebook}" width="30" height="50"/></a>
+                            </li>
+                        </ul>
+                    </div>  
+                </div>
+            </div>
+        </div>      
+    </div>
+</aura:component>

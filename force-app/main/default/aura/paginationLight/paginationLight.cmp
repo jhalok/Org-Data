@@ -1,0 +1,90 @@
+<aura:component controller="paginationLightApex" implements="flexipage:availableForAllPageTypes,force:appHostable,flexipage:availableForRecordHome,force:hasRecordId,force:hasSObjectName" access="global">
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+    <aura:handler name="change" action="{!c.handlePageChange}" value="{!v.pageNumber}"/>
+    <aura:attribute name="allAccounts" type="Account[]"/>
+    <aura:attribute name="currentList" type="Account[]" />
+    <aura:attribute name="recordsPerPage" type="Integer" default="10"/>
+    <aura:attribute name="maxPage" type="Integer"/>
+    <aura:attribute name="pageNumber" type="Integer" default="1" description="Current page number" />
+    <aura:attribute name="spinner" type="boolean" default="false"/>
+    <aura:attribute name="limitvalue" type="Integer"/>
+    <aura:attribute name="offsetvalue" type="Integer"/>
+    <aura:registerEvent name="showToast" type="force:showToast"/>
+    <aura:handler event="aura:waiting" action="{!c.showSpinner}"/>
+    <aura:handler event="aura:doneWaiting" action="{!c.hideSpinner}"/>
+    
+    <lightning:card variant="Basic" title="Account Pagination" iconName="standard:account">
+        <aura:set attribute="actions">
+            <lightning:layout class="slds-float_right slds-p-top_large slds-p-bottom_large">             
+            </lightning:layout>   
+        </aura:set>
+    </lightning:card> 
+    
+    <aura:if isTrue="{!v.spinner}">
+        <div class="exampleHolder">
+            <lightning:spinner alternativeText="Loading" size="medium" />
+        </div>
+    </aura:if>
+    
+    <div class="slds-page-header">
+        <table aria-multiselectable="true" class="slds-scrollable_y slds-table slds-table_bordered slds-table_fixed-layout slds-table_resizable-cols" role="grid" var="index">
+            <thead>
+                <tr class="slds-text-title_caps">
+                    <th scope="col" class="">
+                        <div class="slds-truncate" title="Name">Name</div>
+                    </th>
+                    <th scope="col" class="">
+                        <div class="slds-truncate" title="Type">Phone</div>
+                    </th>
+                    <th scope="col" class="">
+                        <div class="slds-truncate" title="Date">Account Number</div>
+                    </th>
+                    <th scope="col" class="">
+                        <div class="slds-truncate" title="Website">Website</div>
+                    </th>
+                    <th scope="col" class="">
+                        <div class="slds-truncate" title="Rating">Rating</div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <aura:iteration items="{!v.currentList}" var="acc">
+                    <tr>
+                        <td scope="row">
+                            <div class="slds-truncate">{!acc.Name}</div>
+                        </td>
+                        <td scope="row">
+                            <div class="slds-truncate">{!acc.Phone}</div>
+                        </td>
+                        <td scope="row">
+                            <div class="slds-truncate">{!acc.AccountNumber}</div>
+                        </td>
+                        <td scope="row">
+                            <div class="slds-truncate">{!acc.Website}</div>
+                        </td>
+                        <td scope="row">
+                            <div class="slds-truncate">{!acc.Rating}</div>
+                        </td>
+                    </tr>
+                </aura:iteration>     
+            </tbody>
+        </table>
+        <br></br>
+        <div>
+        </div>
+    </div>
+  <br></br>
+    <lightning:layout class="slds-p-left_x-medium">
+        <lightning:select aura:Id ="pageSize" name="selectItem" value="{!v.recordsPerPage}" label="Display Records Per Page:" onchange="{!c.doInit}" >
+            <option value="10" label = "10" />  
+            <option value="15" label = "15"/>
+            <option value="20" label = "20"/>
+            <option value="50" label = "50"/>
+            <option value="100" label = "100"/>
+        </lightning:select>
+    </lightning:layout>
+    
+    <br></br>
+    <c:Paginator AccountList="{!v.allAccounts}" currentPageNumber="{!v.pageNumber}" maxPageNumber="{!v.maxPage}" recordsper="{!v.recordsPerPage}" limitcurnt="{!v.limitvalue}" currentList="{!v.currentList}"/>   
+ 
+</aura:component>

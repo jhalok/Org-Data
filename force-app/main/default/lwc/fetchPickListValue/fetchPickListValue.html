@@ -1,0 +1,17 @@
+<template>
+    <!-- Custom Lightning Input Select Field-->
+      <label class="slds-form-element__label" for="select-01">Stage Name</label>
+        <div class="slds-form-element__control">
+          <div class="slds-select_container">
+            <select class="slds-select" id="select-01" onchange={onValueSelection}>
+                  <option value="">---None---</option>
+                  <!--iterate all picklist values from wrapper list using for:each loop-->
+                    <template for:each={stageNameValues.data} for:item="picklistItem">
+                       <option key={picklistItem.svalue} value={picklistItem.svalue}>
+                         {picklistItem.slabel}
+                       </option>
+                  </template>
+            </select>
+          </div>
+        </div>
+  </template>

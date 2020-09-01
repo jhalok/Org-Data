@@ -1,0 +1,78 @@
+<aura:component controller="NewClass" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:handler name="init" action="{!c.doInIt}"  value="{!this}"></aura:handler>
+    <aura:attribute name="accountList" type="List" /> 
+    <aura:attribute name="contactList" type="List" /> 
+   
+    <aura:attribute name="opportunityList" type="Opportunity[]" />    
+    <aura:attribute name="paginationList" type="Opportunity[]"/>
+    <aura:attribute name="pageSize" type="Integer" default="10"/>
+    <aura:attribute name="totalSize" type="Integer"/>
+    <aura:attribute name="start" type="Integer" />
+    
+    <aura:attribute name="end" type="Integer"/>
+    <div class="slds-theme_default">
+        <h1 class="slds-text-heading--medium">Accounts &nbsp; Contacts</h1>
+        <br/>
+        <lightning:layout horizontalAlign="space" verticalAlign="center" multipleRows="true">
+            <aura:iteration items="{!v.paginationList}" var="account">
+                <lightning:layoutItem class="boxDisplay slds-m-right_small slds-m-bottom_small" flexibility="auto" size="12" smallDeviceSize="12" mediumDeviceSize="4" largeDeviceSize="12">
+                    <div>Account Name :{!account.Name}<ul>
+                        <lightning:formattedRichText aura:id="image" class="imageProp slds-align_absolute-center" value="{!account.showImage__c}" />
+                        <!-- <aura:iteration items="{!account.Contacts}" var="contact">
+                            <li>FirstName : {!contact.FirstName}</li>        
+                        </aura:iteration>-->
+                        </ul>
+                    </div>
+                </lightning:layoutItem>
+            </aura:iteration>
+        </lightning:layout>
+        <lightning:button label="First" onclick="{!c.first}" />
+        <lightning:button label="Previous" onclick="{!c.previous}" />
+        <lightning:button label="Next" onclick="{!c.next}" />
+        <lightning:button label="Last" disabled="{!v.pageSize >= v.totalSize}" onclick="{!c.last}" />
+    </div>
+</aura:component>
+<!-- <lightning:card title="Datatable With Pagination">
+        <lightning:layout multipleRows="true" horizontalAlign="center">
+            <lightning:layoutItem padding="around-small" size="12">
+                <lightning:datatable
+                                     aura:id="accountDataTable"
+                                     columns="{! v.columns }"
+                                     data="{! v.data }"
+                                     keyField="Id"
+                                     hideCheckboxColumn="true"/>
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" flexibility="auto">
+                <lightning:button label="First" iconName="utility:left" iconPosition="left"
+                                  onclick="{!c.onFirst}" disabled="{! v.currentPageNumber == 1}"/>
+                <lightning:button iconName="utility:chevronleft" iconPosition="left"
+                                  onclick="{!c.onPrev}" disabled="{! v.currentPageNumber == 1}"/>
+                <span class="slds-p-horizontal_x-small">
+                    <a onclick="{!c.processMe}" name="1" 
+                       class="{! (v.currentPageNumber == 1) ? 'selected' : ''}">1</a>
+                </span>
+                <span class="slds-p-horizontal_xxx-small">
+                    <a>...</a>
+                </span>
+                
+                <aura:iteration items="{!v.pageList}" var="item">
+                    <span class="slds-p-horizontal_x-small">
+                        <a onclick="{!c.processMe}" name="{!item}"
+                           class="{! (v.currentPageNumber == item) ? 'selected' : ''}">{!item}</a>
+                    </span>
+                </aura:iteration>
+                
+                <span class="slds-p-horizontal_xxx-small">
+                    <a>...</a>
+                </span>
+                <span class="slds-p-horizontal_x-small">
+                    <a onclick="{!c.processMe}" name="{!v.totalPages}"
+                       class="{! (v.currentPageNumber == v.totalPages) ? 'selected' : ''}">{!v.totalPages}</a>
+                </span>
+                <lightning:button iconName="utility:chevronright" iconPosition="right" 
+                                  disabled="{! v.currentPageNumber == v.totalPages}" onclick="{!c.onNext}"/>
+                <lightning:button label="Last" iconName="utility:right" iconPosition="right" 
+                                  disabled="{! v.currentPageNumber == v.totalPages}" onclick="{!c.onLast}"/>
+            </lightning:layoutItem>
+        </lightning:layout>
+    </lightning:card> -->

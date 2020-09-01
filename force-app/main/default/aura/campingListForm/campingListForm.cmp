@@ -1,0 +1,38 @@
+<aura:component >
+    <aura:registerEvent name="addItem" type="c:addItemEvent"/>
+    
+    <aura:attribute name="newItem" type="Camping_Item__c"
+     default="{ 'sobjectType': 'Camping_Item__c',
+                    'Name': '',
+                    'Quantity__c': 1,
+                    'Price__c': 0,
+                    'Packed__c': false }"/>
+        <!-- CREATE NEW ITEM FORM -->
+    <form class="slsd-form--stacked">
+            <lightning:input aura:id="campingform" label="Camping Name"
+                                     name="campingname"
+                                     value="{!v.newItem.Name}"
+                                     required="true"/> 
+                    <lightning:input type="number" aura:id="campingform" label="Quantity"
+                                     name="campingQuantity"
+                                     min="1"                                    
+                                     step="1"
+                                     value="{!v.newItem.Quantity__c}"
+                                     messageWhenRangeUnderflow="Enter an Quantity that's at least 1."/>
+                      <lightning:input type="number" aura:id="campingform" label="Price"
+                                     name="campingPrice"
+                                     min="0.1"
+                                     formatter="currency"
+                                     step="0.1"
+                                     value="{!v.newItem.Price__c}"
+                                     messageWhenRangeUnderflow="Enter an Price that's at least 0.1."/>
+                    <lightning:input type="checkbox" aura:id="campingform" label="Packed ?"  
+                                     name="campingPacked"
+                                     checked="{!v.newItem.Packed__c}"/>
+                    <lightning:button label="Create Camping" 
+                                      class="slds-m-top--medium"
+                                      variant="brand"
+                                      onclick="{!c.clickCreateItem}"/>
+        </form>
+    <!-- / CREATE NEW ITEM FORM -->
+</aura:component>

@@ -1,0 +1,109 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    
+    <aura:attribute name = "showingfields" type = "list" access = "private"  description = "List attribute use to hold the showing fields"/>     
+    <aura:attribute name = "listOfRecord" type = "list" access = "private"  description = "List of record that show in table"/>     
+    <aura:attribute name = "iterateNumber" type = "List" access = "private" default = "['red', 'green', 'blue','red', 'green', 'blue','red', 'green', 'blue','red', 'green', 'blue','red', 'green', 'blue','red', 'green', 'blue','red', 'green']" description = "this attribute is use to show numbe of line in table"/>     
+    <aura:attribute name = "showIcons" type = "boolean" access = "private" default = "true"  description = "This attribute is use to show and hide scroll button list"/>
+    
+    <aura:handler name = "init" value = "{!this}" action = "{!c.myAction}"/>   
+    <div  class = "slds-table slds-table_bordered slds-table_cell-buffer slds-grid-wrap" style="background-color:#e5f0fa;width:100%">  
+        <aura:if isTrue="{!v.showIcons}">
+        
+            <button id="up1" class="slds-button slds-button_icon" name="up" onclick="{!c.showButton}" >
+        	    <lightning:icon style="background-color:cornflowerblue;margin: 5px 5px;box-shadow: 0 6px 7px 0px black;z-index:1" iconName="standard:lead_list" size="medium"/>        
+     	   	</button> 
+            
+         <aura:set attribute="else">
+             <button  class="slds-button slds-button_icon" style="float:left;"  title="close" onclick="{!c.showButton}" >
+                 <lightning:icon style="background-color:cornflowerblue;margin: 5px 5px;box-shadow: 0 6px 7px 0px black;z-index:1" iconName="action:close" size="xx-small"/>  
+             </button> 
+             
+             <div>           
+                <button  class="slds-button slds-button_icon horizontalButtonStyle"  title="up" onclick="{!c.scrollMove}" >
+                    <lightning:icon iconName="utility:up" size="medium"/>        
+                </button> 
+            </div>
+            <div>
+                <button class="slds-button slds-button_icon horizontalButtonStyle" onclick="{!c.scrollMove}"  title="prev" >
+                    <lightning:icon iconName="utility:left" size="medium"/>        
+                </button>
+            </div>
+            <div>
+                <button class="slds-button slds-button_icon horizontalButtonStyle"  onclick="{!c.scrollMove}"   title="next" >
+                    <lightning:icon iconName="utility:right" size="medium"/>        
+                </button>
+            </div>
+            <div >           
+                <button class="slds-button slds-button_icon lastHorzButn" onclick="{!c.scrollMove}"  title="down" >
+                    <lightning:icon iconName="utility:down" size="medium"/>  
+                </button>
+            </div>        
+             
+         </aura:set>
+        </aura:if>
+    </div>
+    
+    <aura:if isTrue="{!!v.showIcons}">
+        <div class = "slds-table slds-table_bordered slds-table_cell-buffer slds-grid-wrap" Style="float:left;background-color:#e5f0fa;z-index: 1;text-align:center;"  >  
+            
+            <div>           
+                <button  class="slds-button slds-button_icon verticalButtonStyle" style="" title="up" onclick="{!c.scrollMove}" >
+                    <lightning:icon iconName="utility:up" size="medium"/>        
+                </button> 
+            </div>
+            <div >
+                <button class="slds-button slds-button_icon verticalButtonStyle"  onclick="{!c.scrollMove}"  title="prev" >
+                    <lightning:icon iconName="utility:left" size="medium"/>        
+                </button>
+            </div>
+            <div>
+                <button class="slds-button slds-button_icon verticalButtonStyle" onclick="{!c.scrollMove}"   title="next" >
+                    <lightning:icon iconName="utility:right" size="medium"/>        
+                </button>
+            </div>
+            <div >           
+                <button class="slds-button slds-button_icon verticalButtonStyle" onclick="{!c.scrollMove}"  title="down" >
+                    <lightning:icon iconName="utility:down" size="medium"/>  
+                </button>
+            </div>        
+        </div>
+    </aura:if>
+   
+  
+   
+    <div id="ScrollId" class="slds-scrollable" style="overflow:hidden">
+        <table  class = "slds-table slds-table_bordered slds-table_cell-buffer slds-grid-wrap slds-table--header-fixed"  >
+            <thead>
+                <tr class = "slds-line-height_reset">
+                    <th class="slds-text-title_caps slds-text-align_left slds-cell-fixed" scope="col"  >
+                        <div class="slds-truncate" >
+                            <ui:inputCheckbox text = "" aura:id = "boxPack" value = "{!v.selected}" change = "{!c.checkboxSelect}"/>
+                        </div>
+                    </th>
+                    
+                    <aura:iteration items = "{!v.showingfields}" var = "field" indexVar = "indx">                    
+                        <th  class = "slds-text-title_caps slds-text-align_left" scope = "col" >
+                            <div class="slds-truncate"  title="Opportunity Name">{!field}</div>                       
+                        </th>                      
+                    </aura:iteration>
+                </tr>
+            </thead> 
+            <tbody  >        
+                <aura:iteration items="{!v.iterateNumber}" var="item" >  
+                    <tr aria-selected="false" class="slds-hint-parent" > 
+                        <td class="slds-text-title_caps slds-text-align_left" scope="col" style="width: 100px;">
+                            <div class="slds-truncate">
+                                <ui:inputCheckbox text="" aura:id="boxPack"  />
+                            </div>
+                        </td>
+                        <aura:iteration items="{!v.listOfRecord}" var="fieldval" indexVar="indx">               
+                            <td class="slds-text-align_left" scope="col" >                    
+                                <div class="slds-truncate" title="Id. Decision Makers">{!fieldval}</div> 
+                            </td>     
+                        </aura:iteration>                
+                    </tr>
+                </aura:iteration>
+            </tbody>
+        </table>  
+    </div>
+</aura:component>

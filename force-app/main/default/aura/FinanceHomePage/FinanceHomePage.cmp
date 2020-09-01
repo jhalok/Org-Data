@@ -1,0 +1,32 @@
+<aura:component implements="lightning:isUrlAddressable,force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <div class="demo-only" style="width:200px;background-color:#3e4247">
+        <nav class="slds-nav-vertical" aria-label="Sub page">
+            <div class="slds-nav-vertical__section">
+                <ul aria-describedby="entity-header">
+                    <li class="slds-nav-vertical__item">
+                        <a href="javascript:void(0);" class="slds-nav-vertical__action"></a>
+                    </li>
+                    <li class="slds-nav-vertical__item">
+                        <a href="javascript:void(0);" class="slds-nav-vertical__action">Super and Retirment</a>
+                    </li>
+                    <li class="slds-nav-vertical__item">
+                        <a href="javascript:void(0);" class="slds-nav-vertical__action">Investments</a>
+                    </li>
+                    <li class="slds-nav-vertical__item">
+                        <a href="javascript:void(0);" class="slds-nav-vertical__action">Advice</a>
+                    </li>
+                    <li class="slds-nav-vertical__item">
+                        <a href="javascript:void(0);" class="slds-nav-vertical__action">Insaurance</a>
+                    </li>
+                    <li class="slds-nav-vertical__item">
+                        <a href="javascript:void(0);" class="slds-nav-vertical__action">Tool</a>
+                    </li>
+                    <li class="slds-nav-vertical__item">
+                        <a href="javascript:void(0);" class="slds-nav-vertical__action">Contact us</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    
+</aura:component>

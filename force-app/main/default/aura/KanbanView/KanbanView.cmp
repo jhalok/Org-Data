@@ -1,0 +1,22 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+	
+    
+    <lightning:card variant="Basic" title="" iconName="utility:kanban">
+        <h1 class="slds-page-header__title slds-truncate slds-align-middle" title="Kanban">Kanban of {!v.objName}</h1>
+        <aura:set attribute="actions">
+            <lightning:layout>
+                
+            </lightning:layout>   
+        </aura:set>
+    </lightning:card>
+    
+    <lightning:card>
+    	
+    
+    
+    
+    
+    
+    
+    </lightning:card>
+</aura:component>

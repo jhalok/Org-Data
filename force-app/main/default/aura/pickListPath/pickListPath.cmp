@@ -1,0 +1,8 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" >
+    <aura:attribute name="variant" type="String" default="non-linear"/>
+    <lightning:picklistPath aura:id="path" recordId="{!v.recordId}"
+        variant="{!v.variant}"
+        onselect="{!c.handleSelect}"
+        picklistFieldApiName="Rating"
+    />
+</aura:component>

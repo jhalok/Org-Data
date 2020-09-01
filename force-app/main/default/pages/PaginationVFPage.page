@@ -1,0 +1,104 @@
+<!--This apex page is used to bind with the apex class "PaginationController" -->
+<apex:page controller="PaginationController" tabStyle="Account">
+    
+    <apex:form >
+        <apex:actionFunction name="refreshPageSize" action="{!refreshedPageSize}" status="loadingStatus" reRender="pbId"/>
+        <apex:pageBlock id="pbId">
+            <apex:pageBlockSection title="All Accounts" collapsible="false" columns="1">                
+                
+                <!--PageBlockTable component is having value of Account obj & created variable ref of it.-->
+                <apex:pageBlockTable value="{!Accounts}" var="accObj">
+                                     
+                    <apex:column > 
+                        <apex:facet name="header"> 
+                            <apex:commandLink action="{!ViewData}" value="Name{!IF(sortDirection='ASC','▼','▲')}">
+                                <apex:param value="name" assignTo="{!sortExpression}"/>
+                            </apex:commandLink>
+                        </apex:facet>    
+                        {!accObj.Name}
+                    </apex:column>
+                    
+                    <apex:column > 
+                        <apex:facet name="header"> 
+                            <apex:commandLink action="{!ViewData}" value="Phone{!IF(sortDirection='ASC','▼','▲')}">
+                                <apex:param value="name" assignTo="{!sortExpression}"/>
+                            </apex:commandLink>
+                        </apex:facet>    
+                        {!accObj.Phone}
+                    </apex:column>
+                    
+                    <apex:column > 
+                        <apex:facet name="header"> 
+                            <apex:commandLink action="{!ViewData}"  value="AccountNumber{!IF(sortDirection='ASC','▼','▲')}" >
+                                <apex:param value="name" assignTo="{!sortExpression}"/>
+                            </apex:commandLink>
+                        </apex:facet>    
+                        {!accObj.AccountNumber}
+                    </apex:column>
+                    
+                   <apex:column > 
+                        <apex:facet name="header"> 
+                            <apex:commandLink action="{!ViewData}" value="Website{!IF(sortDirection='ASC','▼','▲')}">
+                                <apex:param value="name" assignTo="{!sortExpression}"/>
+                            </apex:commandLink>
+                        </apex:facet>    
+                        {!accObj.Website}
+                    </apex:column>
+                    
+                    
+                    <!--<apex:column headerValue="Phone">
+<apex:outputField value="{!accObj.Phone}"/>
+</apex:column>
+
+<apex:column headerValue="AccountNumber">
+<apex:outputField value="{!accObj.AccountNumber}"/>
+</apex:column>
+
+<apex:column headerValue="Website">
+<apex:outputField value="{!accObj.Website}"/>
+</apex:column>
+-->   
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+            
+            <!--Used table tag to show picklist, buttons & goTo page in the same row-->
+            <table width="100%"><tr>    
+                
+                <!--Alignment left to the tag td will display the noOfRecords options as a picklist to show the data-->
+                <td align="left">
+                    <apex:outputText >{!(setCon.pageNumber * size)+1-size}-{!(setCon.pageNumber * size)} of {!noOfRecords}</apex:outputText> 
+                    <apex:selectList value="{!size}" size="1" onchange="refreshPageSize()">
+                        <apex:selectOptions value="{!listOption}"/> 
+                        <!--  <apex:actionSupport event="onchange" action="{!}" rernder/>  -->
+                    </apex:selectList>
+                    
+                </td>
+                
+                <!--Alignment center will display all the button(first,prev,next,last) in center and show the please wait loading image on the 
+buttons click till the time data is being loaded according to the condition specified-->
+                <td align="center">    
+                    <apex:commandButton value="First" action="{!setCon.first}" disabled="{!!setcon.hasPrevious}" status="loadingStatus" reRender="pbId"/>
+                    <apex:commandButton value="Previous" action="{!setCon.previous}" disabled="{!!setcon.hasPrevious}" status="loadingStatus" reRender="pbId"/>
+                    <apex:commandButton value="Next" action="{!setCon.next}" disabled="{!!setcon.hasNext}" status="loadingStatus" reRender="pbId"/>
+                    <apex:commandButton value="Last" action="{!setCon.last}" disabled="{!!setcon.hasNext}" status="loadingStatus" reRender="pbId"/>
+                    
+                    <apex:outputPanel >
+                        <apex:actionStatus id="loadingStatus">
+                            <apex:facet name="start">
+                                <apex:image url="{!URLFOR($Resource.MVImageTest, 'Please/Please.gif')}" width="20" height="20"/>
+                            </apex:facet>
+                        </apex:actionStatus>     
+                    </apex:outputPanel>     
+                    
+                </td>  
+                
+                <!--Used the inputtext field to go on to the particular page from the total no of records,and alignment is right so it will be shown in the right-->
+                <td align="right">
+                    Page <apex:inputText style="width:20px" value="{!setCon.PageNumber}"/>  of {!CEILING(noOfRecords / Size)}
+                </td> 
+                </tr>
+                
+            </table>  
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

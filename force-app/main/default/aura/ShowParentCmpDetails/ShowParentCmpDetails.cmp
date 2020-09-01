@@ -1,0 +1,94 @@
+<aura:component controller="ShowParentChildDetails" implements="flexipage:availableForAllPageTypes,force:appHostable,flexipage:availableForRecordHome,force:hasRecordId,force:hasSObjectName" access="global">
+    <aura:attribute name="accounts" type="Account[]"/>
+    <aura:attribute name="contacts" type="Contact[]"/>
+    <aura:attribute name="cases" type="Case[]"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="totalSizeOfRecords" type="Integer" />
+    <aura:attribute name="showChilds" type="boolean" default="false" />
+    
+    <div class="slds-box slds-theme_default">
+        <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+            <thead>
+                <tr class="slds-text-title_caps">
+                    <th scope="col">
+                        <div class="slds-truncate" title="Name">Account Name</div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <lightning:layout multipleRows="true">
+                    <aura:iteration items="{!v.accounts}" var="acc">
+                        <lightning:layoutItem class="slds-p-bottom_small" size="12">
+                            <div class="slds-truncate">
+                                <!--<lightning:button variant="brand" label="Prev" onclick="{! c.handleClick }" /> -->
+                                <a href="javascript:void(0);" onclick="{!c.selectedRecord}" data-value="{!acc.Id}">
+                                <lightning:icon iconName="utility:chevronright" size="xx-small" >
+                                    {!acc.Name}
+                                </lightning:icon>
+                                </a>
+                                {!acc.Name}
+                            </div>
+                        </lightning:layoutItem>
+                    </aura:iteration>
+                </lightning:layout>
+                <div>
+                    <div>Contacts</div>
+                    <aura:iteration items="{!v.contacts}" var="con">
+                        <div class="slds-truncate">
+                            {!con.Name}
+                        </div>
+                    </aura:iteration>
+                </div>
+                <div>
+                    <div class="slds-p-top_small">Cases</div>
+                    <aura:iteration items="{!v.cases}" var="cas">
+                        <div class="slds-truncate">
+                            {!cas.CaseNumber}
+                        </div>
+                    </aura:iteration>
+                </div>
+                <div>
+                    <div class="slds-align_absolute-center">
+                        <lightning:button variant="brand" label="Prev" onclick="{! c.handleClick }" />
+                        <lightning:button variant="brand" label="Next" onclick="{! c.handleClick }" />
+                    </div>
+                    <div class="slds-float_right slds-p-bottom_x-large">
+                        <b>Total Records:</b> {!v.totalSizeOfRecords}
+                    </div>
+                </div>
+            </tbody>
+
+        </table>
+        
+        <!--  <div>    
+            <div>Accounts</div>
+            <aura:iteration items="{!v.accounts}" var="acc">
+                <div class="slds-truncate">
+                    <a href="javascript:void(0);" onclick="{!c.selectedRecord}" data-value="{!acc.Id}">
+                        {!acc.Name}
+                    </a>
+                </div>
+            </aura:iteration>
+            <div>
+                <div>Contacts</div>
+                <aura:iteration items="{!v.contacts}" var="con">
+                    <div class="slds-truncate">
+                        {!con.Name}
+                    </div>
+                </aura:iteration>
+            </div>
+            <div>
+                <div>Cases</div>
+                <aura:iteration items="{!v.cases}" var="cas">
+                    <div class="slds-truncate">
+                        {!cas.CaseNumber}
+                    </div>
+                </aura:iteration>
+            </div>
+        </div>
+       <div class="slds-float_right">
+        <b>Total Records:</b> {!v.totalSizeOfRecords}
+       </div> -->
+    </div>
+</aura:component>

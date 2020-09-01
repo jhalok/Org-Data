@@ -1,0 +1,10 @@
+<template>
+    <div class="wrapper">
+    <header class="header">Available Bikes for</header>
+    {name}
+    <lightning-record-view-form record-id={userId} object-api-name="User">
+        <lightning-output-field field-name="Name"></lightning-output-field>
+        <lightning-output-field field-name="Username"></lightning-output-field>        
+    </lightning-record-view-form>
+    </div>
+</template>

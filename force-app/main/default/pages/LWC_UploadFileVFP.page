@@ -1,0 +1,17 @@
+<apex:page >
+    <apex:includeLightning />
+    <div id="lightning" />
+	<script>
+		$Lightning.use("c:LWC_UploadFileApp", function() {
+        	 $Lightning.createComponent("c:uploadFile", {
+            	   objectName: "Contact"
+                 },
+              "lightning",
+              function(cmp) {
+                console.log("LWC component was created");
+                // do some stuff
+              }
+          );
+        });
+    </script>
+</apex:page>

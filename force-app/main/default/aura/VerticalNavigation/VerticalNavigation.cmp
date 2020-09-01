@@ -1,0 +1,61 @@
+<aura:component implements="lightning:isUrlAddressable,force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <lightning:layout>
+        <lightning:layoutItem size="12" smallDeviceSize="12" mediumDeviceSize="1" largeDeviceSize="2"  class="mainSideBar">
+            <lightning:layout multipleRows="true">
+                <lightning:layoutItem size="12" smallDeviceSize="12" mediumDeviceSize="1" largeDeviceSize="12" class="firstNav" >
+                    <div class="slds-text-align_center slds-p-around_x-large">
+                        <span></span>
+                    </div>
+                </lightning:layoutItem>
+            </lightning:layout>
+            <lightning:layout multipleRows="true">
+                <lightning:layoutItem size="12" smallDeviceSize="12" mediumDeviceSize="1" largeDeviceSize="12" >
+                    <div class="left-Vertical-Nav slds-p-left_xx-large slds-p-top_large slds-p-bottom_large">
+                        <span>Super &amp; Retirement</span>
+                        <span><lightning:icon iconName="utility:chevronright" size="x-small" class="Nav-Chevron" /></span>
+                    </div>
+                </lightning:layoutItem>
+            </lightning:layout>
+            <lightning:layout multipleRows="true">
+                <lightning:layoutItem size="12" smallDeviceSize="12" mediumDeviceSize="1" largeDeviceSize="12" >
+                    <div class="left-Vertical-Nav slds-p-left_xx-large slds-p-top_large slds-p-bottom_large">
+                        <span>Investments</span>
+                        <span><lightning:icon iconName="utility:chevronright" size="x-small" class="Nav-Chevron" /></span>
+                    </div>
+                </lightning:layoutItem>
+            </lightning:layout>
+            <lightning:layout multipleRows="true">
+                <lightning:layoutItem size="12" smallDeviceSize="12" mediumDeviceSize="1" largeDeviceSize="12" >
+                    <div class="left-Vertical-Nav slds-p-left_xx-large slds-p-top_large slds-p-bottom_large" >
+                        <span>Advice</span>
+                        <lightning:icon iconName="utility:chevronright" size="x-small" class="Nav-Chevron" />
+                    </div>
+                </lightning:layoutItem>
+            </lightning:layout>
+            <lightning:layout multipleRows="true">
+                <lightning:layoutItem size="12" smallDeviceSize="12" mediumDeviceSize="1" largeDeviceSize="12" >
+                    <div class="left-Vertical-Nav slds-p-left_xx-large slds-p-top_large slds-p-bottom_large">
+                        <span>Insurance</span>
+                        <lightning:icon iconName="utility:chevronright" size="x-small" class="Nav-Chevron" />
+                    </div>
+                </lightning:layoutItem>
+            </lightning:layout>
+            <lightning:layout multipleRows="true">
+                <lightning:layoutItem size="12" smallDeviceSize="12" mediumDeviceSize="1" largeDeviceSize="12" >
+                    <div class="left-Vertical-Nav slds-p-left_xx-large slds-p-top_large slds-p-bottom_large">
+                        <span>Tools</span>
+                        <lightning:icon iconName="utility:chevronright" size="x-small" class="Nav-Chevron"  />
+                    </div>
+                </lightning:layoutItem>
+            </lightning:layout>
+            <lightning:layout multipleRows="true">
+                <lightning:layoutItem size="12" smallDeviceSize="12" mediumDeviceSize="1" largeDeviceSize="12" >
+                    <div class="left-Vertical-Nav slds-p-left_xx-large slds-p-top_large slds-p-bottom_large">
+                        <span>Contact us</span>
+                        <lightning:icon iconName="utility:chevronright" size="x-small" class="Nav-Chevron"/>
+                    </div>
+                </lightning:layoutItem>
+            </lightning:layout>
+        </lightning:layoutItem>
+    </lightning:layout>
+</aura:component>

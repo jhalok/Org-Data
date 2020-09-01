@@ -1,0 +1,6 @@
+<aura:component >
+    <aura:attribute name="FirstName" type="string" default="Alok"/>
+    <aura:attribute name="Company" type="string" default="Briskminds"/>
+    <p>{!v.FirstName}</p>
+    <p>{!v.FirstName + 'is working in' + v.Company}</p>
+</aura:component>

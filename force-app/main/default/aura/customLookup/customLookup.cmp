@@ -1,0 +1,78 @@
+<aura:component controller="lookUpController" >
+
+	<!-- Attributes that can be set while component calling-->
+    <aura:attribute name="objectName" type="string" default="Account" required="true" />
+    <aura:attribute name="fieldName" type="string" default="Name" required="true" />
+    <aura:attribute name="value" type="String" default="Alok" description="To pre-populate a value" />
+    <aura:attribute name="recordCount" type="string" default="5" description="Records visible at once"/>
+    <aura:attribute name="iconName" type="string" default="standard:drafts" description="complete icon name eg. standard:account" />
+    <aura:attribute name="label" type="string" default="" description="Label will be displayed above input Box" />
+    <aura:attribute name="placeholder" type="string" default="Search.." description="placeholder for input Box" />
+
+    <!-- Internal Use Attributes -->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="searchString" type="string" default="Name" description="String to search"/>
+    <aura:attribute name="selectedRecord" type="Object" default="Account" description="selected Record Details" />
+    <aura:attribute name="recordsList" type="List" description="List of Records having data" access="private" />
+    <aura:attribute name="message" type="String" default="" />
+
+    <!-- Component Markup -->
+    <div class="slds-form-element">
+		<label class="slds-form-element__label" for="combobox-id-1">{!if(v.label != '',v.label,v.fieldName)}</label>
+		<div class="slds-form-element__control">
+		    <div class="slds-combobox_container">
+			    <div class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click slds-is-open" aura:id="resultsDiv" aria-expanded="true" aria-haspopup="listbox" role="combobox">
+			        <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right" role="none">
+				        <div aura:id="lookup-pill" class="{! 'slds-pill-container ' + if(v.selectedRecord == '','slds-hide','') }">
+		                    <!-- Selected Value Pill -->
+		                    <lightning:pill class="fullWidth" label="{!v.selectedRecord.label}" name="{!v.selectedRecord.value}" onremove="{! c.removeItem }">
+		                        <aura:set attribute="media">
+		                            <lightning:icon iconName="{!v.iconName}" size="x-small" alternativeText="icon"/>
+		                        </aura:set>
+		                    </lightning:pill>
+		                </div>
+		                <div aura:id="lookupField" class="{! if(v.selectedRecord == '','slds-show','slds-hide') }">
+		                	<!-- Icon, Search Bar, Search Icon -->
+					        <span class="slds-icon_container slds-combobox__input-entity-icon inputIcon" title="record">
+		                        <lightning:icon class="slds-icon slds-icon_small slds-icon-text-default" iconName="{!v.iconName}" size="x-small" alternativeText="icon"/>
+		                    </span>
+					        <lightning:input aura:id="inputLookup" id="combobox-id-1" role="textbox" class="inputBox" placeholder="{!v.placeholder}" onkeyup="{!c.searchRecords}" value="{!v.searchString}" onblur="{!c.blurEvent}" aria-controls="listbox-id-1" autoComplete="off" />
+					        <span class="slds-icon_container slds-icon-utility-down slds-input__icon slds-input__icon_right">
+					            <lightning:icon iconName="utility:search" size="x-small" alternativeText="search"/> 
+					        </span>
+					        <lightning:spinner class="slds-hide" aura:id="Spinner" alternativeText="Loading" size="small" variant="brand"/>
+					    </div>
+			        </div>
+			        <!-- Dropdown List -->
+			        <div id="listbox-id-1" class="slds-dropdown slds-dropdown_length-5 slds-dropdown_fluid" role="listbox" style="{! 'max-height:' + (8 + (v.recordCount * 40)) + 'px' }">
+				        <ul class="slds-listbox slds-listbox_vertical recordListBox" role="presentation">
+				        	<aura:if isTrue="{! v.message == '' }" >
+				        		<!-- To display Drop down List -->
+					          	<aura:iteration items="{!v.recordsList}" var="rec" >
+						            <li id="{!rec.value}" class="slds-listbox__item" onmousedown="{!c.selectItem}">
+							            <div class="slds-media slds-listbox__option_entity">
+							                <span>
+							                  	<lightning:icon iconName="{!v.iconName}" alternativeText="icon"></lightning:icon>
+							                </span>
+							                <span class="verticalAlign">
+							                  	<span class="slds-truncate">{!rec.label}</span>
+							                </span>
+							            </div>
+						            </li>
+						        </aura:iteration>
+					        	<!-- To display Error Message -->
+				              	<aura:set attribute="else">
+									<li class="slds-listbox__item">
+						                <div id="option1" class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta">
+							                <span class="slds-media__body">{!v.message}</span>
+						                </div>
+					              	</li>
+				              	</aura:set>
+							</aura:if>
+				        </ul>
+			        </div>
+			    </div>
+		    </div>
+		</div>
+	</div>
+</aura:component>

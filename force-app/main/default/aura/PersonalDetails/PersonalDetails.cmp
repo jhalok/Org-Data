@@ -1,0 +1,4 @@
+<aura:component >
+	<p>Name</p><p>Alok jha</p>
+    <p>Company</p><p>Briskminds</p>
+</aura:component>

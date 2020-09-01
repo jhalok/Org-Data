@@ -1,0 +1,25 @@
+<!--This component is used to display the all tabs-->
+<aura:component implements="flexipage:availableForAllPageTypes">
+    <lightning:tabset>
+        
+        <!--Addition tab-->
+        <lightning:tab label="Addition" id="add" >
+            <c:CalcInputComponent  btnName = "Add"/>
+        </lightning:tab >
+        
+         <!--Substraction tab-->
+        <lightning:tab label="Substraction" id="sub" >
+            <c:CalcInputComponent btnName = "Sub"/>
+        </lightning:tab>
+        
+        <!--Multiplication tab-->
+        <lightning:tab label="Multiplication" id="mul" >
+            <c:CalcInputComponent btnName = "Mul"/>
+        </lightning:tab>
+        
+        <!--Division tab-->
+        <lightning:tab label="Division" id="div" >
+            <c:CalcInputComponent btnName = "Div"/>
+        </lightning:tab>    
+    </lightning:tabset>
+</aura:component>

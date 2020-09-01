@@ -1,0 +1,11 @@
+<aura:component controller="Twilio" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global" >
+<lightning:notificationsLibrary aura:id="notifLib"/>
+
+    <div class="row">
+        <lightning:input aura:id="mobileNumber" name="mobileNumber" label="Mobile Number" />
+        <lightning:input aura:id="message" name="message" label="Message" />
+    </div>
+    <div class="row">
+        <lightning:button variant="brand" label="Send Message" title="Send Message" onclick="{! c.handleClick }" />
+    </div>
+</aura:component>

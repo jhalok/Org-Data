@@ -1,0 +1,45 @@
+<apex:page tabStyle="Contact" controller="AccCompController" sidebar="false" showHeader="false"> 
+    <apex:form >
+        <apex:pageBlock >
+            
+            <apex:pageBlockSection columns="1" >
+              
+             <apex:outputPanel rendered="{!flag2}" style="font-Size:16px;color:red;">
+                    <div align="center" rendered="{!flag2}">
+                        Welcome To The Wizard
+                
+                        
+                 </div>
+         			 <apex:outputText value="{!$Label.Wizard_Inform}"/>
+                </apex:outputPanel>
+            </apex:pageBlockSection>
+            
+            <c:SecondComponent AccountList="{!acc}" rendered="{!flag == True}"/>
+            <div align="Center">
+                <apex:commandButton value="Edit" action="{!editAllRecords}" rendered="{!flag1 == True}" style="text-align:center;font-size:15px; padding:4px;width:80px"/>
+                <apex:commandButton value="Remove" action="{!removeAllRecord}" rendered="{!flag1 == True}" style="text-align:center;font-size:15px; padding:4px;width:80px"/>
+            </div>
+            
+            <c:ThirdComponent wrapper="{!wrapContactList}"  nonEdit="{!nonEdit}" editRecord="{!editRecord}" rendered="{!flag1 == True}"/>
+            <apex:outputPanel rendered="{!flag1 == True}">
+                <apex:inputText value="{!addRowSize}" size="1"/>
+                <apex:commandButton action="{!addRow}" value="Add Row" />  
+            </apex:outputPanel>
+            
+            
+            <c:FourthCompenent AccountList="{!acc}" wrapper="{!wrapContactList}" rendered="{!flag3}"/>
+            <div align="center">
+                <apex:commandButton action="{!AccountComponent}" value="Start" rendered="{!flag2}" style="text-align:center;font-size:15px; padding:4px;width:60px"/>
+                <apex:commandButton value="Previous" action="{!prvPageAccount}" rendered="{!flag == True}" style="text-align:center;font-size:15px; padding:4px;width:80px"/>
+                <apex:commandButton value="Next" action="{!contactNextPage}" rendered="{!flag == True}" style="text-align:center;font-size:15px; padding:4px;width:60px"/> 
+                <apex:commandButton value="Previous" action="{!prvPreviewPage}" rendered="{!flag3}" style="text-align:center;font-size:15px; padding:4px;width:80px"/>
+                <apex:commandButton value="Save" action="{!saveRecord}" rendered="{!flag3}" style="text-align:center;font-size:15px; padding:4px;width:60px"/>
+                <apex:commandButton value="Previous" action="{!prvPageContact}" rendered="{!flag1 == True}" immediate="true" style="text-align:center;font-size:15px; padding:4px;width:80px"/>
+                <apex:commandButton value="Next" action="{!nextPagePreview}" rendered="{!flag1 == True}" style="text-align:center;font-size:15px; padding:4px;width:60px"/>
+                <apex:commandButton value="Close" style="text-align:center;font-size:15px; padding:4px;width:60px" action="{!cancel}"/> 
+            </div>
+            
+            <c:FifthComponent FinalCompo="{!showMessage}" rendered="{!flag5}"/>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

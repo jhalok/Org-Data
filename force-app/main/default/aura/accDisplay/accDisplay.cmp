@@ -1,0 +1,35 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId">
+    
+    <aura:attribute name="accountRecord" type="Object"/>
+    <aura:attribute name="recordError" type="String"/>
+    
+    <force:recordData aura:id="accountDetails"
+    	    layoutType="FULL"
+ 			mode="VIEW"
+            recordId="{!v.recordId}"
+            targetFields="{!v.accountRecord}"
+            targetError="{!v.recordError}"
+            recordUpdated ="{!c.handleRecordUpdated}"
+                      />
+    
+    <div class="Record Details"> 
+    <lightning:card iconName="standard:account" title="{!v.accountRecord.Name}" >
+        <div class="slds-p-horizontal--small">
+            <p class="slds-text-heading--small">
+                <lightning:formattedText title="Industry" value="{!v.accountRecord.Industry}" /></p>
+            <br/>
+            <p class="slds-text-heading--small">
+                <lightning:formattedText title="Description" value="{!v.accountRecord.Description}" /></p>
+             <br/>
+             <p class="slds-text-heading--small">
+                <lightning:formattedPhone title="Phone" value="{!v.accountRecord.Phone}" /></p>
+        </div>
+    </lightning:card>
+    </div>
+    
+     <aura:if isTrue="{!not(empty(v.recordError))}">
+        <div class="recordError">
+            {!v.recordError}</div>
+    </aura:if>
+    
+</aura:component>

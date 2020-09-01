@@ -1,0 +1,5 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+	<ltng:require scripts="{!$Resource.forcetk}" afterScriptsLoaded="{!c.afterScriptsLoaded}"></ltng:require>
+   <!-- <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>-->
+ 
+</aura:component>

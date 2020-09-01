@@ -1,0 +1,138 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction"
+                access="global" 
+                controller="dataTableCtrl">
+    <!-- call doInit method on component load -->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+	<!-- aura attributes to store data/values --> 
+	<aura:attribute name="listOfAllAccounts" type="list"/> 
+    <aura:attribute name="PaginationList" type="list"/> 
+    <aura:attribute name="selectedCount" type="integer" default="0"
+                    description="selected Records Count"/>
+    <aura:attribute name="startPage" type="Integer" />
+    <aura:attribute name="endPage" type="Integer"/>
+    <aura:attribute name="totalRecordsCount" type="Integer"/>
+    <aura:attribute name="pageSize" type="Integer" default="4"
+                    description="number of records to be display on per page"/>
+    <aura:attribute name="currentPage" type="integer" default="1"/>
+    <aura:attribute name="totalPagesCount" type="integer"/>
+    <aura:attribute name="bNoRecordsFound" type="boolean"/>
+    
+    
+    <aura:if isTrue="{!v.bNoRecordsFound}">
+        <!--display error message if there is no records available -->
+		<div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_info" role="alert">
+            <span class="slds-assistive-text">error</span>
+            <h2>No record found.</h2>
+        </div>
+        <aura:set attribute="else">
+		 <!-- lightning:button to get selected rows data -->
+            <div class="slds-clearfix slds-m-around_small">
+                <div class="slds-clearfix">
+                    <div class="slds-float_right">
+                        <lightning:button variant="destructive"
+                                          label="Get Selected Records"
+                                          onclick="{! c.getSelectedRecords }"
+                                          disabled="{!v.selectedCount == 0}"/>
+                    </div>
+                </div>
+            </div>
+         <!-- display total record and selected record count -->    
+            <p class="slds-m-around_small">
+                <span class="slds-badge slds-badge_lightest" style="display:inline-block">
+                    Total Records : {!v.selectedCount > 0 ? v.selectedCount + '/' : ''} {!v.totalRecordsCount} 
+                </span>
+            </p>
+			
+           <!-- data table start-->  
+            <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+                <thead>
+                    <tr class="slds-text-title_caps">
+					<!--header checkbox for select all-->
+                        <th style="width:3.25rem;" class="slds-text-align_right">
+                            <div class="slds-form-element">
+                                <div class="slds-form-element__control">
+                                    <label class="slds-checkbox">
+                                        <ui:inputCheckbox disabled="{!v.totalRecordsCount == 0}"
+                                                          aura:id="selectAllId"
+                                                          change="{!c.selectAllCheckbox}"/>
+                                        <span class="slds-checkbox_faux"></span>
+                                        <span class="slds-form-element__label"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </th>
+                        <th scope="col">
+                            <div class="slds-truncate" title="Name">Name</div>
+                        </th>
+                        <th scope="col">
+                            <div class="slds-truncate" title="Phone">Phone</div>
+                        </th>
+                        <th scope="col">
+                            <div class="slds-truncate" title="Type">Type</div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <aura:iteration items="{!v.PaginationList}" var="obj">
+                        <tr>
+                            <th scope="row" class="slds-text-align_right" style="width:3.25rem;">
+                                <div class="slds-form-element">
+                                    <div class="slds-form-element__control">
+                                        <label class="slds-checkbox">
+                                            <ui:inputCheckbox text="{!obj.objAccount.Id}"
+                                                              value="{!obj.isChecked}"
+                                                              change="{!c.checkboxSelect}"/>
+                                            <span class="slds-checkbox_faux"></span>
+                                            <span class="slds-form-element__label text"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </th>
+                            <th scope="row">
+                                <div class="slds-truncate" title="{!obj.objAccount.Name}">
+                                    {!obj.objAccount.Name}
+                                </div>
+                            </th> 
+                            <th scope="row">
+                                <div class="slds-truncate" title="{!obj.objAccount.Phone}">
+                                    <lightning:formattedPhone value="{!obj.objAccount.Phone}"/>
+                                </div>
+                            </th>
+                            <th scope="row">
+                                <div class="slds-truncate" title="{!obj.objAccount.Type}">
+                                    {!obj.objAccount.Type}
+                                </div>
+                            </th>
+                        </tr>
+                    </aura:iteration>
+                </tbody>
+            </table>
+             <!-- DataTable End -->
+            <br/>
+            <!--  Pagination Buttons Start -->
+            <div class="slds-align_absolute-center">         
+                <lightning:button label="Previous"
+                                  disabled="{!v.startPage == 0}"  
+                                  onclick="{!c.navigation}"
+                                  variant="brand"
+                                  iconName="utility:back"
+                                  name="previous"/>
+                
+                <span class="slds-badge slds-badge_lightest"
+                      style="margin-right: 10px;margin-left: 10px;">
+                    Page {!v.currentPage} out of {!v.totalPagesCount}
+                </span>
+                
+                <lightning:button label="Next"
+                                  disabled="{!(v.endPage + 1) >= v.totalRecordsCount}" 
+                                  onclick="{!c.navigation}"
+                                  variant="brand"
+                                  iconName="utility:forward"
+                                  iconPosition="right"
+                                  name="next"/>
+            </div>  
+            <!--  Pagination Buttons End -->
+        </aura:set> 
+    </aura:if>
+</aura:component>

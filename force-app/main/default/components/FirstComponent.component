@@ -1,0 +1,16 @@
+<apex:component controller="AccCompController">
+    <apex:attribute name="accountlist" description="This is the value for the component." type="Account" required="true"/> 
+    
+    <apex:pageBlockSection title="Account Information" rendered="{!currentPageId != null}"> 
+        <apex:repeat value="{!$ObjectType.Account.FieldSets.AccountWiz_fieldSet}" var="fields">
+            <apex:outputField value="{!accountlist[fields]}"/>
+        </apex:repeat> 
+    </apex:pageBlockSection> 
+    
+    <apex:pageBlockSection title="Account Information" rendered="{!currentPageId==null}"> 
+        <apex:repeat value="{!$ObjectType.Account.FieldSets.AccountWiz_fieldSet}" var="fields"> 
+            <apex:inputField value="{!accountlist[fields]}"/> 
+        </apex:repeat> 
+    </apex:pageBlockSection>   
+   
+</apex:component>

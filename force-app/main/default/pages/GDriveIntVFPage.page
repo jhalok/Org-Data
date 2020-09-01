@@ -1,0 +1,11 @@
+<apex:page action="{!init}" controller="GoogleDriveCntrlr" showHeader="false" standardStylesheets="false" lightningStyleSheets="true">  
+    <apex:slds />  
+    <div class="slds-scope">   
+        <apex:form >
+            <b><center><font size="4" color="blue">You'r Logged In.</font></center></b>
+            <center><font size="4" color="Red">Click on button to Save token, To perform further functionality in the Google Drive from Salesforce.</font></center><br/>  
+            <b><center><apex:commandButton value="Save token" action="{!saveToken}" styleclass="slds-button slds-button_brand" /></center></b> 
+            <!--<apex:commandButton action="{!getNewToken}" value="Get new Token"/>-->
+        </apex:form>  
+    </div> 
+</apex:page>

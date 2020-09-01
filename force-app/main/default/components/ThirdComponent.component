@@ -1,0 +1,50 @@
+<apex:component Controller="AccCompController">
+    <apex:pageMessages ></apex:pageMessages>
+    <script type="text/javascript">
+    function selectAllCheckboxes(obj,className){
+        var Array = document.getElementsByClassName(className);
+        for(var i = 0; i< Array.length; i++){
+            Array[i].checked = obj.checked;
+        }
+    }
+    
+    </script>
+    
+    <apex:attribute name="wrapper" type="list" description="Describe"/>
+    <apex:attribute name="nonEdit" type="boolean" description="Contact rows"/>
+    <apex:attribute name="editRecord" type="boolean" description="Contact rows"/>
+    
+    <apex:pageBlockSection columns="1" title="Contact Information">
+        <apex:pageBlockTable value="{!wrapper}" var="Wrapcon" rendered="{!nonEdit}"> 
+            <apex:column headerValue="Select all">
+                <apex:facet name="header">
+                    <apex:inputCheckbox onclick="selectAllCheckboxes(this,'chkbox1')"/>
+                </apex:facet> 
+                <apex:inputCheckbox value="{!Wrapcon['selected']}" styleClass="chkbox1"/>
+            </apex:column>
+            
+            <apex:repeat value="{!$ObjectType.Contact.FieldSets.ContactWiz_FieldSet}" var="fields" >
+                <apex:column headerValue="{!fields}">
+                    <apex:inputField value="{!Wrapcon['con'][fields]}" rendered="{!Wrapcon['con']['Id'] == null}" required="false"/>
+                    <apex:outputField value="{!Wrapcon['con'][fields]}" rendered="{!Wrapcon['con']['Id'] != null}"/>
+                </apex:column>
+            </apex:repeat>
+        </apex:pageBlockTable>
+        
+        <apex:pageBlockTable value="{!wrapper}" var="Wrapcon" rendered="{!editRecord}"> 
+            <apex:column headerValue="Select all">
+                <apex:facet name="header">
+                    <apex:inputCheckbox onclick="selectAllCheckboxes(this,'chkbox1')"/>
+                </apex:facet> 
+                <apex:inputCheckbox value="{!Wrapcon['selected']}" styleClass="chkbox1"/>
+            </apex:column>
+            
+            <apex:repeat value="{!$ObjectType.Contact.FieldSets.ContactWiz_FieldSet}" var="fields" >
+                <apex:column headerValue="{!fields}">
+                    <apex:inputField value="{!Wrapcon['con'][fields]}" rendered="{!(Wrapcon['con']['Id'] == null || Wrapcon['selected'] == true)}" required="false"/>
+                    <apex:outputField value="{!Wrapcon['con'][fields]}" rendered="{!(Wrapcon['con']['Id'] != null && Wrapcon['selected'] == false)}"/>
+                </apex:column>
+            </apex:repeat>
+        </apex:pageBlockTable>
+    </apex:pageBlockSection>
+</apex:component>

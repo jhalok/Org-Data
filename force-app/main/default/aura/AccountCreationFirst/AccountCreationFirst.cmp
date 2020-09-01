@@ -1,0 +1,33 @@
+<aura:component implements="lightning:actionOverride,lightning:isUrlAddressable,force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:attribute name="recordId" type="String"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute Name="showFirstSec" type="boolean" default="true"/>
+    <aura:attribute Name="showSecondSec" type="boolean" default="false"/> 
+    {!v.recordId}
+    <aura:if isTrue="{!v.showFirstSec}">
+        <lightning:recordViewForm objectApiName="Account" class="slds-m-horizontal_xx-large">
+            <lightning:messages />
+            <div class="slds-grid">
+                <div class="slds-col slds-size_2-of-4">
+                    <lightning:inputField fieldName="Industry"/>
+                </div>
+            </div>
+            <div class="slds-grid">
+                <div class="slds-col slds-size_2-of-4">
+                    <lightning:inputField fieldName="Name"/>
+                </div>
+            </div>
+            <div class="slds-grid">
+                <div class="slds-col slds-size_2-of-4">
+                    <lightning:inputField fieldName="Type"/>
+                </div>
+            </div>
+            <lightning:button class="slds-m-top_small" type="submit" label="Create new" onclick="{!c.Save}"/>
+            <!--<lightning:button label="Calling another save section" onclick="{!c.handleClick}"/> -->
+            
+        </lightning:recordViewForm>
+    </aura:if>
+    <aura:if isTrue="{!v.showSecondSec}">
+        <c:AccountCreationSec idval="{!v.recordId}"/>
+    </aura:if>
+</aura:component>

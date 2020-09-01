@@ -1,0 +1,19 @@
+<aura:component >
+    
+    <aura:attribute name="edit" type="Boolean" default="false"/>
+    <aura:attribute name="total" type="Integer"/>
+    <aura:attribute name="btnName" type ="String"/>
+    
+    <!--Input field to take the integer value-->
+    <lightning:input type="number" aura:id="frstnum1" label="Enter First Number" />
+    <lightning:input type="number" aura:id="secnum2" label="Enter Second Number"  />
+    
+    <!--button to call the calculator function and change the label on the tab selection-->
+    <lightning:button class="slds-align_absolute-center" aura:id="butn" label="{!v.btnName}"  onclick="{!c.Calculator}" />
+    
+    <!--Condition to show the total-->
+    <aura:if isTrue="{!v.edit}">
+    {!v.btnName} is  <ui:outputNumber value="{!v.total}"/>
+    </aura:if>
+    
+</aura:component>

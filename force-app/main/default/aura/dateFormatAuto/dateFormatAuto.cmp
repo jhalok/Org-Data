@@ -1,0 +1,10 @@
+<aura:component implements="lightning:isUrlAddressable,force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+<!-- <lightning:input aura:id="input" label="customInput" maxlength="10" onchange="{!c.onCustomInputChange}"/> --> 
+<!-- <ui:inputDate aura:id="Birthdate" class="hideinput" label="d"  change="{!c.onChange}" value="{!v.date}" displayDatePicker="true"/> --> 
+
+<lightning:input aura:id="inputVal" label="lightning:input"  name="Birthdate" maxlength="10" onchange="{!c.Change}"/>
+<!--<lightning:input type="date"/>-->
+<ui:inputDate aura:id="text" keyup="{!c.onChange}" displayDatePicker="true" label="ui Input" format="MM/DD/YYYY"/>
+
+
+</aura:component>

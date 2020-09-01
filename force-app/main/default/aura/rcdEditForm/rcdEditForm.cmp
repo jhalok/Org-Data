@@ -1,0 +1,55 @@
+<aura:component implements="flexipage:availableForAllPageTypes,force:appHostable,flexipage:availableForRecordHome,force:hasRecordId,force:hasSObjectName" access="global" >
+    <aura:attribute name="Account" type="String[]" default="Pet__c" />
+    <lightning:card iconName="custom:custom19" title="lightning:recordForm">
+        <div class="slds-p-left_large slds-p-right_medium">	
+            <lightning:recordForm aura:id="recordViewForm" 
+                                  objectApiName="{!v.Account}"
+                                  fields="Name,Breed__c,Gender__c,Notes__c,Type__c"
+                                  columns="2"
+                                  layoutType ="Full"
+                                  mode="edit"
+                                  onsuccess="{!c.onSuccess}"
+                                  onsubmit="{!c.onSubmit}"
+                                  onload="{!c.onLoad}"
+                                  onerror="{!c.onError}"
+                                  />   
+            
+        </div>
+    </lightning:card>
+    <lightning:card iconName="custom:custom19" title="Edit lightning:recordForm">
+        <div class="slds-p-left_large slds-p-right_medium">	
+            <lightning:recordForm aura:id="recordViewForm" 
+                                  objectApiName="{!v.sObjectName}"
+                                  columns="2"
+                                  fields="Name,Breed__c,Gender__c,Notes__c,Type__c"
+                                  recordId="a8C2F0000004FDUUA2"
+                                  layoutType ="Full"
+                                  mode="View"
+                                  onsuccess="{!c.onSuccess}"
+                                  onsubmit="{!c.onSubmit}"
+                                  onload="{!c.onLoad}"
+                                  onerror="{!c.onError}"
+                                  />   
+            
+        </div>
+    </lightning:card>
+    
+    <lightning:card iconName="custom:custom19" title="Read Only lightning:recordForm">
+        <div class="slds-p-left_large slds-p-right_medium">	
+            <lightning:recordForm aura:id="recordViewForm" 
+                                  objectApiName="{!v.sObjectName}"
+                                  columns="2"
+                                  fields="Name,Breed__c,Gender__c,Notes__c,Type__c"
+                                  recordId="a8C2F0000004FDUUA2"
+                                  layoutType ="Full"
+                                  mode="readonly"
+                                  onsuccess="{!c.onSuccess}"
+                                  onsubmit="{!c.onSubmit}"
+                                  onload="{!c.onLoad}"
+                                  onerror="{!c.onError}"
+                                  />   
+            
+        </div>
+    </lightning:card>
+    
+</aura:component>

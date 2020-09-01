@@ -1,0 +1,17 @@
+<aura:component controller="TreeHirerachy" implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome" access="global" >
+    <aura:attribute name="objectNames" type="List"/>
+    <aura:attribute name="selectedObjectName" type="String"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    
+    <lightning:layout>
+        <div class="form-group slds-align_absolute-center">
+            <lightning:select aura:id="objectPickList" value="{!v.selectedObjectName}" onchange="{!c.selectedObject}" label="Select Object">
+                <aura:iteration items="{!v.objectNames}" var="obj" >
+                    <option text="{!obj.LabelName}" value="{!obj.APIName}" />
+                </aura:iteration>
+            </lightning:select>
+        </div> 
+    </lightning:layout>
+    <hr></hr>
+    <!-- <lightning:tree items="{!v.items }" header="{!v.ltngHierarchyHeader}" onselect="{!c.handleSelect}"/> -->
+</aura:component>

@@ -1,0 +1,126 @@
+<aura:component controller="pagiSearchController" implements="flexipage:availableForAllPageTypes,force:appHostable,flexipage:availableForRecordHome,force:hasRecordId,force:hasSObjectName" access="global">	
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" /> 
+    <aura:attribute name="AccountList" type="Account[]"/>
+    <aura:attribute name="PageNumber" type="integer" default="1"/>
+    <aura:attribute name="TotalPages" type="integer" default="0"/>
+    <aura:attribute name="TotalRecords" type="integer" default="0"/>
+    <aura:attribute name="RecordStart" type="integer" default="0"/>
+    <aura:attribute name="RecordEnd" type="integer" default="0"/>
+    <aura:attribute name="selectedValue" type="integer" default="5"/>
+    <aura:registerEvent name="showToast" type="force:showToast"/>
+    <aura:attribute name="searchKey" type="String" description="use for store user search input"/>
+    <aura:attribute name="defaultShow" type="boolean" default="true"/>
+    <aura:attribute name="showButton" type="boolean" default="false"/>      
+    <aura:attribute name="currentId" type="String"/>
+    <aura:attribute name="spinner" type="boolean" default="false"/>
+    <aura:handler event="aura:waiting" action="{!c.showSpinner}"/>
+    <aura:handler event="aura:doneWaiting" action="{!c.hideSpinner}"/>
+    <aura:attribute name="currentList" type="Account[]" />
+    <aura:handler name="change" action="{!c.handlePageChange}" value="{!v.pageNumber}"/>
+    
+    
+    <lightning:card variant="Basic" title="Account" iconName="standard:account">
+         <aura:set attribute="actions">
+         <lightning:layout class="slds-float_right">
+                <lightning:layoutItem size="7" padding="around-small">
+                    <lightning:input value="{!v.searchKey}"
+                                     placeholder="Search Accounts.."
+                                     aura:id="searchField"
+                                     onchange="{!c.searchKeyChange}"/>   
+               </lightning:layoutItem>
+              
+               <lightning:layoutItem size="5" padding="slds-p-top_medium" class="buttonPosition">
+                 <lightning:button label="New Account" onclick="{!c.createRecord}"/>
+              </lightning:layoutItem>
+    	 </lightning:layout>   
+        </aura:set>
+    </lightning:card>
+    
+     <div class="slds-page-header" role="banner">
+        <aura:if isTrue="{!v.showButton}">
+                 <lightning:buttonIcon iconName="utility:home" class="slds-p-around_small" size="large" variant="bare" onclick="{!c.doInit}" alternativeText="HomePage" />
+        </aura:if>
+         
+         <aura:if isTrue="{!v.spinner}">
+             <div class="exampleHolder">
+                    <lightning:spinner alternativeText="Loading" size="medium" />
+             </div>
+     	</aura:if>
+         
+         <table aria-multiselectable="true" class="slds-table slds-table_bordered slds-table_resizable-cols" role="grid">
+            <thead>
+                <tr class="slds-text-title_caps">
+                    <th scope="col">
+                        <div class="slds-truncate" title="S.no">S.no</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="Account Name">Account Name</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="Type">Type</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="Industry">Industry</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="Phone">Phone</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="Fax">Fax</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="Fax"></div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <aura:iteration items="{!v.AccountList}" var="acc" indexVar="count"> 
+                    <tr>
+                        <td> {!acc.Id}</td>
+                        <td> {!acc.Name}</td>
+                        <td> {!acc.Type}</td>
+                        <td> {!acc.Industry}</td>
+                        <td> {!acc.Phone}</td>
+                        <td> {!acc.Fax}</td>
+                        <td>
+                            <lightning:buttonMenu iconSize="x-small" aura:id="menu" value="{!acc.Id}"  onselect="{! c.handleSelect }" alternativeText="Show menu">
+                                <lightning:menuItem aura:id="menuSec" value="{!acc.Id}" label="Delete Account" />
+                            </lightning:buttonMenu>
+                        </td>
+                    </tr>
+                </aura:iteration> 
+            </tbody>
+        </table>
+        <br/>
+        
+         <aura:if isTrue="{!v.defaultShow}">    
+             <lightning:select aura:Id ="pageSize" class="marginText slds-grid slds-size_2-of-12" name="selectItem" value="{!v.selectedValue}" label="Display Records Per Page:" onchange="{!c.onSelectChange}" >
+                 <option value="5" label = "5" />
+                 <option value="10" label = "10" />  
+                 <option value="15" label = "15"/>
+                 <option value="20" label = "20"/>
+             </lightning:select>
+         </aura:if>
+         
+      <aura:if isTrue="{!v.defaultShow}">       
+        <div class="slds-grid slds-wrap">
+            <div class="slds-col slds-size_9-of-12 ">
+                    <lightning:layoutItem>
+                       Page No.<lightning:input name="input1" class="widthPageNoBox" value="{!v.PageNumber}" onchange="{!c.setPageNum}"/> of Total Pages: {!v.TotalPages} from Total Records: {!v.TotalRecords} 
+                   </lightning:layoutItem>
+              </div>   
+       
+         	<div class="slds-col slds-grid slds-size_3-of-12 pageNoDisplay">
+               <lightning:layout>
+                <lightning:layoutItem>
+                    <lightning:button disabled="{!v.PageNumber == 1}" variant="brand" label="First" onclick="{!c.handleFirst}" />  
+                    <lightning:button disabled="{!v.PageNumber == 1}" variant="brand" aura:id="prevPage" label="Prev" onclick="{!c.handlePrev}" />            
+                    <lightning:button disabled="{!v.PageNumber == v.TotalPages}" aura:id="nextPage" variant="brand" label="Next" onclick="{!c.handleNext}"/>
+                    <lightning:button disabled="{!v.PageNumber == v.TotalPages}"  variant="brand" label="Last" onclick="{!c.handleLast}"/>
+                </lightning:layoutItem>
+              </lightning:layout>
+        	 </div>
+         </div>
+        </aura:if>
+       </div>
+</aura:component>

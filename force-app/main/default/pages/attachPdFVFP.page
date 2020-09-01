@@ -1,0 +1,17 @@
+<apex:page controller="PdfAttachment_Controller" renderAs="PDF" action="{!getPDF}">
+<div>
+	<img src="{!$Resource.HouseExpImage}" width="25%"/>
+</div>
+<apex:form >
+		<apex:PageBlock title="House Expense's">
+			<apex:pageBlockSection >
+				<apex:pageBlockTable value="{!attachmentRecord}" var="expense">
+					<apex:column value="{!expense.Member__r.Name}" />
+					<apex:column value="{!expense.Total_Expense__c}" />
+					<apex:column value="{!expense.Total_Balance__c}" />
+					<apex:column value="{!expense.Member__r.House__r.Name}" />
+				</apex:pageBlockTable>
+			</apex:pageBlockSection>
+		</apex:PageBlock>
+	</apex:form>
+</apex:page>

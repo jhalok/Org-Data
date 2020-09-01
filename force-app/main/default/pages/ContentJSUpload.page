@@ -1,0 +1,27 @@
+<apex:page docType="html-5.0" title="File Uploader">
+    <h3>
+        Select a file to upload as a new Chatter File.
+    </h3>
+    <input type="file" id="file" onchange="upload()"/>
+    <p id="message"></p>
+    <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script src="{!$Resource.forcetk}"></script>
+    <script>
+    var client = new forcetk.Client();
+    
+    client.setSessionToken('{!$Api.Session_ID}');
+    
+    function upload() {
+        var file = $("#file")[0].files[0];
+        client.createBlob('ContentVersion', {
+            Origin: 'H', // 'H' for Chatter File, 'C' for Content Document
+            PathOnClient: file.name
+        }, file.name, 'VersionData', file, function(response){
+            console.log(response);
+            $("#message").html("Chatter File created: <a target=\"_blank\" href=\"/" + response.id + "\">Take a look!</a>");
+        }, function(request, status, response){
+            $("#message").html("Error: " + status);
+        });
+    }
+    </script>
+</apex:page>

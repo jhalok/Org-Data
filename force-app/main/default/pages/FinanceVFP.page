@@ -1,0 +1,19 @@
+<apex:page sidebar="false" showHeader="false">
+    <apex:includeLightning />
+    <apex:slds />
+    
+    <div style="width:100%;height:100px;" id="FlipcardContainer" />
+    
+    <script>
+    $Lightning.use("c:FinanceApp", function() {
+        $Lightning.createComponent("c:NavMenu",
+                                   { 
+                                       
+                                   },
+                                   "FlipcardContainer",
+                                   function(cmp) {
+                                       
+                                   });
+    });
+    </script>
+</apex:page>
